@@ -1,0 +1,21 @@
+# BlockCert Python Dependencies
+# Install: pip install -r requirements.txt
+
+# Layer 1 — BERT NLP
+torch>=2.0.0
+transformers>=4.35.0
+scikit-learn>=1.3.0
+numpy>=1.24.0
+
+# Post-Quantum Cryptography
+dilithium-py>=0.2.0
+
+# Pipeline & API
+requests>=2.31.0
+
+# Evaluation
+matplotlib>=3.7.0
+
+# Optional — spaCy for regex fallback mode
+# spacy>=3.7.0
+# Run after: python -m spacy download en_core_web_sm

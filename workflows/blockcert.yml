@@ -1,0 +1,94 @@
+name: BlockCert CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  # ── Test Python components (NLP + Dataset + Evaluation) ────────────────────
+  test-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate synthetic dataset
+        run: python dataset/data_loader.py --mode synthetic --n 50
+
+      - name: Run scoring evaluation (no Fabric needed)
+        run: python evaluation/evaluate_scoring.py --data dataset/output/structured_dataset.csv
+
+      - name: Test post-quantum signer
+        run: python quantum/pq_signer.py
+
+      - name: Upload evaluation artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: evaluation-results
+          path: evaluation/*.json
+
+  # ── Test Node.js components (Chaincode + API) ───────────────────────────────
+  test-node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: chaincode/package.json
+
+      - name: Install chaincode dependencies
+        run: cd chaincode && npm install
+
+      - name: Lint chaincode
+        run: cd chaincode && npx eslint blockcert.js --no-eslintrc --rule '{"no-unused-vars":"warn"}' || true
+
+      - name: Install API dependencies
+        run: cd api && npm install
+
+  # ── Deploy to NRP (only on push to main) ───────────────────────────────────
+  deploy-nrp:
+    needs: [ test-python, test-node ]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Configure NRP kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.NRP_KUBECONFIG }}" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Deploy BlockCert API to NRP
+        run: |
+          kubectl apply -f k8s/configmap.yaml       -n blockcert
+          kubectl apply -f k8s/fabric-network.yaml  -n blockcert
+          kubectl apply -f k8s/api-deployment.yaml  -n blockcert
+          kubectl apply -f k8s/ipfs-deployment.yaml -n blockcert
+
+      - name: Wait for rollout
+        run: kubectl rollout status deployment/blockcert-api -n blockcert --timeout=120s
+
+      - name: Verify deployment
+        run: |
+          kubectl get pods -n blockcert
+          kubectl get services -n blockcert

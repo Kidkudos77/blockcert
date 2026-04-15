@@ -1,0 +1,224 @@
+# BlockCert — Kubernetes Manifests for NRP (Nautilus HyperCluster)
+# Apply with: kubectl apply -f k8s/ -n blockcert
+# Create namespace first: kubectl create namespace blockcert
+---
+# ── Namespace ─────────────────────────────────────────────────────────────────
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: blockcert
+  labels:
+    app: blockcert
+    institution: famu
+    program: fcss
+---
+# ── ConfigMap — shared environment variables ──────────────────────────────────
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blockcert-config
+  namespace: blockcert
+data:
+  BLOCKCERT_API:    "http://blockcert-api-service:3000"
+  BLOCKCERT_CALLER: "famu-institution"
+  BERT_MODEL_DIR:   "/app/nlp/model"
+  FABRIC_CHANNEL:   "blockcertchannel"
+  FABRIC_CHAINCODE: "blockcert"
+  PORT:             "3000"
+---
+# ── BlockCert API Deployment ──────────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blockcert-api
+  namespace: blockcert
+  labels:
+    app: blockcert-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blockcert-api
+  template:
+    metadata:
+      labels:
+        app: blockcert-api
+    spec:
+      containers:
+        - name: blockcert-api
+          image: node:18-alpine
+          workingDir: /app
+          command: ["node", "api/server.js"]
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: blockcert-config
+          volumeMounts:
+            - name: app-code
+              mountPath: /app
+            - name: wallet-store
+              mountPath: /app/wallet/store
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu:    "250m"
+            limits:
+              memory: "512Mi"
+              cpu:    "500m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      volumes:
+        - name: app-code
+          configMap:
+            name: blockcert-config
+        - name: wallet-store
+          persistentVolumeClaim:
+            claimName: wallet-pvc
+---
+# ── BlockCert API Service ─────────────────────────────────────────────────────
+apiVersion: v1
+kind: Service
+metadata:
+  name: blockcert-api-service
+  namespace: blockcert
+spec:
+  selector:
+    app: blockcert-api
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
+---
+# ── IPFS Deployment ───────────────────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blockcert-ipfs
+  namespace: blockcert
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blockcert-ipfs
+  template:
+    metadata:
+      labels:
+        app: blockcert-ipfs
+    spec:
+      containers:
+        - name: ipfs
+          image: ipfs/kubo:latest
+          ports:
+            - containerPort: 5001   # API
+            - containerPort: 4001   # Swarm
+            - containerPort: 8080   # Gateway
+          volumeMounts:
+            - name: ipfs-data
+              mountPath: /data/ipfs
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu:    "250m"
+            limits:
+              memory: "1Gi"
+              cpu:    "500m"
+      volumes:
+        - name: ipfs-data
+          persistentVolumeClaim:
+            claimName: ipfs-pvc
+---
+# ── IPFS Service ──────────────────────────────────────────────────────────────
+apiVersion: v1
+kind: Service
+metadata:
+  name: blockcert-ipfs-service
+  namespace: blockcert
+spec:
+  selector:
+    app: blockcert-ipfs
+  ports:
+    - name: api
+      port: 5001
+      targetPort: 5001
+  type: ClusterIP
+---
+# ── BERT Training Job (GPU) ───────────────────────────────────────────────────
+# Run once to train the BERT model on NRP GPU nodes
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bert-training-job
+  namespace: blockcert
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: bert-trainer
+          image: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+          command:
+            - python
+            - nlp/bert_classifier.py
+            - --train
+            - --data
+            - dataset/output/sentence_labels.json
+            - --model
+            - nlp/model
+          resources:
+            requests:
+              memory:           "4Gi"
+              cpu:              "2"
+              nvidia.com/gpu:   "1"
+            limits:
+              memory:           "8Gi"
+              cpu:              "4"
+              nvidia.com/gpu:   "1"
+          volumeMounts:
+            - name: model-storage
+              mountPath: /app/nlp/model
+      volumes:
+        - name: model-storage
+          persistentVolumeClaim:
+            claimName: model-pvc
+      nodeSelector:
+        nvidia.com/gpu.present: "true"
+---
+# ── Persistent Volume Claims ──────────────────────────────────────────────────
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wallet-pvc
+  namespace: blockcert
+spec:
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ipfs-pvc
+  namespace: blockcert
+spec:
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-pvc
+  namespace: blockcert
+spec:
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 5Gi
