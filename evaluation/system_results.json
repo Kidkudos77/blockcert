@@ -1,0 +1,22 @@
+{
+  "health": {
+    "n": 50,
+    "errors": 0,
+    "mean_ms": 6.77,
+    "median_ms": 2.6,
+    "stdev_ms": 14.45,
+    "throughput_rps": 147.71
+  },
+  "issue": {
+    "error": "All failed",
+    "n": 50
+  },
+  "verify": {
+    "error": "All failed",
+    "n": 50
+  },
+  "analytics": {
+    "error": "All failed",
+    "n": 50
+  }
+}

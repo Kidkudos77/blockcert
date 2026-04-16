@@ -1,0 +1,1834 @@
+[
+  {
+    "student_id": "FAMU10001",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4360",
+      "CIS4361",
+      "CNT4406",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.92
+  },
+  {
+    "student_id": "FAMU10154",
+    "gpa": 2.6,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4361",
+      "CNT4406",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.76
+  },
+  {
+    "student_id": "FAMU10105",
+    "gpa": 3.58,
+    "courses_completed": [
+      "CIS4360",
+      "COP3710",
+      "CIS4361",
+      "CNT4406",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.938
+  },
+  {
+    "student_id": "FAMU10079",
+    "gpa": 3.57,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.777
+  },
+  {
+    "student_id": "FAMU10083",
+    "gpa": 3.32,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4361",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.912
+  },
+  {
+    "student_id": "FAMU10036",
+    "gpa": 3.26,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361",
+      "CIS4360",
+      "CIS4385C",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.906
+  },
+  {
+    "student_id": "FAMU10043",
+    "gpa": 3.8,
+    "courses_completed": [
+      "CIS4360",
+      "COP3710",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.8
+  },
+  {
+    "student_id": "FAMU10050",
+    "gpa": 3.52,
+    "courses_completed": [
+      "CIS4361",
+      "COP3710",
+      "CIS4385C",
+      "CNT4406",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.932
+  },
+  {
+    "student_id": "FAMU10142",
+    "gpa": 2.2,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4361",
+      "CIS4385C",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.8
+  },
+  {
+    "student_id": "FAMU10159",
+    "gpa": 2.25,
+    "courses_completed": [
+      "CIS4360",
+      "COP3710",
+      "CNT4406",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.725
+  },
+  {
+    "student_id": "FAMU10081",
+    "gpa": 3.65,
+    "courses_completed": [
+      "CIS4385C",
+      "COP3710",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.865
+  },
+  {
+    "student_id": "FAMU10010",
+    "gpa": 3.46,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4385C",
+      "COP3710",
+      "CNT4406",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.926
+  },
+  {
+    "student_id": "FAMU10113",
+    "gpa": 3.5,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4361",
+      "CIS4385C",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.85
+  },
+  {
+    "student_id": "FAMU10082",
+    "gpa": 3.78,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4360",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.878
+  },
+  {
+    "student_id": "FAMU10062",
+    "gpa": 3.23,
+    "courses_completed": [
+      "CIS4385C",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.743
+  },
+  {
+    "student_id": "FAMU10025",
+    "gpa": 3.75,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360",
+      "CNT4406",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.875
+  },
+  {
+    "student_id": "FAMU10074",
+    "gpa": 3.2,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.74
+  },
+  {
+    "student_id": "FAMU10077",
+    "gpa": 3.53,
+    "courses_completed": [
+      "COP3710",
+      "CNT4406",
+      "CIS4360",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.853
+  },
+  {
+    "student_id": "FAMU10110",
+    "gpa": 3.67,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361",
+      "CIS4385C",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.867
+  },
+  {
+    "student_id": "FAMU10189",
+    "gpa": 2.25,
+    "courses_completed": [
+      "CIS4361",
+      "CNT4406",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.725
+  },
+  {
+    "student_id": "FAMU10009",
+    "gpa": 3.42,
+    "courses_completed": [
+      "CIS4385C",
+      "COP3710",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.842
+  },
+  {
+    "student_id": "FAMU10119",
+    "gpa": 3.57,
+    "courses_completed": [
+      "CIS4385C",
+      "CNT4406",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.777
+  },
+  {
+    "student_id": "FAMU10042",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "COP3710",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.84
+  },
+  {
+    "student_id": "FAMU10091",
+    "gpa": 3.33,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4361",
+      "CNT4406",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.833
+  },
+  {
+    "student_id": "FAMU10049",
+    "gpa": 3.57,
+    "courses_completed": [
+      "COP3710",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.777
+  },
+  {
+    "student_id": "FAMU10047",
+    "gpa": 3.15,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360",
+      "CNT4406",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.815
+  },
+  {
+    "student_id": "FAMU10002",
+    "gpa": 3.43,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4385C",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.763
+  },
+  {
+    "student_id": "FAMU10072",
+    "gpa": 3.33,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4360",
+      "CNT4406",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.833
+  },
+  {
+    "student_id": "FAMU10059",
+    "gpa": 3.65,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CIS4385C",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.865
+  },
+  {
+    "student_id": "FAMU10126",
+    "gpa": 3.7,
+    "courses_completed": [
+      "CIS4360",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.71
+  },
+  {
+    "student_id": "FAMU10157",
+    "gpa": 2.2,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4360",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.8
+  },
+  {
+    "student_id": "FAMU10068",
+    "gpa": 3.34,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CIS4361",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.914
+  },
+  {
+    "student_id": "FAMU10115",
+    "gpa": 3.43,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.763
+  },
+  {
+    "student_id": "FAMU10109",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360",
+      "COP3710",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.84
+  },
+  {
+    "student_id": "FAMU10021",
+    "gpa": 3.9,
+    "courses_completed": [
+      "COP3710",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.81
+  },
+  {
+    "student_id": "FAMU10013",
+    "gpa": 3.26,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4360",
+      "COP3710",
+      "CIS4361",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.906
+  },
+  {
+    "student_id": "FAMU10177",
+    "gpa": 2.15,
+    "courses_completed": [
+      "CIS4360",
+      "COP3710",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.715
+  },
+  {
+    "student_id": "FAMU10175",
+    "gpa": 2.34,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361",
+      "CIS4360",
+      "CIS4385C",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.814
+  },
+  {
+    "student_id": "FAMU10024",
+    "gpa": 3.57,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.777
+  },
+  {
+    "student_id": "FAMU10092",
+    "gpa": 3.8,
+    "courses_completed": [
+      "CIS4361",
+      "CNT4406",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.8
+  },
+  {
+    "student_id": "FAMU10123",
+    "gpa": 2.53,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4360",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.753
+  },
+  {
+    "student_id": "FAMU10026",
+    "gpa": 3.32,
+    "courses_completed": [
+      "COP3710",
+      "CIS4360",
+      "CNT4406",
+      "CIS4361",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.912
+  },
+  {
+    "student_id": "FAMU10087",
+    "gpa": 3.52,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CNT4406",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.932
+  },
+  {
+    "student_id": "FAMU10003",
+    "gpa": 3.53,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4385C",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.773
+  },
+  {
+    "student_id": "FAMU10103",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CIS4385C",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.787
+  },
+  {
+    "student_id": "FAMU10162",
+    "gpa": 2.42,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360",
+      "COP3710",
+      "CNT4406",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.822
+  },
+  {
+    "student_id": "FAMU10102",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4385C",
+      "CIS4360",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.84
+  },
+  {
+    "student_id": "FAMU10173",
+    "gpa": 2.25,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.725
+  },
+  {
+    "student_id": "FAMU10060",
+    "gpa": 3.1,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4361",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.73
+  },
+  {
+    "student_id": "FAMU10023",
+    "gpa": 3.4,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361",
+      "CIS4360",
+      "CIS4385C",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.92
+  },
+  {
+    "student_id": "FAMU10098",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4385C",
+      "CIS4361",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.92
+  },
+  {
+    "student_id": "FAMU10153",
+    "gpa": 3.85,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.725
+  },
+  {
+    "student_id": "FAMU10019",
+    "gpa": 3.42,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4360",
+      "COP3710",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.842
+  },
+  {
+    "student_id": "FAMU10053",
+    "gpa": 3.15,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CNT4406",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.815
+  },
+  {
+    "student_id": "FAMU10067",
+    "gpa": 3.52,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4361",
+      "COP3710",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.932
+  },
+  {
+    "student_id": "FAMU10134",
+    "gpa": 2.22,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "COP3710",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.722
+  },
+  {
+    "student_id": "FAMU10044",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4385C",
+      "CIS4361",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.92
+  },
+  {
+    "student_id": "FAMU10085",
+    "gpa": 3.47,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4385C",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.847
+  },
+  {
+    "student_id": "FAMU10054",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4361",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.84
+  },
+  {
+    "student_id": "FAMU10080",
+    "gpa": 3.6,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4385C",
+      "CIS4360",
+      "CIS4361",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.94
+  },
+  {
+    "student_id": "FAMU10022",
+    "gpa": 3.9,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.81
+  },
+  {
+    "student_id": "FAMU10075",
+    "gpa": 3.5,
+    "courses_completed": [
+      "COP3710",
+      "CIS4360",
+      "CNT4406",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.85
+  },
+  {
+    "student_id": "FAMU10071",
+    "gpa": 3.67,
+    "courses_completed": [
+      "COP3710",
+      "CNT4406",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.787
+  },
+  {
+    "student_id": "FAMU10035",
+    "gpa": 3.34,
+    "courses_completed": [
+      "CIS4361",
+      "COP3710",
+      "CNT4406",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.914
+  },
+  {
+    "student_id": "FAMU10066",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4385C",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.84
+  },
+  {
+    "student_id": "FAMU10084",
+    "gpa": 3.2,
+    "courses_completed": [
+      "CIS4385C",
+      "CNT4406",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.74
+  },
+  {
+    "student_id": "FAMU10181",
+    "gpa": 2.42,
+    "courses_completed": [
+      "CIS4361",
+      "CNT4406",
+      "CIS4360",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.742
+  },
+  {
+    "student_id": "FAMU10038",
+    "gpa": 3.33,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.753
+  },
+  {
+    "student_id": "FAMU10155",
+    "gpa": 2.24,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CNT4406",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.804
+  },
+  {
+    "student_id": "FAMU10041",
+    "gpa": 3.34,
+    "courses_completed": [
+      "CIS4361",
+      "CNT4406",
+      "COP3710",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.914
+  },
+  {
+    "student_id": "FAMU10122",
+    "gpa": 2.34,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CIS4361",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.814
+  },
+  {
+    "student_id": "FAMU10040",
+    "gpa": 3.23,
+    "courses_completed": [
+      "COP3710",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.743
+  },
+  {
+    "student_id": "FAMU10171",
+    "gpa": 2.25,
+    "courses_completed": [
+      "CIS4385C",
+      "CNT4406",
+      "COP3710",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.725
+  },
+  {
+    "student_id": "FAMU10093",
+    "gpa": 3.46,
+    "courses_completed": [
+      "COP3710",
+      "CNT4406",
+      "CIS4361",
+      "CIS4385C",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.926
+  },
+  {
+    "student_id": "FAMU10112",
+    "gpa": 3.46,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361",
+      "CIS4385C",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.926
+  },
+  {
+    "student_id": "FAMU10037",
+    "gpa": 3.6,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4360",
+      "CIS4361",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.94
+  },
+  {
+    "student_id": "FAMU10064",
+    "gpa": 3.46,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4360",
+      "COP3710",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.926
+  },
+  {
+    "student_id": "FAMU10127",
+    "gpa": 2.32,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CIS4361",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.812
+  },
+  {
+    "student_id": "FAMU10007",
+    "gpa": 3.17,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4385C",
+      "CNT4406",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.817
+  },
+  {
+    "student_id": "FAMU10099",
+    "gpa": 3.25,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4385C",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.825
+  },
+  {
+    "student_id": "FAMU10027",
+    "gpa": 3.25,
+    "courses_completed": [
+      "CIS4385C",
+      "COP3710",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.825
+  },
+  {
+    "student_id": "FAMU10069",
+    "gpa": 3.53,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4361",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.773
+  },
+  {
+    "student_id": "FAMU10029",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.787
+  },
+  {
+    "student_id": "FAMU10056",
+    "gpa": 3.6,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4361",
+      "COP3710",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.94
+  },
+  {
+    "student_id": "FAMU10051",
+    "gpa": 3.77,
+    "courses_completed": [
+      "COP3710",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.797
+  },
+  {
+    "student_id": "FAMU10147",
+    "gpa": 3.85,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.725
+  },
+  {
+    "student_id": "FAMU10094",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4360",
+      "COP3710",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.84
+  },
+  {
+    "student_id": "FAMU10031",
+    "gpa": 3.33,
+    "courses_completed": [
+      "CIS4385C",
+      "CNT4406",
+      "COP3710",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.833
+  },
+  {
+    "student_id": "FAMU10006",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.787
+  },
+  {
+    "student_id": "FAMU10111",
+    "gpa": 3.35,
+    "courses_completed": [
+      "CIS4361",
+      "COP3710",
+      "CIS4385C",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.835
+  },
+  {
+    "student_id": "FAMU10090",
+    "gpa": 3.2,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4361",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.74
+  },
+  {
+    "student_id": "FAMU10086",
+    "gpa": 3.33,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.753
+  },
+  {
+    "student_id": "FAMU10125",
+    "gpa": 3.65,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.705
+  },
+  {
+    "student_id": "FAMU10130",
+    "gpa": 2.32,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4360",
+      "CIS4361",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.812
+  },
+  {
+    "student_id": "FAMU10012",
+    "gpa": 3.75,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.875
+  },
+  {
+    "student_id": "FAMU10174",
+    "gpa": 2.42,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CNT4406",
+      "COP3710",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.822
+  },
+  {
+    "student_id": "FAMU10052",
+    "gpa": 3.26,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4385C",
+      "COP3710",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.906
+  },
+  {
+    "student_id": "FAMU10061",
+    "gpa": 3.85,
+    "courses_completed": [
+      "CIS4385C",
+      "COP3710",
+      "CIS4360",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.885
+  },
+  {
+    "student_id": "FAMU10004",
+    "gpa": 3.57,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.777
+  },
+  {
+    "student_id": "FAMU10028",
+    "gpa": 3.47,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.767
+  },
+  {
+    "student_id": "FAMU10048",
+    "gpa": 3.9,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.81
+  },
+  {
+    "student_id": "FAMU10070",
+    "gpa": 3.38,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4361",
+      "COP3710",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.918
+  },
+  {
+    "student_id": "FAMU10039",
+    "gpa": 3.68,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4360",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.948
+  },
+  {
+    "student_id": "FAMU10178",
+    "gpa": 2.5,
+    "courses_completed": [
+      "COP3710",
+      "CNT4406",
+      "CIS4361",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.75
+  },
+  {
+    "student_id": "FAMU10117",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4361",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.92
+  },
+  {
+    "student_id": "FAMU10063",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4385C",
+      "COP3710",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.867
+  },
+  {
+    "student_id": "FAMU10058",
+    "gpa": 3.46,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CIS4385C",
+      "CNT4406",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.926
+  },
+  {
+    "student_id": "FAMU10163",
+    "gpa": 2.06,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4361",
+      "CIS4360",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.786
+  },
+  {
+    "student_id": "FAMU10179",
+    "gpa": 2.53,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4361",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.753
+  },
+  {
+    "student_id": "FAMU10139",
+    "gpa": 2.42,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4361",
+      "COP3710",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.742
+  },
+  {
+    "student_id": "FAMU10076",
+    "gpa": 3.23,
+    "courses_completed": [
+      "CIS4361",
+      "COP3710",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.743
+  },
+  {
+    "student_id": "FAMU10057",
+    "gpa": 3.24,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361",
+      "CIS4360",
+      "CNT4406",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.904
+  },
+  {
+    "student_id": "FAMU10032",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4361",
+      "COP3710",
+      "CIS4385C",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.84
+  },
+  {
+    "student_id": "FAMU10100",
+    "gpa": 3.43,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.763
+  },
+  {
+    "student_id": "FAMU10137",
+    "gpa": 2.4,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "COP3710",
+      "CIS4385C",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.82
+  },
+  {
+    "student_id": "FAMU10045",
+    "gpa": 3.33,
+    "courses_completed": [
+      "COP3710",
+      "CIS4360",
+      "CNT4406",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.833
+  },
+  {
+    "student_id": "FAMU10030",
+    "gpa": 3.54,
+    "courses_completed": [
+      "CIS4360",
+      "COP3710",
+      "CIS4385C",
+      "CIS4361",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.934
+  },
+  {
+    "student_id": "FAMU10089",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4385C",
+      "CIS4360",
+      "CNT4406",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.92
+  },
+  {
+    "student_id": "FAMU10176",
+    "gpa": 2.42,
+    "courses_completed": [
+      "COP3710",
+      "CIS4360",
+      "CIS4361",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.742
+  },
+  {
+    "student_id": "FAMU10020",
+    "gpa": 3.75,
+    "courses_completed": [
+      "COP3710",
+      "CNT4406",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.875
+  },
+  {
+    "student_id": "FAMU10096",
+    "gpa": 3.6,
+    "courses_completed": [
+      "CIS4360",
+      "COP3710",
+      "CIS4385C",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.94
+  },
+  {
+    "student_id": "FAMU10114",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4360",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.84
+  },
+  {
+    "student_id": "FAMU10097",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4361",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.787
+  },
+  {
+    "student_id": "FAMU10095",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4360",
+      "CIS4361",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.867
+  },
+  {
+    "student_id": "FAMU10107",
+    "gpa": 3.2,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4385C",
+      "COP3710",
+      "CIS4361",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.9
+  },
+  {
+    "student_id": "FAMU10034",
+    "gpa": 3.43,
+    "courses_completed": [
+      "COP3710",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.763
+  },
+  {
+    "student_id": "FAMU10046",
+    "gpa": 3.54,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4385C",
+      "CIS4361",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.934
+  },
+  {
+    "student_id": "FAMU10104",
+    "gpa": 3.38,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361",
+      "CNT4406",
+      "CIS4385C",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.918
+  },
+  {
+    "student_id": "FAMU10073",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.787
+  },
+  {
+    "student_id": "FAMU10008",
+    "gpa": 3.1,
+    "courses_completed": [
+      "COP3710",
+      "CIS4361",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.73
+  },
+  {
+    "student_id": "FAMU10017",
+    "gpa": 3.62,
+    "courses_completed": [
+      "CIS4385C",
+      "COP3710",
+      "CNT4406",
+      "CIS4360",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.942
+  },
+  {
+    "student_id": "FAMU10015",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CIS4385C",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.787
+  },
+  {
+    "student_id": "FAMU10016",
+    "gpa": 3.6,
+    "courses_completed": [
+      "CIS4360",
+      "CNT4406",
+      "CIS4385C",
+      "COP3710",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.94
+  },
+  {
+    "student_id": "FAMU10088",
+    "gpa": 3.5,
+    "courses_completed": [
+      "CIS4361",
+      "CNT4406",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.85
+  },
+  {
+    "student_id": "FAMU10108",
+    "gpa": 3.46,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4385C",
+      "CNT4406",
+      "COP3710",
+      "CIS4360"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.926
+  },
+  {
+    "student_id": "FAMU10011",
+    "gpa": 3.6,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4385C",
+      "CIS4361",
+      "COP3710",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.94
+  },
+  {
+    "student_id": "FAMU10018",
+    "gpa": 4.0,
+    "courses_completed": [
+      "CNT4406",
+      "CIS4360",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.9
+  },
+  {
+    "student_id": "FAMU10055",
+    "gpa": 3.85,
+    "courses_completed": [
+      "CIS4361",
+      "COP3710",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.885
+  },
+  {
+    "student_id": "FAMU10000",
+    "gpa": 3.8,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4360",
+      "CIS4385C",
+      "COP3710",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.96
+  },
+  {
+    "student_id": "FAMU10065",
+    "gpa": 3.57,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4361",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.777
+  },
+  {
+    "student_id": "FAMU10101",
+    "gpa": 3.35,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.835
+  },
+  {
+    "student_id": "FAMU10005",
+    "gpa": 3.67,
+    "courses_completed": [
+      "CIS4361",
+      "COP3710",
+      "CIS4385C"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.787
+  },
+  {
+    "student_id": "FAMU10078",
+    "gpa": 3.6,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4360",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.94
+  },
+  {
+    "student_id": "FAMU10172",
+    "gpa": 2.17,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.717
+  },
+  {
+    "student_id": "FAMU10118",
+    "gpa": 3.33,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.833
+  },
+  {
+    "student_id": "FAMU10143",
+    "gpa": 2.28,
+    "courses_completed": [
+      "CNT4406",
+      "COP3710",
+      "CIS4360",
+      "CIS4385C",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.808
+  },
+  {
+    "student_id": "FAMU10014",
+    "gpa": 3.8,
+    "courses_completed": [
+      "CIS4360",
+      "CIS4385C",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.8
+  },
+  {
+    "student_id": "FAMU10199",
+    "gpa": 2.33,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4360",
+      "CIS4361",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.733
+  },
+  {
+    "student_id": "FAMU10106",
+    "gpa": 3.38,
+    "courses_completed": [
+      "COP3710",
+      "CIS4385C",
+      "CIS4361",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.918
+  },
+  {
+    "student_id": "FAMU10131",
+    "gpa": 2.2,
+    "courses_completed": [
+      "CIS4385C",
+      "COP3710",
+      "CIS4360",
+      "CNT4406",
+      "CIS4361"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.8
+  },
+  {
+    "student_id": "FAMU10033",
+    "gpa": 3.4,
+    "courses_completed": [
+      "CIS4361",
+      "CIS4385C",
+      "CNT4406",
+      "CIS4360",
+      "COP3710"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.92
+  },
+  {
+    "student_id": "FAMU10116",
+    "gpa": 3.7,
+    "courses_completed": [
+      "CIS4385C",
+      "CIS4360",
+      "CNT4406"
+    ],
+    "bert_confidence": 0.9,
+    "eligibility_score": 0.79
+  }
+]

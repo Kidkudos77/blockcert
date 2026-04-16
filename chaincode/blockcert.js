@@ -21,7 +21,7 @@ const crypto       = require('crypto');
 
 const PROGRAM      = 'FAMU-FCSS';
 const ISSUER       = 'famu.edu';
-const FCSS_COURSES = ['NSA3010','NSA4020','NSA4030','NSA4040','NSA4050'];
+const FCSS_COURSES = ['CIS4385C','CIS4360','CIS4361','CNT4406','COP3710'];
 const MIN_GPA      = 3.0;
 const MIN_COURSES  = 3;
 const W1=0.40, W2=0.40, W3=0.20;

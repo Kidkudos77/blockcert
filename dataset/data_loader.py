@@ -28,11 +28,11 @@ random.seed(42)
 
 # ── FCSS Program Catalog ──────────────────────────────────────────────────────
 COURSES = {
-    'NSA3010': 'Network Security Fundamentals',
-    'NSA4020': 'Penetration Testing',
-    'NSA4030': 'Digital Forensics',
-    'NSA4040': 'Incident Response',
-    'NSA4050': 'Cryptography',
+    'CIS4385C': 'Digital Forensics',
+    'CIS4360':  'Introduction to Computer Security',
+    'CIS4361':  'Applied Security',
+    'CNT4406':  'Network Security',
+    'COP3710':  'Database Management Systems',
 }
 
 # Natural language sentence variations per course.
@@ -40,7 +40,7 @@ COURSES = {
 # When a Kaggle dataset is loaded, real transcript sentences
 # are added to this pool automatically.
 COURSE_VARIATIONS = {
-    'NSA3010': [
+    'CIS4385C': [
         'NSA3010 Network Security Fundamentals A',
         'Completed Network Security Fundamentals with grade A-',
         'NSA 3010 - Intro to Network Security B+',
@@ -50,7 +50,7 @@ COURSE_VARIATIONS = {
         'Network Security NSA3010 completed with B+',
         'NSA3010 grade earned: A minus',
     ],
-    'NSA4020': [
+    'CIS4360': [
         'NSA4020 Penetration Testing A-',
         'Pen Testing (NSA4020) Grade: B+',
         'Completed: Penetration Testing and Ethical Hacking B',
@@ -60,7 +60,7 @@ COURSE_VARIATIONS = {
         'Penetration Testing NSA4020 credits 3 grade A',
         'NSA4020 pentest course passed grade B',
     ],
-    'NSA4030': [
+    'CIS4361': [
         'NSA4030 Digital Forensics B+',
         'Digital Forensics and Incident Investigation (NSA4030) A',
         'Completed NSA 4030: Forensic Analysis Grade B',
@@ -70,7 +70,7 @@ COURSE_VARIATIONS = {
         'NSA4030 digital forensics examination passed A-',
         'Cyber forensics NSA4030 grade B plus',
     ],
-    'NSA4040': [
+    'CNT4406': [
         'NSA4040 Incident Response A',
         'IR and Threat Management NSA4040 B+',
         'Completed Incident Response (NSA4040) with A-',
@@ -80,7 +80,7 @@ COURSE_VARIATIONS = {
         'NSA4040 incident response course grade A',
         'Threat and incident management NSA4040 B',
     ],
-    'NSA4050': [
+    'COP3710': [
         'NSA4050 Cryptography A-',
         'Applied Cryptography NSA4050 B',
         'Cryptography and Data Security (NSA4050) Grade A',

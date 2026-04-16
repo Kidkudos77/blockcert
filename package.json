@@ -1,0 +1,16 @@
+{
+  "name": "blockcert",
+  "version": "1.0.0",
+  "description": "[![CI/CD](https://github.com/YOUR_USERNAME/blockcert/actions/workflows/blockcert.yml/badge.svg)](https://github.com/YOUR_USERNAME/blockcert/actions) [![Python](https://img.shields.io/badge/Python-3.10+-blue)](https://python.org) [![Node.js](https://img.shields.io/badge/Node.js-18+-green)](https://nodejs.org) [![Hyperledger Fabric](https://img.shields.io/badge/Hyperledger-Fabric%202.5-orange)](https://hyperledger.org) [![Post-Quantum](https://img.shields.io/badge/PQ%20Crypto-CRYSTALS--Dilithium3-purple)](https://pq-crystals.org) [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fabric-ca-client": "^2.2.20",
+    "fabric-network": "^2.2.20"
+  }
+}

@@ -13,8 +13,8 @@ const WALLET_DIR   = path.join(__dirname, '..', 'wallet', 'store');
 const CONN_PROFILE = path.join(__dirname, '..', 'config', 'connection.json');
 const CHANNEL      = 'blockcertchannel';
 const CHAINCODE    = 'blockcert';
-const MSP_ID       = 'FAMUMsp';
-const CA_HOST      = 'ca.famu.edu';
+const MSP_ID       = 'Org1MSP';
+const CA_HOST      = 'ca.org1.example.com';
 
 function loadProfile() {
     if (!fs.existsSync(CONN_PROFILE))
@@ -39,7 +39,7 @@ async function enrollAdmin() {
     console.log('Admin enrolled.');
 }
 
-async function registerUser({ userID, role, affiliation='famu.fcss' }) {
+async function registerUser({ userID, role, affiliation='org1.department1' }) {
     const VALID = ['admin','institution','student','verifier'];
     if (!VALID.includes(role)) throw new Error(`Invalid role: ${role}`);
     const ccp = loadProfile(); const wallet = await getWallet();
@@ -72,7 +72,7 @@ async function getContract(userID) {
     const ccp = loadProfile(); const wallet = await getWallet();
     if (!await wallet.get(userID)) throw new Error(`Identity '${userID}' not found.`);
     const gateway = new Gateway();
-    await gateway.connect(ccp, { wallet, identity:userID, discovery:{ enabled:true, asLocalhost:true } });
+    await gateway.connect(ccp, { wallet, identity:userID, discovery:{ enabled:false, asLocalhost:true } });
     const contract = (await gateway.getNetwork(CHANNEL)).getContract(CHAINCODE);
     return { contract, gateway };
 }

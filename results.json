@@ -1,0 +1,2191 @@
+{
+  "summary": {
+    "ISSUED": 46,
+    "NOT_ELIGIBLE": 63,
+    "MANUAL_REVIEW": 0,
+    "REJECTED": 91,
+    "API_UNAVAILABLE": 0
+  },
+  "total": 200,
+  "details": [
+    {
+      "student_id": "FAMU10193",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10001",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10001-0fa2f383",
+      "credHash": "5e8ad9523b6cccf45a253ce6dc2fd5c1327efa77dd06202c36a65b69b1c098dd",
+      "scoring": {
+        "score": 0.9399,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.34,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.4,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10170",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10154",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.6 below minimum 3.0",
+      "score": 0.7799
+    },
+    {
+      "student_id": "FAMU10150",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10105",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10105-407aef22",
+      "credHash": "a2b46fda8e1a0f65b56dc5dc0240812cd8139fdd53bd43ffdfd39bcec4fb344e",
+      "scoring": {
+        "score": 0.9579,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.358,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.58,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10079",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10180",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.1 below minimum 3.0",
+      "score": 0.726
+    },
+    {
+      "student_id": "FAMU10083",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10083-761e068f",
+      "credHash": "fb0c432cf1ed50c0ec550e8ad59707e09a2187ff7fb4bb0dc0f52e4749e2cf05",
+      "scoring": {
+        "score": 0.9319,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.332,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.32,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10036",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10036-ca07af5a",
+      "credHash": "6063b2eec8e81fb50be60dcaf04f83eb30cd5593a9398ba2a685d2218de1eb25",
+      "scoring": {
+        "score": 0.9259,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.326,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.26,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10043",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10050",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10192",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10142",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.2 below minimum 3.0",
+      "score": 0.8199
+    },
+    {
+      "student_id": "FAMU10159",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.25 below minimum 3.0",
+      "score": 0.8249
+    },
+    {
+      "student_id": "FAMU10081",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10010",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10158",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10183",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.6729
+    },
+    {
+      "student_id": "FAMU10113",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10082",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10141",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.3 below minimum 3.0",
+      "score": 0.7499
+    },
+    {
+      "student_id": "FAMU10062",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10025",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10074",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10074-4789ded8",
+      "credHash": "bcc9541af5eabe4bd76396ef42577113da565fa9c5d2498a97c59a322325fce1",
+      "scoring": {
+        "score": 0.7599,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.32,
+          "course_component": 0.24,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.2,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10077",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10077-29a76b7b",
+      "credHash": "58c9a5175178232f1e113e297a44403fadd14847d784a86936daf2d83f2c916d",
+      "scoring": {
+        "score": 0.8729,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.353,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.53,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10110",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10189",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.25 below minimum 3.0",
+      "score": 0.7449
+    },
+    {
+      "student_id": "FAMU10182",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.6729
+    },
+    {
+      "student_id": "FAMU10129",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.0 below minimum 3.0",
+      "score": 0.5598
+    },
+    {
+      "student_id": "FAMU10009",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10119",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10042",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10042-40430118",
+      "credHash": "092c0c18daa269cab729f36b9d1405de876f6c76e758e8a6ed03a242bb89e4fd",
+      "scoring": {
+        "score": 0.8599,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.34,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.4,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10091",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10049",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10049-24215de7",
+      "credHash": "8d5106850a1ee2710e5af23ac755a5d9591b84f3f2d68c8d24a2269ca8a35d97",
+      "scoring": {
+        "score": 0.8769,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.357,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.57,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10047",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10047-33ac5f70",
+      "credHash": "7495ff4abd3cd8283f3ce224b1c19229d8857ebea5bf4b1da2d541471e6d119c",
+      "scoring": {
+        "score": 0.8349,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.315,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.15,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10124",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.3 below minimum 3.0",
+      "score": 0.5899
+    },
+    {
+      "student_id": "FAMU10002",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10002-afe0a134",
+      "credHash": "70a33c97c5f91e36c6211152ec4fc4c7a24f47e14eb3f88f7642a15960e64466",
+      "scoring": {
+        "score": 0.8628,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.343,
+          "course_component": 0.32,
+          "bert_component": 0.1998
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.43,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10072",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10196",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.65 below minimum 3.0",
+      "score": 0.7048
+    },
+    {
+      "student_id": "FAMU10059",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10126",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10157",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.2 below minimum 3.0",
+      "score": 0.8199
+    },
+    {
+      "student_id": "FAMU10169",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.7 below minimum 3.0",
+      "score": 0.7099
+    },
+    {
+      "student_id": "FAMU10068",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10068-254a08ff",
+      "credHash": "5ca195c377d43b1f809383d6192eb2c5b5ce99125a3b67c6cf19af16bfab5328",
+      "scoring": {
+        "score": 0.9339,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.334,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.34,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10188",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.8328
+    },
+    {
+      "student_id": "FAMU10115",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10109",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10021",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10013",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10177",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.15 below minimum 3.0",
+      "score": 0.7349
+    },
+    {
+      "student_id": "FAMU10175",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.34 below minimum 3.0",
+      "score": 0.8339
+    },
+    {
+      "student_id": "FAMU10024",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10132",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.7529
+    },
+    {
+      "student_id": "FAMU10198",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.7 below minimum 3.0",
+      "score": 0.7098
+    },
+    {
+      "student_id": "FAMU10092",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10092-290e2756",
+      "credHash": "a239d692c3f3c7cb94dca3a9acd6cbf6efa32fe006c18f9808f0321d7bc2ba61",
+      "scoring": {
+        "score": 0.8998,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.38,
+          "course_component": 0.32,
+          "bert_component": 0.1998
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.8,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10123",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.53 below minimum 3.0",
+      "score": 0.7729
+    },
+    {
+      "student_id": "FAMU10026",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10026-19b214b8",
+      "credHash": "e6810b704030e13eb9b1d5ae67265774981ee6b1b22bb239a6ef51793f9c4846",
+      "scoring": {
+        "score": 0.9319,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.332,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.32,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10087",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10003",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10140",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.3 below minimum 3.0",
+      "score": 0.7392
+    },
+    {
+      "student_id": "FAMU10103",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10162",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.42 below minimum 3.0",
+      "score": 0.8419
+    },
+    {
+      "student_id": "FAMU10102",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10151",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10151-82653f66",
+      "credHash": "0b3b369f59febd233cc482588474bc65adb3f2ed03c1bfd2e5f277bbd714ad62",
+      "scoring": {
+        "score": 0.7549,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.315,
+          "course_component": 0.24,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.15,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10173",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.25 below minimum 3.0",
+      "score": 0.8248
+    },
+    {
+      "student_id": "FAMU10167",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.7528
+    },
+    {
+      "student_id": "FAMU10060",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10023",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10098",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10153",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10019",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10156",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10053",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10053-1f2e3e1a",
+      "credHash": "1d90f28ed99101d75b4402832dbae07efd96fc136cdd2aa47de88fcbc052870b",
+      "scoring": {
+        "score": 0.8349,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.315,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.15,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10152",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.0 below minimum 3.0",
+      "score": 0.5598
+    },
+    {
+      "student_id": "FAMU10067",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10067-80188b47",
+      "credHash": "742e1f92cc9519b89e39b664b21fa04e1158c3d83e9d984da787c5861d66af42",
+      "scoring": {
+        "score": 0.9519,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.352,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.52,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10134",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.22 below minimum 3.0",
+      "score": 0.8219
+    },
+    {
+      "student_id": "FAMU10044",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10145",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.5 below minimum 3.0",
+      "score": 0.6898
+    },
+    {
+      "student_id": "FAMU10194",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10194-df68f66e",
+      "credHash": "53b13c9d2b6d3995c73a44071ceaf001cc0f0deb469d2f8b7466c5b8b29f7add",
+      "scoring": {
+        "score": 0.7549,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.315,
+          "course_component": 0.24,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.15,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10085",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10085-5d7e2992",
+      "credHash": "2e36ae51213028105b7f7be568cf928eea0d8d5f9fd2c3e142b9f5b053e791e3",
+      "scoring": {
+        "score": 0.9469,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.347,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.47,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10054",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10080",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10022",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10075",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10075-a139add5",
+      "credHash": "2cfb525c990ec4fe6cc36e74a64be0da8f1d9909d33d4e9c9aba279baf9b7040",
+      "scoring": {
+        "score": 0.9499,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.35,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.5,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10071",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10071-052c68f8",
+      "credHash": "ecdbe6f85c75913c498757b53f4f9f00b3bff8b0211be80db52dd12edb56a890",
+      "scoring": {
+        "score": 0.8869,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.367,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.67,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10197",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.47 below minimum 3.0",
+      "score": 0.6869
+    },
+    {
+      "student_id": "FAMU10035",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10195",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10128",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.7528
+    },
+    {
+      "student_id": "FAMU10133",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.85 below minimum 3.0",
+      "score": 0.7248
+    },
+    {
+      "student_id": "FAMU10066",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10084",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10181",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.42 below minimum 3.0",
+      "score": 0.7619
+    },
+    {
+      "student_id": "FAMU10038",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10038-1145a52d",
+      "credHash": "1387c25c1da0318cf06f76f6765fab50874f94a64f6c8d09030f37deb11e2210",
+      "scoring": {
+        "score": 0.7729,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.333,
+          "course_component": 0.24,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.33,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10155",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.24 below minimum 3.0",
+      "score": 0.8239
+    },
+    {
+      "student_id": "FAMU10041",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10121",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10121-8a231fa2",
+      "credHash": "5aa393c0e486d507c8de50813c6286fc676de92af167bafd9f0994fb33dbf14b",
+      "scoring": {
+        "score": 0.7699,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.33,
+          "course_component": 0.24,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.3,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10122",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.34 below minimum 3.0",
+      "score": 0.8339
+    },
+    {
+      "student_id": "FAMU10186",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.7529
+    },
+    {
+      "student_id": "FAMU10040",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10171",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.25 below minimum 3.0",
+      "score": 0.8248
+    },
+    {
+      "student_id": "FAMU10093",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10112",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10037",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10064",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10127",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.32 below minimum 3.0",
+      "score": 0.8319
+    },
+    {
+      "student_id": "FAMU10007",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10007-556b235f",
+      "credHash": "ba430f6b1d7337aea606b93af4a9c2c13ed3078b255ba70673d57cc47cf9174d",
+      "scoring": {
+        "score": 0.8369,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.317,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.17,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10099",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10160",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.5 below minimum 3.0",
+      "score": 0.7698
+    },
+    {
+      "student_id": "FAMU10027",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10027-eb138aec",
+      "credHash": "d7beb1bcd2c8b511a91c7ea93119360caa10173a576361eee50f3cf4cb3614d7",
+      "scoring": {
+        "score": 0.9249,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.325,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.25,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10069",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10029",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10056",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10056-54638ef9",
+      "credHash": "de0737693c9e82e005f95f59e946542c80fa8cdda4fd1a08b9ed8843be365a0e",
+      "scoring": {
+        "score": 0.9599,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.36,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.6,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10051",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10147",
+      "status": "NOT_ELIGIBLE",
+      "reason": "Only 2 FCSS courses completed (need 3)",
+      "score": 0.7449
+    },
+    {
+      "student_id": "FAMU10094",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10031",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10031-43a0aac4",
+      "credHash": "f13224336507ec35443a1cc0f8535938f434f31e6c112c27be3c978edefc9037",
+      "scoring": {
+        "score": 0.9328,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.333,
+          "course_component": 0.4,
+          "bert_component": 0.1998
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.33,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10006",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10111",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10090",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10090-3ee4b061",
+      "credHash": "92df490a58b546998dc7f1dfc16aac23e7fc7ecefb5e7ae8c44b707a70ea2d07",
+      "scoring": {
+        "score": 0.8398,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.32,
+          "course_component": 0.32,
+          "bert_component": 0.1998
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.2,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10086",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10125",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10149",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10130",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.32 below minimum 3.0",
+      "score": 0.8319
+    },
+    {
+      "student_id": "FAMU10146",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.7 below minimum 3.0",
+      "score": 0.6298
+    },
+    {
+      "student_id": "FAMU10012",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10174",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.42 below minimum 3.0",
+      "score": 0.8419
+    },
+    {
+      "student_id": "FAMU10052",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10052-df008f7c",
+      "credHash": "960b257c99f30b05d864ab962c2bbac136f9b77dc4a0e4a3722eb24bc4b7b8f1",
+      "scoring": {
+        "score": 0.9259,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.326,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.26,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10061",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10061-8cb73713",
+      "credHash": "c72153492f91782c89f48ca4e4abd6cfced7f1eb7b27ae66a095a4e6de4ecbe5",
+      "scoring": {
+        "score": 0.9049,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.385,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.85,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10004",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10166",
+      "status": "NOT_ELIGIBLE",
+      "reason": "Only 2 FCSS courses completed (need 3)",
+      "score": 0.6598
+    },
+    {
+      "student_id": "FAMU10190",
+      "status": "NOT_ELIGIBLE",
+      "reason": "Only 2 FCSS courses completed (need 3)",
+      "score": 0.6749
+    },
+    {
+      "student_id": "FAMU10028",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10028-bf8428f2",
+      "credHash": "1bb84b0ec837017bd43f63f731192e739b81a02ff9b18ab7fe537680c26ad959",
+      "scoring": {
+        "score": 0.8669,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.347,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.47,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10048",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10048-378da855",
+      "credHash": "2fbe9d5bd6144e33a33ae06bb523a0f6de735f20f6bd4d273f9241b1757e3bab",
+      "scoring": {
+        "score": 0.9099,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.39,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.9,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10070",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10039",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10178",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.5 below minimum 3.0",
+      "score": 0.8498
+    },
+    {
+      "student_id": "FAMU10117",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10063",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10058",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10163",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.06 below minimum 3.0",
+      "score": 0.8059
+    },
+    {
+      "student_id": "FAMU10136",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.7 below minimum 3.0",
+      "score": 0.774
+    },
+    {
+      "student_id": "FAMU10179",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.53 below minimum 3.0",
+      "score": 0.7729
+    },
+    {
+      "student_id": "FAMU10139",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.42 below minimum 3.0",
+      "score": 0.8418
+    },
+    {
+      "student_id": "FAMU10191",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.7529
+    },
+    {
+      "student_id": "FAMU10076",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10076-9b8f8465",
+      "credHash": "5c561ef414b15a843ada1944bb0c4d6788d825873921ff299c3f75a0bb1895ad",
+      "scoring": {
+        "score": 0.8428,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.323,
+          "course_component": 0.32,
+          "bert_component": 0.1998
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.23,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10187",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.57 below minimum 3.0",
+      "score": 0.6969
+    },
+    {
+      "student_id": "FAMU10184",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10057",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10032",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10135",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.3 below minimum 3.0",
+      "score": 0.6699
+    },
+    {
+      "student_id": "FAMU10100",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10100-c9bc2701",
+      "credHash": "92b495bbce2dcef66a219ee169465243004f6e1736ff9fc4644055072646449f",
+      "scoring": {
+        "score": 0.7829,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.343,
+          "course_component": 0.24,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.43,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10137",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.4 below minimum 3.0",
+      "score": 0.8399
+    },
+    {
+      "student_id": "FAMU10045",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10045-935dbfb9",
+      "credHash": "e5ecf87761790a510b9ca01a76af8f23427d17625811b231bf2eff6e0a4f9df1",
+      "scoring": {
+        "score": 0.9329,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.333,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.33,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10030",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10030-97e85256",
+      "credHash": "9cd21cfe5266881f1e336f50fd867214f054424f2b5a07d4e964a3fd332399ab",
+      "scoring": {
+        "score": 0.9539,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.354,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.54,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10089",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10168",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.7 below minimum 3.0",
+      "score": 0.7098
+    },
+    {
+      "student_id": "FAMU10176",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.42 below minimum 3.0",
+      "score": 0.7619
+    },
+    {
+      "student_id": "FAMU10020",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10020-f0427c1e",
+      "credHash": "4a9c0eb1d4981bcce1ed6b282bd7c5597e8f37e6b01a066c4c90b578ad524767",
+      "scoring": {
+        "score": 0.9748,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.375,
+          "course_component": 0.4,
+          "bert_component": 0.1998
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.75,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10161",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.0 below minimum 3.0",
+      "score": 0.7198
+    },
+    {
+      "student_id": "FAMU10096",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10096-b89fdfda",
+      "credHash": "ab5c782fb7c38666e86e188d8e1002e02a3f205ff7a53f13edaaa481966db67e",
+      "scoring": {
+        "score": 0.9599,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.36,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.6,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10114",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10097",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10095",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10095-7096f887",
+      "credHash": "9e5e5e6aeb7afca80d6074773e42c171e2212679913d1573d224d86787e9437e",
+      "scoring": {
+        "score": 0.8869,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.367,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.67,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10107",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10165",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10165-4195b6f5",
+      "credHash": "a0ab3ddf195ebe12802c3c3afa4dba8213d2c7e0931cfdbeceb0d44a2463c6f0",
+      "scoring": {
+        "score": 0.8398,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.4,
+          "course_component": 0.24,
+          "bert_component": 0.1998
+        },
+        "threshold": 0.7
+      },
+      "gpa": 4.0,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10164",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.85 below minimum 3.0",
+      "score": 0.7248
+    },
+    {
+      "student_id": "FAMU10034",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10046",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10104",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10073",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10008",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10120",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.57 below minimum 3.0",
+      "score": 0.7769
+    },
+    {
+      "student_id": "FAMU10017",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10017-1cf0bbda",
+      "credHash": "fc513e0c8387f18ec86c9ccf6877c51e6ecd20bda8d1625f2beef47a2b995f8e",
+      "scoring": {
+        "score": 0.9619,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.362,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.62,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10015",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10138",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.7529
+    },
+    {
+      "student_id": "FAMU10016",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10088",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10108",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10011",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10011-11e6798e",
+      "credHash": "144ed0305e54b38bb9f89935dbbd43034318f569104a9f2382e9c0a2f5cf54bb",
+      "scoring": {
+        "score": 0.9599,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.36,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.6,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10018",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10148",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.0 below minimum 3.0",
+      "score": 0.5599
+    },
+    {
+      "student_id": "FAMU10055",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10055-10b3ca42",
+      "credHash": "52bc259b35fd59f0612dff9d1f5381fdf29278c868d5d81e5a6444b3cb85db8f",
+      "scoring": {
+        "score": 0.9049,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.385,
+          "course_component": 0.32,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.85,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10000",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10065",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10065-dc039b80",
+      "credHash": "9d0a8d461e0540ea7273ec84d342c3292ff0dcd91bfa24ecaa143ccd7184c36c",
+      "scoring": {
+        "score": 0.7969,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.357,
+          "course_component": 0.24,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.57,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CNT4406"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10101",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10005",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10185",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.15 below minimum 3.0",
+      "score": 0.7348
+    },
+    {
+      "student_id": "FAMU10078",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10078-b2bf23be",
+      "credHash": "5a926c58c1afb7413a4f409014e1d7e7ceb5c7e5d147b5e6c35bf6dcf67dc0b4",
+      "scoring": {
+        "score": 0.9599,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.36,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.6,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10172",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.17 below minimum 3.0",
+      "score": 0.8168
+    },
+    {
+      "student_id": "FAMU10118",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10143",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.28 below minimum 3.0",
+      "score": 0.8279
+    },
+    {
+      "student_id": "FAMU10014",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10144",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    },
+    {
+      "student_id": "FAMU10199",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.33 below minimum 3.0",
+      "score": 0.7529
+    },
+    {
+      "student_id": "FAMU10106",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10106-9bb694d7",
+      "credHash": "960c4100a656f90a4076e49f20b745f6c093d0389c013c789f7bc066dad47c5b",
+      "scoring": {
+        "score": 0.9379,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.338,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.38,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10131",
+      "status": "NOT_ELIGIBLE",
+      "reason": "GPA 2.2 below minimum 3.0",
+      "score": 0.8199
+    },
+    {
+      "student_id": "FAMU10033",
+      "status": "ISSUED",
+      "credentialID": "BLOCKCERT-FAMU10033-60c1d965",
+      "credHash": "0c2d2d5386eb1f6dceb688fe77b2fd44dd637da467c86bc619365fd22f7b4159",
+      "scoring": {
+        "score": 0.9399,
+        "eligible": true,
+        "breakdown": {
+          "gpa_component": 0.34,
+          "course_component": 0.4,
+          "bert_component": 0.1999
+        },
+        "threshold": 0.7
+      },
+      "gpa": 3.4,
+      "courses": [
+        "CIS4360",
+        "CIS4361",
+        "CIS4385C",
+        "CNT4406",
+        "COP3710"
+      ],
+      "pq_signed": true,
+      "pq_algorithm": "CRYSTALS-Dilithium3"
+    },
+    {
+      "student_id": "FAMU10116",
+      "status": "REJECTED",
+      "reason": {
+        "error": "No valid responses from any peers. Errors:\n    peer=undefined, status=grpc, message=Peer endorsements do not match"
+      }
+    }
+  ]
+}

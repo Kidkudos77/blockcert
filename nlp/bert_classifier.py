@@ -21,13 +21,17 @@ Usage:
 import json, os, argparse
 import torch
 from torch.utils.data import Dataset, DataLoader
-from transformers import (BertTokenizer, BertForSequenceClassification,
-                          AdamW, get_linear_schedule_with_warmup)
+from transformers import (
+     BertTokenizer,
+     BertForSequenceClassification,
+     get_linear_schedule_with_warmup
+)
+from torch.optim import AdamW 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
 # ── Label map ─────────────────────────────────────────────────────────────────
-LABEL2ID  = {'NONE':0,'NSA3010':1,'NSA4020':2,'NSA4030':3,'NSA4040':4,'NSA4050':5}
+LABEL2ID  = {'NONE':0,'CIS4385C':1,'CIS4360':2,'CIS4361':3,'CNT4406':4,'COP3710':5}
 ID2LABEL  = {v:k for k,v in LABEL2ID.items()}
 NUM_LABELS = len(LABEL2ID)
 

@@ -1,0 +1,12 @@
+{
+  "name": "blockcert",
+  "version": "1.0.0",
+  "main": "blockcert.js",
+  "scripts": {
+    "start": "fabric-chaincode-node start"
+  },
+  "dependencies": {
+    "fabric-contract-api": "^2.5.0",
+    "fabric-shim": "^2.5.0"
+  }
+}
