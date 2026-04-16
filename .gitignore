@@ -1,0 +1,27 @@
+# Python virtual environment - never commit this
+venv/
+
+# BERT model weights - too large for GitHub (use HuggingFace Hub instead)
+nlp/model/*.safetensors
+nlp/model/*.bin
+nlp/model/model*
+
+# Node modules
+node_modules/
+
+# Wallet keys - security
+wallet/store/
+
+# Generated outputs
+dataset/output/
+results.json
+evaluation/scoring_results.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.cache/
+
+# OS files
+.DS_Store
