@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "userID": "admin",
+      "name": "Javonte Carter",
+      "email": "javonte1.carter@famu.edu",
+      "passwordHash": "4733b73b8ffab495bc0ce197b6a8db09e4c12cebd1691ce948f8264c06f83ea3",
+      "role": "admin",
+      "status": "active",
+      "createdAt": "2026-04-16T00:00:00.000Z"
+    },
+    {
+      "userID": "FAMU10001",
+      "name": "Marcus Johnson",
+      "email": "m.johnson@famu.edu",
+      "passwordHash": "150626165b4752722fd928688a812d9613394ef32195fe1aac6fb51d414eef4f",
+      "role": "student",
+      "status": "active",
+      "createdAt": "2026-04-16T00:00:00.000Z"
+    },
+    {
+      "userID": "famu-institution",
+      "name": "FAMU Registrar",
+      "email": "registrar@famu.edu",
+      "passwordHash": "b177504a490704e510d1538c45b2c86092111eb3cb16d99f8d66cb1f0868ba34",
+      "role": "institution",
+      "status": "active",
+      "createdAt": "2026-04-16T00:00:00.000Z"
+    },
+    {
+      "userID": "public-verifier",
+      "name": "HR Verifier",
+      "email": "hr@techcorp.com",
+      "passwordHash": "48e3ae95a5a4c4cc78c739fd2955ba1f6545dd363578958a9cf41dd68618edec",
+      "role": "employer",
+      "status": "active",
+      "createdAt": "2026-04-16T00:00:00.000Z"
+    }
+  ]
+}
