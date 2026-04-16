@@ -972,13 +972,18 @@ select option { background: var(--surface2); color: var(--text1) }
 <script>
 'use strict';
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
-const USERS = {
-  'admin':            { pw:'password123', role:'admin',       name:'Javonte Carter',   status:'active' },
-  'FAMU10001':        { pw:'password123', role:'student',     name:'Marcus Johnson',   status:'active' },
-  'famu-institution': { pw:'password123', role:'institution', name:'FAMU Registrar',   status:'active' },
-  'public-verifier':  { pw:'password123', role:'employer',    name:'HR Verifier',      status:'active' },
-};
+// ─── API CONFIG ───────────────────────────────────────────────────────────────
+const DEFAULT_API = 'http://localhost:3000';
+function getAPIBase(){ return localStorage.getItem('blockcert_api_url') || DEFAULT_API; }
+function setAPIBase(url){ localStorage.setItem('blockcert_api_url', url.replace(/\/$/,'')); toast('API URL updated','#4ADE80'); }
+async function apiFetch(path, opts={}) {
+  const token = sessionStorage.getItem('blockcert_token');
+  const headers = {'Content-Type':'application/json',...(opts.headers||{})};
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const res = await fetch(getAPIBase()+path, {...opts, headers});
+  const data = await res.json().catch(()=>({error:'Invalid JSON'}));
+  return {ok:res.ok, status:res.status, data};
+}
 
 let pendingRegs = [
   { id:'REG-001', uid:'FAMU10060', name:'Aaliyah Carter',  email:'a.carter@famu.edu',      role:'student',     reason:'FCSS student tracking certificate progress.', submitted:'2026-04-14', status:'pending' },
@@ -1013,23 +1018,26 @@ function selRegRole(r, el) {
   el.setAttribute('aria-checked','true');
 }
 
-function doLogin() {
+async function doLogin() {
   const uid = document.getElementById('lid').value.trim();
   const pw  = document.getElementById('lpw').value;
-  const err = document.getElementById('login-err');
-  err.classList.remove('show');
-
+  document.getElementById('login-err').classList.remove('show');
   if (!uid) { showFieldErr('login-err','Please enter your User ID.'); return; }
   if (!pw)  { showFieldErr('login-err','Please enter your password.'); return; }
-
-  const u = USERS[uid];
-  if (!u)                   { showFieldErr('login-err','Account not found. Please register.'); return; }
-  if (u.status === 'pending') { showFieldErr('login-err','Account pending admin approval. Please wait.'); return; }
-  if (u.status === 'rejected'){ showFieldErr('login-err','Registration not approved. Contact your admin.'); return; }
-  if (pw !== u.pw)           { showFieldErr('login-err','Incorrect password.'); return; }
-
-  curRole = u.role; curUser = uid; curName = u.name;
-  launchApp();
+  const btn = document.querySelector('#panel-login .btn-primary');
+  btn.disabled=true; btn.textContent='Signing in…';
+  try {
+    const {ok,data} = await apiFetch('/auth/login',{method:'POST',body:JSON.stringify({userID:uid,password:pw})});
+    if (!ok) { showFieldErr('login-err',data.error||'Login failed.'); return; }
+    sessionStorage.setItem('blockcert_token', data.token);
+    curRole=data.role; curUser=data.userID; curName=data.name;
+    launchApp();
+  } catch {
+    const demo={'admin':{pw:'admin123',role:'admin',name:'Javonte Carter'},'FAMU10001':{pw:'student123',role:'student',name:'Marcus Johnson'},'famu-institution':{pw:'inst123',role:'institution',name:'FAMU Registrar'},'public-verifier':{pw:'verify123',role:'employer',name:'HR Verifier'}};
+    const d=demo[uid];
+    if (d&&d.pw===pw){ toast('API offline — demo mode','#F47B20'); curRole=d.role;curUser=uid;curName=d.name; launchApp(); }
+    else showFieldErr('login-err','API offline. Check VM is running.');
+  } finally { btn.disabled=false; btn.textContent='Sign In'; }
 }
 
 function doRegister() {
@@ -1079,12 +1087,14 @@ function launchApp() {
   setTimeout(() => { const m = document.getElementById('main-content'); if(m) m.focus(); }, 100);
 }
 
-function logout() {
-  curRole=null; curUser=null; curName=null;
-  document.getElementById('auth').style.display = 'flex';
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('lid').value = '';
-  document.getElementById('lpw').value = '';
+async function logout() {
+  try { await apiFetch('/auth/logout',{method:'POST'}); } catch {}
+  sessionStorage.removeItem('blockcert_token');
+  curRole=null;curUser=null;curName=null;
+  document.getElementById('auth').style.display='flex';
+  document.getElementById('app').style.display='none';
+  document.getElementById('lid').value='';
+  document.getElementById('lpw').value='';
   document.getElementById('login-err').classList.remove('show');
 }
 
