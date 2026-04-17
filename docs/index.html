@@ -1383,18 +1383,22 @@ function renderApprovals() {
   }
 
   if (uTbl) {
-    const active = Object.entries(USERS).filter(([k,v])=>v.status==='active');
-    uTbl.innerHTML = active.map(([uid,u])=>{
-      const rc={student:'binf',institution:'bok',employer:'bpur',admin:'borg'}[u.role]||'borg';
-      const canRevoke = uid!=='admin';
-      return `<tr>
-        <td data-label="ID" class="mono">${uid}</td>
-        <td data-label="Name">${u.name}</td>
-        <td data-label="Role"><span class="bdg ${rc}">${u.role}</span></td>
-        <td data-label="Status"><span class="bdg bok">Active</span></td>
-        <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${uid}')" aria-label="Revoke ${u.name}">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
-      </tr>`;
-    }).join('');
+    try {
+      const {ok,data} = await apiFetch('/admin/users');
+      if (ok && data.users) {
+        uTbl.innerHTML = data.users.map(u=>{
+          const rc={student:'binf',institution:'bok',employer:'bpur',admin:'borg'}[u.role]||'borg';
+          const canRevoke = u.userID!=='admin';
+          return `<tr>
+            <td data-label="ID" class="mono">${u.userID}</td>
+            <td data-label="Name">${u.name}</td>
+            <td data-label="Role"><span class="bdg ${rc}">${u.role}</span></td>
+            <td data-label="Status"><span class="bdg ${u.status==='active'?'bok':'berr'}">${u.status}</span></td>
+            <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${u.userID}')">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
+          </tr>`;
+        }).join('');
+      }
+    } catch { uTbl.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:16px">Connect API to see users</td></tr>'; }
   }
 }
 
@@ -1564,7 +1568,7 @@ python3 nlp/bert_classifier.py --train --data dataset/output/sentence_labels.jso
 
 // ─── SHARED LOGIC ─────────────────────────────────────────────────────────────
 function checkHealth() {
-  fetch('http://localhost:3000/health').then(r=>r.json()).then(()=>{
+  fetch(getAPIBase() + '/health').then(r=>r.json()).then(()=>{
     sb('fbar','fst','Online','var(--green-light)'); sb('abar','ast','Online','var(--green-light)');
   }).catch(()=>{ sb('abar','ast','Offline','#FF7B6B'); });
 }
