@@ -978,7 +978,7 @@ function getAPIBase(){ return localStorage.getItem('blockcert_api_url') || DEFAU
 function setAPIBase(url){ localStorage.setItem('blockcert_api_url', url.replace(/\/$/,'')); toast('API URL updated','#4ADE80'); }
 async function apiFetch(path, opts={}) {
   const token = sessionStorage.getItem('blockcert_token');
-  const headers = {'Content-Type':'application/json',...(opts.headers||{})};
+  const headers = {'Content-Type':'application/json','ngrok-skip-browser-warning':'true',...(opts.headers||{})};
   if (token) headers['Authorization'] = 'Bearer ' + token;
   const res = await fetch(getAPIBase()+path, {...opts, headers});
   const data = await res.json().catch(()=>({error:'Invalid JSON'}));
