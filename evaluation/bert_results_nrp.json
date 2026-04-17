@@ -1,0 +1,19 @@
+{
+  "val_accuracy": 1.0,
+  "val_f1": 1.0,
+  "val_loss": 0.0008,
+  "device": "cuda",
+  "epochs": 4,
+  "platform": "NRP Nautilus HyperCluster",
+  "training_samples": 6784,
+  "validation_samples": 1696,
+  "per_class": {
+    "NONE":    {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 560},
+    "CIS4385C":{"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 224},
+    "CIS4360": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 232},
+    "CIS4361": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 222},
+    "CNT4406": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 232},
+    "COP3710": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 226}
+  },
+  "notes": "Trained on NRP Nautilus HyperCluster GPU node via JupyterHub. CUDA device confirmed. Training time ~4 minutes vs ~30 minutes on CPU."
+}
