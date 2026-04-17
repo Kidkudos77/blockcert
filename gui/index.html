@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://kidkudos77.github.io https://*.ngrok-free.dev https://*.ngrok-free.app https://localhost:*; img-src 'self' data:; frame-src 'none'; object-src 'none';">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BlockCert — FAMU Cyber Defense Certificate</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1464,14 +1463,14 @@ function renderApprovals() {
   } else {
     list.innerHTML = filtered.map(r => {
       const actions = r.status==='pending'
-        ? `<button class="btn btn-success btn-sm" onclick="approve('${r.id}')" aria-label="Approve ${h(r\.name)}">Approve</button><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')" aria-label="Reject ${h(r\.name)}">Reject</button>`
+        ? `<button class="btn btn-success btn-sm" onclick="approve('${r.id}')" aria-label="Approve ${h(r.name)}">Approve</button><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')" aria-label="Reject ${h(r.name)}">Reject</button>`
         : r.status==='approved'
           ? `<span class="bdg bok">Approved</span><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')">Revoke</button>`
           : `<span class="bdg berr">Rejected</span><button class="btn btn-success btn-sm" onclick="approve('${r.id}')">Re-approve</button>`;
       return `<div class="appr-card">
         <div class="appr-info">
-          <div class="appr-name">${h(r\.name)} <span class="bdg ${rCls[r.role]||'bwarn'}" style="font-size:0.6875rem;margin-left:4px">${r.role}</span></div>
-          <div class="appr-meta">${h(r\.uid)} · ${h(r\.email)}</div>
+          <div class="appr-name">${h(r.name)} <span class="bdg ${rCls[r.role]||'bwarn'}" style="font-size:0.6875rem;margin-left:4px">${r.role}</span></div>
+          <div class="appr-meta">${h(r.uid)} · ${h(r.email)}</div>
           <div class="appr-req">${r.reason||'No reason provided'}</div>
           <div class="fs11 td" style="margin-top:4px">Submitted: ${r.submitted}</div>
         </div>
@@ -1487,10 +1486,10 @@ function renderApprovals() {
       const canRevoke = uid!=='admin';
       return `<tr>
         <td data-label="ID" class="mono">${uid}</td>
-        <td data-label="Name">${h(u\.name)}</td>
+        <td data-label="Name">${h(u.name)}</td>
         <td data-label="Role"><span class="bdg ${rc}">${u.role}</span></td>
         <td data-label="Status"><span class="bdg bok">Active</span></td>
-        <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${uid}')" aria-label="Revoke ${h(u\.name)}">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
+        <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${uid}')" aria-label="Revoke ${h(u.name)}">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
       </tr>`;
     }).join('');
   }
@@ -1503,11 +1502,11 @@ async function approve(id) {
     if (!ok) { toast('Approval failed: '+(data.error||'unknown'), '#FF7B6B'); return; }
     r.status='approved';
     refreshBadge(); renderApprovals();
-    toast(`✓ ${h(r\.name)} approved as ${r.role}`, '#4ADE80');
+    toast(`✓ ${h(r.name)} approved as ${r.role}`, '#4ADE80');
   } catch {
     // Offline fallback
     r.status='approved'; refreshBadge(); renderApprovals();
-    toast(`✓ ${h(r\.name)} approved (offline demo)`, '#F47B20');
+    toast(`✓ ${h(r.name)} approved (offline demo)`, '#F47B20');
   }
 }
 
@@ -1517,10 +1516,10 @@ async function reject(id) {
     const { ok, data } = await apiFetch('/admin/reject/'+r.uid, { method:'POST', body:'{}' });
     if (!ok) { toast('Reject failed: '+(data.error||'unknown'), '#FF7B6B'); return; }
     r.status='rejected'; refreshBadge(); renderApprovals();
-    toast(`✗ ${h(r\.name)} rejected`, '#FF7B6B');
+    toast(`✗ ${h(r.name)} rejected`, '#FF7B6B');
   } catch {
     r.status='rejected'; refreshBadge(); renderApprovals();
-    toast(`✗ ${h(r\.name)} rejected (offline demo)`, '#F47B20');
+    toast(`✗ ${h(r.name)} rejected (offline demo)`, '#F47B20');
   }
 }
 
@@ -1932,7 +1931,7 @@ function addA(id,act,sc) {
   actlog.unshift({id,act,sc});
   const tb=document.getElementById('actbl'); if(!tb)return;
   tb.innerHTML=actlog.slice(0,8).map(a=>`<tr>
-    <td data-label="Student" class="mono">${h(a\.id)}</td>
+    <td data-label="Student" class="mono">${h(a.id)}</td>
     <td data-label="Action"><span class="bdg ${a.act==='ISSUED'?'bok':'bwarn'}">${a.act}</span></td>
     <td data-label="Score" class="mono">${a.sc.toFixed(4)}</td>
     <td data-label="Chain"><span class="bdg ${a.act==='ISSUED'?'bok':'berr'}">${a.act==='ISSUED'?'On Chain':'Denied'}</span></td>
