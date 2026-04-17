@@ -1480,18 +1480,15 @@ function renderApprovals() {
   }
 
   if (uTbl) {
-    const active = Object.entries(USERS).filter(([k,v])=>v.status==='active');
-    uTbl.innerHTML = active.map(([uid,u])=>{
-      const rc={student:'binf',institution:'bok',employer:'bpur',admin:'borg'}[u.role]||'borg';
-      const canRevoke = uid!=='admin';
-      return `<tr>
-        <td data-label="ID" class="mono">${uid}</td>
-        <td data-label="Name">${esc(u.name)}</td>
-        <td data-label="Role"><span class="bdg ${rc}">${u.role}</span></td>
-        <td data-label="Status"><span class="bdg bok">Active</span></td>
-        <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${uid}')" aria-label="Revoke ${esc(u.name)}">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
-      </tr>`;
-    }).join('');
+    apiFetch('/admin/users').then(function(r){
+      if(!r.ok||!r.data.users){uTbl.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:16px">Connect API to see users</td></tr>';return;}
+      uTbl.innerHTML=r.data.users.map(function(u){
+        var rc={student:'binf',institution:'bok',employer:'bpur',admin:'borg'}[u.role]||'borg';
+        var canRevoke=u.userID!=='admin';
+        var revokeBtn=canRevoke?'<button class="btn btn-danger btn-sm" onclick="revokeUser('+JSON.stringify(u.userID)+')">Revoke</button>':'<span class="fs12 td">Protected</span>';
+        return '<tr><td data-label="ID" class="mono">'+esc(u.userID)+'</td><td data-label="Name">'+esc(u.name)+'</td><td data-label="Role"><span class="bdg '+rc+'">'+u.role+'</span></td><td data-label="Status"><span class="bdg '+(u.status==='active'?'bok':'berr')+'">'+u.status+'</span></td><td data-label="Action">'+revokeBtn+'</td></tr>';
+      }).join('');
+    }).catch(function(){uTbl.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:16px">API offline</td></tr>';});
   }
 }
 
@@ -1776,78 +1773,31 @@ function showCpErr(msg) {
   if (e) { e.textContent=msg; e.style.display='block'; }
 }
 
-function accountPage(){ return `
-<div class="wbanner"><div><div class="wt">My Account</div><div class="ws">Manage your BlockCert credentials</div></div><div class="wr"><div class="wrl">${esc(RDATA[curRole]?.label)}</div><div class="wri">${esc(curUser)}</div></div></div>
-<div class="g2">
-  <div class="card"><div class="ch"><span class="ct">Change Password</span></div>
-    <p class="fs13 tm" style="margin-bottom:14px">Your password must be at least 8 characters. After changing, you will be signed out and asked to sign in again with your new password.</p>
-    <div class="fg"><label class="fl" for="cp-cur">Current Password <span class="req">*</span></label><input type="password" id="cp-cur" autocomplete="current-password" placeholder="Your current password"></div>
-    <div class="fg"><label class="fl" for="cp-new">New Password <span class="req">*</span></label><input type="password" id="cp-new" autocomplete="new-password" placeholder="Min 8 characters"></div>
-    <div class="fg"><label class="fl" for="cp-conf">Confirm New Password <span class="req">*</span></label><input type="password" id="cp-conf" autocomplete="new-password" placeholder="Repeat new password"></div>
-    <span class="field-err" id="cp-err" role="alert" style="display:block;margin-bottom:10px"></span>
-    <button class="btn btn-primary" onclick="doChangePassword()">Update Password</button>
-    <div id="cp-result" aria-live="polite"></div>
-  </div>
-  <div class="card"><div class="ch"><span class="ct">Account Info</span></div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
-        <div class="fs12 td" style="margin-bottom:3px">User ID</div>
-        <div class="mono fs13">${esc(curUser)}</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
-        <div class="fs12 td" style="margin-bottom:3px">Name</div>
-        <div class="fs13">${esc(curName)}</div>
-      </div>
-      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
-        <div class="fs12 td" style="margin-bottom:3px">Role</div>
-        <div class="fs13"><span class="bdg ${curRole==='admin'?'borg':curRole==='institution'?'bok':curRole==='employer'?'bpur':'binf'}">${esc(RDATA[curRole]?.label)}</span></div>
-      </div>
-    </div>
-    <div class="div"></div>
-    <div class="rbox rinf">
-      <div class="fs13 fw5" style="color:#74BFFF">Need help with your account?</div>
-      <div class="fs12 tm" style="margin-top:4px">Contact the BlockCert administrator:</div>
-      <div class="fs12" style="margin-top:6px">
-        <span class="fw5">Javonte Carter</span><br>
-        <a href="mailto:javonte1.carter@famu.edu" style="color:var(--orange);text-decoration:none">javonte1.carter@famu.edu</a>
-      </div>
-      <div class="fs11 td" style="margin-top:6px">For account lockouts, role changes, or access issues.</div>
-    </div>
-  </div>
-</div>\`}
-
-async function doChangePassword() {
-  const cur  = document.getElementById('cp-cur')?.value;
-  const npw  = document.getElementById('cp-new')?.value;
-  const conf = document.getElementById('cp-conf')?.value;
-  const errEl = document.getElementById('cp-err');
-  if (errEl) { errEl.textContent=''; errEl.style.display='none'; }
-
-  if (!cur)  { showCpErr('Please enter your current password.'); return; }
-  if (!npw || npw.length < 8) { showCpErr('New password must be at least 8 characters.'); return; }
-  if (npw !== conf) { showCpErr('New passwords do not match.'); return; }
-  if (cur === npw)  { showCpErr('New password must be different from current password.'); return; }
-
-  const btn = document.querySelector('[onclick="doChangePassword()"]');
-  if (btn) { btn.disabled=true; btn.textContent='Updating…'; }
-
-  try {
-    const {ok,data} = await apiFetch('/auth/change-password',{
-      method:'POST',
-      body:JSON.stringify({currentPassword:cur, newPassword:npw})
-    });
-    const resEl = document.getElementById('cp-result');
-    if (ok) {
-      if (resEl) resEl.innerHTML='<div class="rbox rok" style="margin-top:12px"><div class="fs13 fw5 tg">Password updated successfully</div><div class="fs12 tm" style="margin-top:4px">You will be signed out now. Please sign in with your new password.</div></div>';
-      setTimeout(()=>logout(), 2500);
-    } else {
-      showCpErr(data?.error || 'Password change failed. Please try again.');
-      if (btn) { btn.disabled=false; btn.textContent='Update Password'; }
-    }
-  } catch {
-    showCpErr('API offline — password change requires a live connection.');
-    if (btn) { btn.disabled=false; btn.textContent='Update Password'; }
-  }
+function accountPage(){
+  var rl=RDATA[curRole]?.label||'';
+  var rc=curRole==='admin'?'borg':curRole==='institution'?'bok':curRole==='employer'?'bpur':'binf';
+  return '<div class="wbanner"><div><div class="wt">My Account</div><div class="ws">Manage your BlockCert credentials</div></div><div class="wr"><div class="wrl">'+esc(rl)+'</div><div class="wri">'+esc(curUser)+'</div></div></div>'
+    +'<div class="g2">'
+    +'<div class="card"><div class="ch"><span class="ct">Change Password</span></div>'
+    +'<p class="fs13 tm" style="margin-bottom:14px">Your password must be at least 8 characters. After changing, you will be signed out and asked to sign in again.</p>'
+    +'<div class="fg"><label class="fl" for="cp-cur">Current Password <span class="req">*</span></label><input type="password" id="cp-cur" autocomplete="current-password" placeholder="Your current password"></div>'
+    +'<div class="fg"><label class="fl" for="cp-new">New Password <span class="req">*</span></label><input type="password" id="cp-new" autocomplete="new-password" placeholder="Min 8 characters"></div>'
+    +'<div class="fg"><label class="fl" for="cp-conf">Confirm New Password <span class="req">*</span></label><input type="password" id="cp-conf" autocomplete="new-password" placeholder="Repeat new password"></div>'
+    +'<span class="field-err" id="cp-err" role="alert" style="display:block;margin-bottom:10px"></span>'
+    +'<button class="btn btn-primary" onclick="doChangePassword()">Update Password</button>'
+    +'<div id="cp-result" aria-live="polite"></div></div>'
+    +'<div class="card"><div class="ch"><span class="ct">Account Info</span></div>'
+    +'<div style="display:flex;flex-direction:column;gap:10px">'
+    +'<div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)"><div class="fs12 td" style="margin-bottom:3px">User ID</div><div class="mono fs13">'+esc(curUser)+'</div></div>'
+    +'<div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)"><div class="fs12 td" style="margin-bottom:3px">Name</div><div class="fs13">'+esc(curName)+'</div></div>'
+    +'<div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)"><div class="fs12 td" style="margin-bottom:3px">Role</div><div class="fs13"><span class="bdg '+rc+'">'+esc(rl)+'</span></div></div>'
+    +'</div><div class="div"></div>'
+    +'<div class="rbox rinf"><div class="fs13 fw5" style="color:#74BFFF">Need help with your account?</div>'
+    +'<div class="fs12 tm" style="margin-top:4px">Contact the BlockCert administrator:</div>'
+    +'<div class="fs12" style="margin-top:6px"><span class="fw5">Javonte Carter</span><br>'
+    +'<a href="mailto:javonte1.carter@famu.edu" style="color:var(--orange);text-decoration:none">javonte1.carter@famu.edu</a></div>'
+    +'<div class="fs11 td" style="margin-top:6px">For account lockouts, role changes, or access issues.</div>'
+    +'</div></div></div>';
 }
 
 function showCpErr(msg) {
@@ -1931,7 +1881,7 @@ function addA(id,act,sc) {
   actlog.unshift({id,act,sc});
   const tb=document.getElementById('actbl'); if(!tb)return;
   tb.innerHTML=actlog.slice(0,8).map(a=>`<tr>
-    <td data-label="Student" class="mono">${h(a.id)}</td>
+    <td data-label="Student" class="mono">${esc(a.id)}</td>
     <td data-label="Action"><span class="bdg ${a.act==='ISSUED'?'bok':'bwarn'}">${a.act}</span></td>
     <td data-label="Score" class="mono">${a.sc.toFixed(4)}</td>
     <td data-label="Chain"><span class="bdg ${a.act==='ISSUED'?'bok':'berr'}">${a.act==='ISSUED'?'On Chain':'Denied'}</span></td>
