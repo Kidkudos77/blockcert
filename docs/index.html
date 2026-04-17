@@ -2051,7 +2051,21 @@ function demoStud() {
   const el=document.getElementById('scl'); if(!el)return;
   const hashVal='ea9c7c9e0f54a45acb80847c558ada7a6ff0336ceb7617f1a82ebb4d19a64120';
   if(document.getElementById('shash'))document.getElementById('shash').value=hashVal;
-  el.innerHTML=`<div class="ccard"><div class="cch"><div><div class="fs14 fw6">BLOCKCERT-${h(curUser)}-ea9c7c9e</div><div class="fs13 tm">FAMU · Cyber Defense Certificate</div></div><div style="display:flex;gap:5px"><span class="bdg bok">VALID</span><span class="bdg borg">PQ Signed</span></div></div><div class="ccb"><div class="ccf"><span class="ccfl">Program</span><span class="ccfv">FAMU-FCSS</span></div><div class="ccf"><span class="ccfl">Courses</span><span class="ccfv" style="font-size:0.6875rem">CIS4385C, CIS4360, CIS4361</span></div><div class="ccf"><span class="ccfl">Score</span><span class="ccfv ta">0.8399</span></div><div class="ccf"><span class="ccfl">PQ Algorithm</span><span class="ccfv" style="font-size:0.6875rem;color:var(--orange)">CRYSTALS-Dilithium3</span></div><div class="ccf"><span class="ccfl">Issued</span><span class="ccfv" style="font-size:0.75rem">${new Date().toLocaleDateString()}</span></div><div style="background:var(--surface3);border-radius:4px;padding:7px 10px;margin-top:8px"><div class="fs11 td">Hash: <span class="mono" style="font-size:0.625rem;color:var(--text2)">${hashVal.substring(0,52)}...</span></div></div></div></div>`;
+  const html='<div class="ccard">'
+    +'<div class="cch"><div><div class="fs14 fw6">BLOCKCERT-'+h(curUser)+'-ea9c7c9e</div>'
+    +'<div class="fs13 tm">FAMU · Cyber Defense Certificate</div></div>'
+    +'<div style="display:flex;gap:5px"><span class="bdg bok">VALID</span>'
+    +'<span class="bdg borg">PQ Signed</span></div></div>'
+    +'<div class="ccb">'
+    +'<div class="ccf"><span class="ccfl">Program</span><span class="ccfv">FAMU-FCSS</span></div>'
+    +'<div class="ccf"><span class="ccfl">Courses</span><span class="ccfv">CIS4385C, CIS4360, CIS4361</span></div>'
+    +'<div class="ccf"><span class="ccfl">Score</span><span class="ccfv ta">0.8399</span></div>'
+    +'<div class="ccf"><span class="ccfl">PQ Algorithm</span><span class="ccfv" style="color:var(--orange)">CRYSTALS-Dilithium3</span></div>'
+    +'<div class="ccf"><span class="ccfl">Issued</span><span class="ccfv">'+new Date().toLocaleDateString()+'</span></div>'
+    +'<div style="background:var(--surface3);border-radius:4px;padding:7px 10px;margin-top:8px">'
+    +'<div class="fs11 td">Hash: <span class="mono" style="font-size:0.625rem;color:var(--text2)">'+hashVal.substring(0,52)+'...</span></div>'
+    +'</div></div></div>';
+  el.innerHTML=html;
 }
 
 function cpH() {
