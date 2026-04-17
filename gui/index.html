@@ -1568,10 +1568,10 @@ python3 nlp/bert_classifier.py --train --data dataset/output/sentence_labels.jso
 
 // ─── SHARED LOGIC ─────────────────────────────────────────────────────────────
 function checkHealth() {
-  apiFetch('/health').then(({ok,data})=>{
-    sb('fbar','fst', ok?'Online':'Offline', ok?'var(--green-light)':'#FF7B6B');
-    sb('abar','ast', ok?'Online':'Offline', ok?'var(--green-light)':'#FF7B6B');
-  }).catch(()=>{ sb('abar','ast','Offline','#FF7B6B'); sb('fbar','fst','Offline','#FF7B6B'); });
+  apiFetch('/health').then(({ok})=>{
+    sb('fbar','fst',ok?'Online':'Offline',ok?'var(--green-light)':'#FF7B6B');
+    sb('abar','ast',ok?'Online':'Offline',ok?'var(--green-light)':'#FF7B6B');
+  }).catch(()=>{sb('abar','ast','Offline','#FF7B6B');sb('fbar','fst','Offline','#FF7B6B');});
 }
 
 function sb(bid,sid,t,c) {
