@@ -1346,7 +1346,7 @@ function aApprovals(){ return `
   <div style="overflow-x:auto"><table class="tbl" aria-label="Active accounts"><thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Status</th><th>Action</th></tr></thead><tbody id="users-tbl"></tbody></table></div>
 </div>`}
 
-function renderApprovals() {
+async function renderApprovals() {
   const fRole   = document.getElementById('filter-role')?.value||'';
   const fStatus = document.getElementById('filter-status')?.value??'pending';
   const list    = document.getElementById('appr-list');
