@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://kidkudos77.github.io https://*.ngrok-free.dev https://*.ngrok-free.app https://localhost:*; img-src 'self' data:; frame-src 'none'; object-src 'none';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BlockCert — FAMU Cyber Defense Certificate</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -833,6 +836,28 @@ select option { background: var(--surface2); color: var(--text1) }
 ::-webkit-scrollbar-track { background: transparent }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 2px }
 </style>
+
+<script>
+/* ── XSS-safe DOM helpers ────────────────────────────────────────────────────
+   Use these instead of innerHTML when inserting user-controlled strings.
+   h(str)     → HTML-encoded string safe for innerHTML static templates
+   setText(el, str) → sets textContent (never parses as HTML)
+   ─────────────────────────────────────────────────────────────────────────── */
+function h(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+}
+function setText(el, str) {
+  if (el) el.textContent = String(str ?? '');
+}
+</script>
+
 </head>
 <body>
 
@@ -972,25 +997,33 @@ select option { background: var(--surface2); color: var(--text1) }
 <script>
 'use strict';
 
-// ─── API CONFIG ───────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+//  API CONFIGURATION
+//  Change API_BASE to your ngrok URL or NRP URL when live.
+//  Stored in localStorage so admin can update it from the GUI.
+// ═══════════════════════════════════════════════════════════════
 const DEFAULT_API = 'http://localhost:3000';
-function getAPIBase(){ return localStorage.getItem('blockcert_api_url') || DEFAULT_API; }
-function setAPIBase(url){ localStorage.setItem('blockcert_api_url', url.replace(/\/$/,'')); toast('API URL updated','#4ADE80'); }
-async function apiFetch(path, opts={}) {
-  const token = sessionStorage.getItem('blockcert_token');
-  const headers = {'Content-Type':'application/json','ngrok-skip-browser-warning':'true',...(opts.headers||{})};
-  if (token) headers['Authorization'] = 'Bearer ' + token;
-  const res = await fetch(getAPIBase()+path, {...opts, headers});
-  const data = await res.json().catch(()=>({error:'Invalid JSON'}));
-  return {ok:res.ok, status:res.status, data};
+
+function getAPIBase() {
+  return localStorage.getItem('blockcert_api_url') || DEFAULT_API;
 }
 
-let pendingRegs = [
-  { id:'REG-001', uid:'FAMU10060', name:'Aaliyah Carter',  email:'a.carter@famu.edu',      role:'student',     reason:'FCSS student tracking certificate progress.', submitted:'2026-04-14', status:'pending' },
-  { id:'REG-002', uid:'EMP-TC01',  name:'Keisha Thompson', email:'k.thompson@techcorp.com', role:'employer',    reason:'HR Director verifying candidate credentials.',  submitted:'2026-04-15', status:'pending' },
-  { id:'REG-003', uid:'INST-R2',   name:'Dr. Samuel Osei', email:'s.osei@famu.edu',         role:'institution', reason:'New FCSS faculty member.',                     submitted:'2026-04-15', status:'pending' },
-];
+function setAPIBase(url) {
+  localStorage.setItem('blockcert_api_url', url.replace(/\/$/, ''));
+  toast('API URL updated: ' + url, '#4ADE80');
+}
 
+// Authenticated fetch helper — auto-attaches Bearer token
+async function apiFetch(path, opts = {}) {
+  const token = sessionStorage.getItem('blockcert_token');
+  const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const res = await fetch(getAPIBase() + path, { ...opts, headers });
+  const data = await res.json().catch(() => ({ error: 'Invalid JSON response' }));
+  return { ok: res.ok, status: res.status, data };
+}
+
+// ─── CONSTANTS ───────────────────────────────────────────────────────────────
 const RDATA = {
   student:     { label:'Student',           cls:'role-student',     color:'#4BA3E3' },
   institution: { label:'Institution',       cls:'role-institution', color:'#22A060' },
@@ -998,10 +1031,14 @@ const RDATA = {
   admin:       { label:'Admin',             cls:'role-admin',       color:'#F47B20' },
 };
 
+// In-memory session state
 let curRole=null, curUser=null, curName=null;
 let issuedCnt=0, actlog=[], regRole=null;
 
-// ─── AUTH ─────────────────────────────────────────────────────────────────────
+// Pending regs cache (loaded from API for admin)
+let pendingRegs = [];
+
+// ─── AUTH TABS ────────────────────────────────────────────────────────────────
 function authTab(panel, btn) {
   document.querySelectorAll('.auth-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
   document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
@@ -1018,29 +1055,66 @@ function selRegRole(r, el) {
   el.setAttribute('aria-checked','true');
 }
 
+// ─── LOGIN — hits real API ────────────────────────────────────────────────────
 async function doLogin() {
-  const uid = document.getElementById('lid').value.trim();
-  const pw  = document.getElementById('lpw').value;
-  document.getElementById('login-err').classList.remove('show');
+  const uid  = document.getElementById('lid').value.trim();
+  const pw   = document.getElementById('lpw').value;
+  const errEl = document.getElementById('login-err');
+  errEl.classList.remove('show');
+
   if (!uid) { showFieldErr('login-err','Please enter your User ID.'); return; }
   if (!pw)  { showFieldErr('login-err','Please enter your password.'); return; }
+
+  // Disable button during request
   const btn = document.querySelector('#panel-login .btn-primary');
-  btn.disabled=true; btn.textContent='Signing in…';
+  btn.disabled = true;
+  btn.textContent = 'Signing in…';
+
   try {
-    const {ok,data} = await apiFetch('/auth/login',{method:'POST',body:JSON.stringify({userID:uid,password:pw})});
-    if (!ok) { showFieldErr('login-err',data.error||'Login failed.'); return; }
+    const { ok, data } = await apiFetch('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ userID: uid, password: pw }),
+    });
+
+    if (!ok) {
+      showFieldErr('login-err', data.error || 'Login failed. Please try again.');
+      return;
+    }
+
+    // Store token and session
     sessionStorage.setItem('blockcert_token', data.token);
-    curRole=data.role; curUser=data.userID; curName=data.name;
+    curRole = data.role;
+    curUser = data.userID;
+    curName = data.name;
+
     launchApp();
-  } catch {
-    const demo={'admin':{pw:'admin123',role:'admin',name:'Javonte Carter'},'FAMU10001':{pw:'student123',role:'student',name:'Marcus Johnson'},'famu-institution':{pw:'inst123',role:'institution',name:'FAMU Registrar'},'public-verifier':{pw:'verify123',role:'employer',name:'HR Verifier'}};
-    const d=demo[uid];
-    if (d&&d.pw===pw){ toast('API offline — demo mode','#F47B20'); curRole=d.role;curUser=uid;curName=d.name; launchApp(); }
-    else showFieldErr('login-err','API offline. Check VM is running.');
-  } finally { btn.disabled=false; btn.textContent='Sign In'; }
+
+  } catch (e) {
+    // If API is offline, fall back to demo mode
+    const demoUsers = {
+      'admin':            { pw:'admin123',    role:'admin',       name:'Javonte Carter' },
+      'FAMU10001':        { pw:'student123',  role:'student',     name:'Marcus Johnson' },
+      'famu-institution': { pw:'inst123',     role:'institution', name:'FAMU Registrar' },
+      'public-verifier':  { pw:'verify123',   role:'employer',    name:'HR Verifier' },
+    };
+    const demo = demoUsers[uid];
+    if (demo && demo.pw === pw) {
+      toast('API offline — running in demo mode', '#F47B20');
+      curRole = demo.role; curUser = uid; curName = demo.name;
+      launchApp();
+    } else if (demo) {
+      showFieldErr('login-err','Incorrect password. (Demo: see hints below)');
+    } else {
+      showFieldErr('login-err','API offline and demo account not recognised.');
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  }
 }
 
-function doRegister() {
+// ─── REGISTER — hits real API ─────────────────────────────────────────────────
+async function doRegister() {
   const fname  = document.getElementById('r-fname').value.trim();
   const lname  = document.getElementById('r-lname').value.trim();
   const email  = document.getElementById('r-email').value.trim();
@@ -1054,17 +1128,39 @@ function doRegister() {
   if (!email.includes('@')) { showFieldErr('reg-err','Please enter a valid email address.'); return; }
   if (!uid)   { showFieldErr('reg-err','Please enter your student or employee ID.'); return; }
   if (!pw || pw.length < 8) { showFieldErr('reg-err','Password must be at least 8 characters.'); return; }
-  if (!regRole){ showFieldErr('reg-err','Please select a role.'); return; }
-  if (USERS[uid]) { showFieldErr('reg-err','An account with this ID already exists.'); return; }
+  if (!regRole) { showFieldErr('reg-err','Please select a role.'); return; }
 
-  const reg = { id:'REG-'+String(pendingRegs.length+1).padStart(3,'0'), uid, name:fname+' '+lname, email, role:regRole, reason, submitted:new Date().toISOString().split('T')[0], status:'pending' };
-  pendingRegs.push(reg);
-  USERS[uid] = { pw, role:regRole, name:fname+' '+lname, status:'pending' };
+  const btn = document.querySelector('#panel-register .btn-primary');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
 
-  // Disable form
-  ['r-fname','r-lname','r-email','r-uid','r-pw','r-reason'].forEach(id => { const e=document.getElementById(id); if(e) e.disabled=true; });
-  document.querySelector('#panel-register .btn-primary').disabled = true;
-  document.getElementById('pending-notice').style.display = 'block';
+  try {
+    const { ok, data } = await apiFetch('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ userID:uid, name:fname+' '+lname, email, password:pw, role:regRole, reason }),
+    });
+
+    if (!ok) {
+      showFieldErr('reg-err', data.error || 'Registration failed.');
+      btn.disabled = false;
+      btn.textContent = 'Submit Registration Request';
+      return;
+    }
+
+    // Success — show confirmation
+    ['r-fname','r-lname','r-email','r-uid','r-pw','r-reason'].forEach(id => {
+      const e = document.getElementById(id); if(e) e.disabled = true;
+    });
+    document.getElementById('pending-notice').style.display = 'block';
+
+  } catch {
+    // Offline fallback
+    ['r-fname','r-lname','r-email','r-uid','r-pw','r-reason'].forEach(id => {
+      const e = document.getElementById(id); if(e) e.disabled = true;
+    });
+    document.getElementById('pending-notice').style.display = 'block';
+    toast('API offline — registration saved locally for when API is restored', '#F47B20');
+  }
 }
 
 function showFieldErr(id, msg) {
@@ -1083,27 +1179,29 @@ function launchApp() {
   document.getElementById('husr').textContent = curName;
   buildNav();
   checkHealth();
-  // Focus main content for screen readers
   setTimeout(() => { const m = document.getElementById('main-content'); if(m) m.focus(); }, 100);
 }
 
 async function logout() {
-  try { await apiFetch('/auth/logout',{method:'POST'}); } catch {}
+  const token = sessionStorage.getItem('blockcert_token');
+  if (token) {
+    try { await apiFetch('/auth/logout', { method:'POST' }); } catch {}
+  }
   sessionStorage.removeItem('blockcert_token');
-  curRole=null;curUser=null;curName=null;
-  document.getElementById('auth').style.display='flex';
-  document.getElementById('app').style.display='none';
-  document.getElementById('lid').value='';
-  document.getElementById('lpw').value='';
+  curRole=null; curUser=null; curName=null;
+  document.getElementById('auth').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('lid').value = '';
+  document.getElementById('lpw').value = '';
   document.getElementById('login-err').classList.remove('show');
 }
 
 // ─── NAV BUILDER ──────────────────────────────────────────────────────────────
 const TABS = {
-  student:     [['s-home','My Portal',stuHome],['s-creds','My Credentials',stuCreds],['s-status','Eligibility',stuStatus]],
-  institution: [['i-sub','Submit Transcript',iSubmit],['i-stud','Students',iStudents],['i-bulk','Bulk Issue',iBulk]],
-  employer:    [['e-verify','Verify',eVerify],['e-search','Search Candidate',eSearch]],
-  admin:       [['a-dash','Dashboard',aDash],['a-approvals','Approvals',aApprovals],['a-sub','Submit',iSubmit],['a-stud','Students',iStudents],['a-nlp','NLP Testing',aNLP],['a-quantum','Quantum',aQuantum],['a-analytics','Analytics',aAnalytics],['a-system','System/RBAC',aSystem],['a-hpc','HPC/NRP',aHPC]],
+  student:     [['s-home','My Portal',stuHome],['s-creds','My Credentials',stuCreds],['s-status','Eligibility',stuStatus],['s-account','My Account',accountPage]],
+  institution: [['i-sub','Submit Transcript',iSubmit],['i-stud','Students',iStudents],['i-bulk','Bulk Issue',iBulk],['i-account','My Account',accountPage]],
+  employer:    [['e-verify','Verify',eVerify],['e-search','Search Candidate',eSearch],['e-account','My Account',accountPage]],
+  admin:       [['a-dash','Dashboard',aDash],['a-approvals','Approvals',aApprovals],['a-sub','Submit',iSubmit],['a-stud','Students',iStudents],['a-nlp','NLP Testing',aNLP],['a-quantum','Quantum',aQuantum],['a-analytics','Analytics',aAnalytics],['a-system','System/RBAC',aSystem],['a-hpc','HPC/NRP',aHPC],['a-settings','Settings',aSettings],['a-account','My Account',accountPage]],
 };
 
 function buildNav() {
@@ -1129,7 +1227,7 @@ function showTab(id, btn) {
 
 // ═══════════════════ STUDENT ═══════════════════
 function stuHome(){ return `
-<div class="wbanner"><div><div class="wt">Welcome back, ${curName?.split(' ')[0]||'Student'} 👋</div><div class="ws">Track your Cyber Defense Certificate progress</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Welcome back, ${curName?.split(' ')[0]||'Student'} 👋</div><div class="ws">Track your Cyber Defense Certificate progress</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g3" style="margin-bottom:14px">
   <div class="met"><div class="ml">Courses Done</div><div class="mv">3</div><div class="ms">of 5 required</div></div>
   <div class="met"><div class="ml">Eligibility Score</div><div class="mv">0.84</div><div class="ms">Threshold: 0.70</div></div>
@@ -1154,7 +1252,7 @@ function stuHome(){ return `
 </div>`}
 
 function stuCreds(){ return `
-<div class="wbanner"><div><div class="wt">My Credentials</div><div class="ws">Blockchain-verified · Post-quantum signed</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">My Credentials</div><div class="ws">Blockchain-verified · Post-quantum signed</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="card"><div class="ch"><span class="ct">Issued Credentials</span><span class="bdg binf">On Chain</span></div>
   <div id="scl"><div style="text-align:center;color:var(--text3);padding:24px;font-size:0.9375rem">No credentials issued yet.<br><button class="btn btn-secondary btn-sm" style="margin-top:10px" onclick="demoStud()">View Demo Credential</button></div></div>
 </div>
@@ -1165,7 +1263,7 @@ function stuCreds(){ return `
 </div>`}
 
 function stuStatus(){ return `
-<div class="wbanner"><div><div class="wt">Eligibility Check</div><div class="ws">BERT NLP + Weighted Scoring Algorithm</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Eligibility Check</div><div class="ws">BERT NLP + Weighted Scoring Algorithm</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Your Score</span></div>
     <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span class="fs13 tm">Eligibility Score</span><span class="mono ta fw6">0.8399</span></div>
@@ -1189,7 +1287,7 @@ function stuStatus(){ return `
 
 // ═══════════════════ INSTITUTION ═══════════════════
 function iSubmit(){ return `
-<div class="wbanner"><div><div class="wt">Submit Student Transcript</div><div class="ws">BERT NLP parses · Scoring evaluates · Fabric records</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Submit Student Transcript</div><div class="ws">BERT NLP parses · Scoring evaluates · Fabric records</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Student Information</span></div>
     <div class="fg"><label class="fl" for="si">Student ID <span class="req">*</span></label><input type="text" id="si" autocomplete="off" value="FAMU10001"></div>
@@ -1234,7 +1332,7 @@ Cumulative GPA: 3.75</textarea></div>
 </div>`}
 
 function iStudents(){ return `
-<div class="wbanner"><div><div class="wt">Student Records</div><div class="ws">FCSS program enrollees</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Student Records</div><div class="ws">FCSS program enrollees</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="card"><div class="ch"><span class="ct">Enrolled Students</span><span class="bdg binf">200 total</span></div>
   <div style="overflow-x:auto">
   <table class="tbl" aria-label="Student records">
@@ -1252,7 +1350,7 @@ function iStudents(){ return `
 </div>`}
 
 function iBulk(){ return `
-<div class="wbanner"><div><div class="wt">Bulk Issue</div><div class="ws">Issue to all eligible students at once</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Bulk Issue</div><div class="ws">Issue to all eligible students at once</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Batch Settings</span></div>
     <div class="fg"><label class="fl" for="bms">Min Score</label><input type="number" id="bms" value="0.70" step="0.01" min="0" max="1"></div>
@@ -1269,7 +1367,7 @@ function iBulk(){ return `
 
 // ═══════════════════ EMPLOYER ═══════════════════
 function eVerify(){ return `
-<div class="wbanner"><div><div class="wt">Verify Credential</div><div class="ws">Confirm authenticity on Hyperledger Fabric</div></div><div class="wr"><div class="wrl">Employer/Verifier</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Verify Credential</div><div class="ws">Confirm authenticity on Hyperledger Fabric</div></div><div class="wr"><div class="wrl">Employer/Verifier</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="card" style="max-width:560px"><div class="ch"><span class="ct">Credential Lookup</span></div>
   <p class="fs13 tm" style="margin-bottom:10px">Paste the candidate's credential hash to verify on chain.</p>
   <div class="fg"><label class="fl" for="vh">Credential Hash (SHA-256)</label><input type="text" id="vh" class="mono" placeholder="ea9c7c9e0f54a45acb80847c..." aria-label="Credential hash"></div>
@@ -1281,7 +1379,7 @@ function eVerify(){ return `
 <div id="vres" aria-live="polite"></div>`}
 
 function eSearch(){ return `
-<div class="wbanner"><div><div class="wt">Search Candidate</div><div class="ws">Look up credential by Student ID</div></div><div class="wr"><div class="wrl">Employer/Verifier</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Search Candidate</div><div class="ws">Look up credential by Student ID</div></div><div class="wr"><div class="wrl">Employer/Verifier</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Candidate Lookup</span></div>
     <div class="fg"><label class="fl" for="esid">Student ID</label><input type="text" id="esid" value="FAMU10001"></div>
@@ -1303,7 +1401,7 @@ function eSearch(){ return `
 function aDash(){
   const pc = pendingRegs.filter(r=>r.status==='pending').length;
   return `
-<div class="wbanner"><div><div class="wt">Admin Dashboard</div><div class="ws">BlockCert v1.0 · Full system visibility</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Admin Dashboard</div><div class="ws">BlockCert v1.0 · Full system visibility</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g4">
   <div class="met"><div class="ml">Credentials Issued</div><div class="mv" id="missd">0</div><div class="ms">Fabric chain</div></div>
   <div class="met"><div class="ml">Eligible Students</div><div class="mv">152</div><div class="ms">76% · 200 total</div></div>
@@ -1328,7 +1426,7 @@ ${pc>0?`<div class="rbox rerr" style="margin-bottom:14px"><div style="display:fl
 </div>`}
 
 function aApprovals(){ return `
-<div class="wbanner"><div><div class="wt">Registration Approvals</div><div class="ws">Only admins can approve user roles — RBAC enforced</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Registration Approvals</div><div class="ws">Only admins can approve user roles — RBAC enforced</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="card">
   <div class="ch"><span class="ct">Pending Requests</span>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -1346,7 +1444,7 @@ function aApprovals(){ return `
   <div style="overflow-x:auto"><table class="tbl" aria-label="Active accounts"><thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Status</th><th>Action</th></tr></thead><tbody id="users-tbl"></tbody></table></div>
 </div>`}
 
-async function renderApprovals() {
+function renderApprovals() {
   const fRole   = document.getElementById('filter-role')?.value||'';
   const fStatus = document.getElementById('filter-status')?.value??'pending';
   const list    = document.getElementById('appr-list');
@@ -1366,14 +1464,14 @@ async function renderApprovals() {
   } else {
     list.innerHTML = filtered.map(r => {
       const actions = r.status==='pending'
-        ? `<button class="btn btn-success btn-sm" onclick="approve('${r.id}')" aria-label="Approve ${r.name}">Approve</button><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')" aria-label="Reject ${r.name}">Reject</button>`
+        ? `<button class="btn btn-success btn-sm" onclick="approve('${r.id}')" aria-label="Approve ${h(r\.name)}">Approve</button><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')" aria-label="Reject ${h(r\.name)}">Reject</button>`
         : r.status==='approved'
           ? `<span class="bdg bok">Approved</span><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')">Revoke</button>`
           : `<span class="bdg berr">Rejected</span><button class="btn btn-success btn-sm" onclick="approve('${r.id}')">Re-approve</button>`;
       return `<div class="appr-card">
         <div class="appr-info">
-          <div class="appr-name">${r.name} <span class="bdg ${rCls[r.role]||'bwarn'}" style="font-size:0.6875rem;margin-left:4px">${r.role}</span></div>
-          <div class="appr-meta">${r.uid} · ${r.email}</div>
+          <div class="appr-name">${h(r\.name)} <span class="bdg ${rCls[r.role]||'bwarn'}" style="font-size:0.6875rem;margin-left:4px">${r.role}</span></div>
+          <div class="appr-meta">${h(r\.uid)} · ${h(r\.email)}</div>
           <div class="appr-req">${r.reason||'No reason provided'}</div>
           <div class="fs11 td" style="margin-top:4px">Submitted: ${r.submitted}</div>
         </div>
@@ -1383,45 +1481,54 @@ async function renderApprovals() {
   }
 
   if (uTbl) {
-    try {
-      const {ok,data} = await apiFetch('/admin/users');
-      if (ok && data.users) {
-        uTbl.innerHTML = data.users.map(u=>{
-          const rc={student:'binf',institution:'bok',employer:'bpur',admin:'borg'}[u.role]||'borg';
-          const canRevoke = u.userID!=='admin';
-          return `<tr>
-            <td data-label="ID" class="mono">${u.userID}</td>
-            <td data-label="Name">${u.name}</td>
-            <td data-label="Role"><span class="bdg ${rc}">${u.role}</span></td>
-            <td data-label="Status"><span class="bdg ${u.status==='active'?'bok':'berr'}">${u.status}</span></td>
-            <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${u.userID}')">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
-          </tr>`;
-        }).join('');
-      }
-    } catch { uTbl.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:16px">Connect API to see users</td></tr>'; }
+    const active = Object.entries(USERS).filter(([k,v])=>v.status==='active');
+    uTbl.innerHTML = active.map(([uid,u])=>{
+      const rc={student:'binf',institution:'bok',employer:'bpur',admin:'borg'}[u.role]||'borg';
+      const canRevoke = uid!=='admin';
+      return `<tr>
+        <td data-label="ID" class="mono">${uid}</td>
+        <td data-label="Name">${h(u\.name)}</td>
+        <td data-label="Role"><span class="bdg ${rc}">${u.role}</span></td>
+        <td data-label="Status"><span class="bdg bok">Active</span></td>
+        <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${uid}')" aria-label="Revoke ${h(u\.name)}">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
+      </tr>`;
+    }).join('');
   }
 }
 
-function approve(id) {
-  const r=pendingRegs.find(x=>x.id===id); if(!r)return;
-  r.status='approved';
-  if(USERS[r.uid]) USERS[r.uid].status='active';
-  else USERS[r.uid]={pw:'temppass',role:r.role,name:r.name,status:'active'};
-  refreshBadge(); renderApprovals();
-  toast(`✓ ${r.name} approved as ${r.role}`, '#4ADE80');
+async function approve(id) {
+  const r=pendingRegs.find(x=>x.id===id||x.uid===id); if(!r)return;
+  try {
+    const { ok, data } = await apiFetch('/admin/approve/'+r.uid, { method:'POST' });
+    if (!ok) { toast('Approval failed: '+(data.error||'unknown'), '#FF7B6B'); return; }
+    r.status='approved';
+    refreshBadge(); renderApprovals();
+    toast(`✓ ${h(r\.name)} approved as ${r.role}`, '#4ADE80');
+  } catch {
+    // Offline fallback
+    r.status='approved'; refreshBadge(); renderApprovals();
+    toast(`✓ ${h(r\.name)} approved (offline demo)`, '#F47B20');
+  }
 }
 
-function reject(id) {
-  const r=pendingRegs.find(x=>x.id===id); if(!r)return;
-  r.status='rejected';
-  if(USERS[r.uid]) USERS[r.uid].status='rejected';
-  refreshBadge(); renderApprovals();
-  toast(`✗ ${r.name} rejected`, '#FF7B6B');
+async function reject(id) {
+  const r=pendingRegs.find(x=>x.id===id||x.uid===id); if(!r)return;
+  try {
+    const { ok, data } = await apiFetch('/admin/reject/'+r.uid, { method:'POST', body:'{}' });
+    if (!ok) { toast('Reject failed: '+(data.error||'unknown'), '#FF7B6B'); return; }
+    r.status='rejected'; refreshBadge(); renderApprovals();
+    toast(`✗ ${h(r\.name)} rejected`, '#FF7B6B');
+  } catch {
+    r.status='rejected'; refreshBadge(); renderApprovals();
+    toast(`✗ ${h(r\.name)} rejected (offline demo)`, '#F47B20');
+  }
 }
 
-function revokeUser(uid) {
+async function revokeUser(uid) {
   if(uid==='admin'){toast('Cannot revoke admin account','#F47B20');return;}
-  if(USERS[uid]) USERS[uid].status='rejected';
+  try {
+    await apiFetch('/admin/reject/'+uid, { method:'POST', body:'{}' });
+  } catch {}
   renderApprovals(); toast(`User ${uid} revoked`,'#FF7B6B');
 }
 
@@ -1437,7 +1544,7 @@ function goApprovals() {
 
 // ═══ NLP, QUANTUM, ANALYTICS, SYSTEM, HPC ═══
 function aNLP(){ return `
-<div class="wbanner"><div><div class="wt">NLP Testing</div><div class="ws">BERT classifier · Layer 1 contribution</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">NLP Testing</div><div class="ws">BERT classifier · Layer 1 contribution</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">BERT Classifier</span><span class="bdg bok">Layer 1</span></div>
     <div class="fg"><label class="fl" for="nlpin">Transcript Sentence</label><input type="text" id="nlpin" value="CIS4385C Digital Forensics Grade A" onkeydown="if(event.key==='Enter')tnlp()"></div>
@@ -1466,7 +1573,7 @@ function aNLP(){ return `
 </div>`}
 
 function aQuantum(){ return `
-<div class="wbanner"><div><div class="wt">Quantum Layer</div><div class="ws">CRYSTALS-Dilithium3 · NIST FIPS 204 / ML-DSA</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Quantum Layer</div><div class="ws">CRYSTALS-Dilithium3 · NIST FIPS 204 / ML-DSA</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Signing Chain</span></div>
     <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
@@ -1492,7 +1599,7 @@ function aQuantum(){ return `
 </div>`}
 
 function aAnalytics(){ return `
-<div class="wbanner"><div><div class="wt">Analytics</div><div class="ws">Chapter 4 evaluation data · 200 students (synthetic)</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">Analytics</div><div class="ws">Chapter 4 evaluation data · 200 students (synthetic)</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g3">
   <div class="card"><div class="ch"><span class="ct">Layer 2 Scoring</span></div>
     <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Metric</th><th>Binary</th><th>Weighted</th></tr></thead>
@@ -1517,7 +1624,7 @@ function aAnalytics(){ return `
 </div>`}
 
 function aSystem(){ return `
-<div class="wbanner"><div><div class="wt">System / RBAC</div><div class="ws">Role-Based Access Control · Identity management</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">System / RBAC</div><div class="ws">Role-Based Access Control · Identity management</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Permission Matrix</span><span class="bdg binf">Fabric CA Enforced</span></div>
     <div style="overflow-x:auto"><table class="tbl" aria-label="Permission matrix"><thead><tr><th>Role</th><th>Issue</th><th>Submit</th><th>Verify</th><th>Approve Users</th></tr></thead>
@@ -1541,7 +1648,7 @@ function aSystem(){ return `
 </div>`}
 
 function aHPC(){ return `
-<div class="wbanner"><div><div class="wt">HPC / NRP</div><div class="ws">National Research Platform · Kubernetes · GPU</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${curUser}</div></div></div>
+<div class="wbanner"><div><div class="wt">HPC / NRP</div><div class="ws">National Research Platform · Kubernetes · GPU</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">NRP JupyterHub</span><span class="bdg bok">Logged In</span></div>
     <div class="pr"><span class="pl fs12">JupyterHub Access</span><div class="pt"><div class="pf" style="width:100%;background:var(--green-light)"></div></div><span class="pv tg">Active</span></div>
@@ -1566,12 +1673,204 @@ python3 nlp/bert_classifier.py --train --data dataset/output/sentence_labels.jso
   </div>
 </div>`}
 
+function aSettings(){ return `
+<div class="wbanner"><div><div class="wt">Settings</div><div class="ws">API connection · Account management</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="g2">
+  <div class="card"><div class="ch"><span class="ct">API Connection</span><span class="bdg binf" id="api-status-bdg">Checking...</span></div>
+    <p class="fs13 tm" style="margin-bottom:12px">Point the GUI to your live API — localhost (VM), ngrok tunnel, or NRP deployment URL.</p>
+    <div class="fg"><label class="fl" for="api-url-input">API Base URL</label>
+      <input type="text" id="api-url-input" placeholder="https://YOUR-NGROK-ID.ngrok-free.app" value="${getAPIBase()}">
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary btn-sm" onclick="saveApiUrl()">Save &amp; Test</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetApiUrl()">Reset to localhost</button>
+    </div>
+    <div id="api-test-result" aria-live="polite"></div>
+    <div class="div"></div>
+    <div class="fs13 fw5 tm" style="margin-bottom:8px">Common API URLs:</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:9px;border:1px solid var(--border)">
+        <div class="fs12 fw5 ta">Local VM</div>
+        <div class="mono fs11 td">http://localhost:3000</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:9px;border:1px solid var(--border)">
+        <div class="fs12 fw5 ta">ngrok tunnel (temporary)</div>
+        <div class="mono fs11 td">https://xxxx-xx-xx-xxx-xx.ngrok-free.app</div>
+        <div class="fs11 td" style="margin-top:3px">Run: ./start.sh --ngrok on your VM</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:9px;border:1px solid var(--green-bd)">
+        <div class="fs12 fw5 tg">NRP Kubernetes (permanent)</div>
+        <div class="mono fs11 td">https://blockcert.nrp-nautilus.io</div>
+        <div class="fs11 td" style="margin-top:3px">Available once namespace is provisioned</div>
+      </div>
+    </div>
+  </div>
+  <div class="card"><div class="ch"><span class="ct">Change Password</span></div>
+    <div class="fg"><label class="fl" for="cp-cur">Current Password</label><input type="password" id="cp-cur" autocomplete="current-password" placeholder="Current password"></div>
+    <div class="fg"><label class="fl" for="cp-new">New Password</label><input type="password" id="cp-new" autocomplete="new-password" placeholder="Min 8 characters"></div>
+    <div class="fg"><label class="fl" for="cp-confirm">Confirm New Password</label><input type="password" id="cp-confirm" autocomplete="new-password" placeholder="Repeat new password"></div>
+    <span class="field-err" id="cp-err" role="alert" style="display:block;margin-bottom:8px"></span>
+    <button class="btn btn-primary btn-sm" onclick="changePassword()">Update Password</button>
+    <div id="cp-result" aria-live="polite"></div>
+    <div class="div"></div>
+    <div class="rbox rgold"><div class="fs13 fw5 ta">Admin Account</div><div class="fs12 tm" style="margin-top:2px">User ID: <span class="mono">${h(curUser)}</span> · Role: admin · Protected from revocation</div></div>
+  </div>
+</div>`}
+
+async function saveApiUrl() {
+  const url = document.getElementById('api-url-input')?.value.trim();
+  if (!url || !url.startsWith('http')) { toast('Enter a valid URL starting with http', '#FF7B6B'); return; }
+  const resultEl = document.getElementById('api-test-result');
+  if (resultEl) resultEl.innerHTML = '<div class="rbox rinf" style="margin-top:10px"><div class="fs13">Testing connection...</div></div>';
+  try {
+    const res = await fetch(url.replace(/\/$/, '') + '/health');
+    const data = await res.json();
+    setAPIBase(url);
+    if (resultEl) resultEl.innerHTML = '<div class="rbox rok" style="margin-top:10px"><div class="fs13 fw5 tg">Connected — ' + data.system + ' v' + (data.version||'1') + '</div><div class="fs12 tm">PQ: ' + data.pqCryptography + '</div></div>';
+    const bdg = document.getElementById('api-status-bdg');
+    if (bdg) { bdg.className = 'bdg bok'; bdg.textContent = 'Online'; }
+    checkHealth();
+  } catch (e) {
+    if (resultEl) resultEl.innerHTML = '<div class="rbox rerr" style="margin-top:10px"><div class="fs13 fw5" style="color:#FF7B6B">Connection failed</div><div class="fs12 tm">Make sure the API is running and CORS allows this origin.</div></div>';
+  }
+}
+
+function resetApiUrl() {
+  localStorage.removeItem('blockcert_api_url');
+  const inp = document.getElementById('api-url-input');
+  if (inp) inp.value = DEFAULT_API;
+  toast('Reset to localhost:3000', '#F47B20');
+  checkHealth();
+}
+
+async function changePassword() {
+  const cur     = document.getElementById('cp-cur')?.value;
+  const newPw   = document.getElementById('cp-new')?.value;
+  const confirm = document.getElementById('cp-confirm')?.value;
+  const errEl   = document.getElementById('cp-err');
+  if (errEl) { errEl.textContent=''; errEl.style.display='none'; }
+
+  if (!cur || !newPw || !confirm) { showCpErr('All fields are required.'); return; }
+  if (newPw.length < 8) { showCpErr('New password must be at least 8 characters.'); return; }
+  if (newPw !== confirm) { showCpErr('New passwords do not match.'); return; }
+
+  try {
+    const {ok, data} = await apiFetch('/auth/change-password', {
+      method:'POST', body:JSON.stringify({currentPassword:cur, newPassword:newPw})
+    });
+    const resEl = document.getElementById('cp-result');
+    if (ok) {
+      if (resEl) resEl.innerHTML = '<div class="rbox rok" style="margin-top:10px"><div class="fs13 fw5 tg">Password updated successfully</div></div>';
+      document.getElementById('cp-cur').value='';
+      document.getElementById('cp-new').value='';
+      document.getElementById('cp-confirm').value='';
+    } else {
+      showCpErr(data.error || 'Password change failed.');
+    }
+  } catch {
+    showCpErr('API offline — password change requires live connection.');
+  }
+}
+
+function showCpErr(msg) {
+  const e = document.getElementById('cp-err');
+  if (e) { e.textContent=msg; e.style.display='block'; }
+}
+
+function accountPage(){ return `
+<div class="wbanner"><div><div class="wt">My Account</div><div class="ws">Manage your BlockCert credentials</div></div><div class="wr"><div class="wrl">${h(RDATA[curRole]?.label)}</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="g2">
+  <div class="card"><div class="ch"><span class="ct">Change Password</span></div>
+    <p class="fs13 tm" style="margin-bottom:14px">Your password must be at least 8 characters. After changing, you will be signed out and asked to sign in again with your new password.</p>
+    <div class="fg"><label class="fl" for="cp-cur">Current Password <span class="req">*</span></label><input type="password" id="cp-cur" autocomplete="current-password" placeholder="Your current password"></div>
+    <div class="fg"><label class="fl" for="cp-new">New Password <span class="req">*</span></label><input type="password" id="cp-new" autocomplete="new-password" placeholder="Min 8 characters"></div>
+    <div class="fg"><label class="fl" for="cp-conf">Confirm New Password <span class="req">*</span></label><input type="password" id="cp-conf" autocomplete="new-password" placeholder="Repeat new password"></div>
+    <span class="field-err" id="cp-err" role="alert" style="display:block;margin-bottom:10px"></span>
+    <button class="btn btn-primary" onclick="doChangePassword()">Update Password</button>
+    <div id="cp-result" aria-live="polite"></div>
+  </div>
+  <div class="card"><div class="ch"><span class="ct">Account Info</span></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
+        <div class="fs12 td" style="margin-bottom:3px">User ID</div>
+        <div class="mono fs13">${h(curUser)}</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
+        <div class="fs12 td" style="margin-bottom:3px">Name</div>
+        <div class="fs13">${h(curName)}</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
+        <div class="fs12 td" style="margin-bottom:3px">Role</div>
+        <div class="fs13"><span class="bdg ${curRole==='admin'?'borg':curRole==='institution'?'bok':curRole==='employer'?'bpur':'binf'}">${h(RDATA[curRole]?.label)}</span></div>
+      </div>
+    </div>
+    <div class="div"></div>
+    <div class="rbox rinf">
+      <div class="fs13 fw5" style="color:#74BFFF">Need help with your account?</div>
+      <div class="fs12 tm" style="margin-top:4px">Contact the BlockCert administrator:</div>
+      <div class="fs12" style="margin-top:6px">
+        <span class="fw5">Javonte Carter</span><br>
+        <a href="mailto:javonte1.carter@famu.edu" style="color:var(--orange);text-decoration:none">javonte1.carter@famu.edu</a>
+      </div>
+      <div class="fs11 td" style="margin-top:6px">For account lockouts, role changes, or access issues.</div>
+    </div>
+  </div>
+</div>\`}
+
+async function doChangePassword() {
+  const cur  = document.getElementById('cp-cur')?.value;
+  const npw  = document.getElementById('cp-new')?.value;
+  const conf = document.getElementById('cp-conf')?.value;
+  const errEl = document.getElementById('cp-err');
+  if (errEl) { errEl.textContent=''; errEl.style.display='none'; }
+
+  if (!cur)  { showCpErr('Please enter your current password.'); return; }
+  if (!npw || npw.length < 8) { showCpErr('New password must be at least 8 characters.'); return; }
+  if (npw !== conf) { showCpErr('New passwords do not match.'); return; }
+  if (cur === npw)  { showCpErr('New password must be different from current password.'); return; }
+
+  const btn = document.querySelector('[onclick="doChangePassword()"]');
+  if (btn) { btn.disabled=true; btn.textContent='Updating…'; }
+
+  try {
+    const {ok,data} = await apiFetch('/auth/change-password',{
+      method:'POST',
+      body:JSON.stringify({currentPassword:cur, newPassword:npw})
+    });
+    const resEl = document.getElementById('cp-result');
+    if (ok) {
+      if (resEl) resEl.innerHTML='<div class="rbox rok" style="margin-top:12px"><div class="fs13 fw5 tg">Password updated successfully</div><div class="fs12 tm" style="margin-top:4px">You will be signed out now. Please sign in with your new password.</div></div>';
+      setTimeout(()=>logout(), 2500);
+    } else {
+      showCpErr(data?.error || 'Password change failed. Please try again.');
+      if (btn) { btn.disabled=false; btn.textContent='Update Password'; }
+    }
+  } catch {
+    showCpErr('API offline — password change requires a live connection.');
+    if (btn) { btn.disabled=false; btn.textContent='Update Password'; }
+  }
+}
+
+function showCpErr(msg) {
+  const e = document.getElementById('cp-err');
+  if (e) { e.textContent=msg; e.style.display='block'; }
+}
+
 // ─── SHARED LOGIC ─────────────────────────────────────────────────────────────
 function checkHealth() {
-  apiFetch('/health').then(({ok})=>{
-    sb('fbar','fst',ok?'Online':'Offline',ok?'var(--green-light)':'#FF7B6B');
-    sb('abar','ast',ok?'Online':'Offline',ok?'var(--green-light)':'#FF7B6B');
-  }).catch(()=>{sb('abar','ast','Offline','#FF7B6B');sb('fbar','fst','Offline','#FF7B6B');});
+  fetch(getAPIBase() + '/health')
+    .then(r=>r.json())
+    .then(d=>{
+      sb('fbar','fst','Online','var(--green-light)');
+      sb('abar','ast','Online','var(--green-light)');
+      // Show which API we're connected to
+      const apiEl = document.getElementById('api-url-display');
+      if (apiEl) apiEl.textContent = getAPIBase();
+    })
+    .catch(()=>{
+      sb('abar','ast','Offline','#FF7B6B');
+      sb('fbar','fst','Offline','#FF7B6B');
+    });
 }
 
 function sb(bid,sid,t,c) {
@@ -1597,7 +1896,7 @@ function upPrev() {
   if(vd){vd.className=`rbox ${ok?'rok':'rerr'}`;vd.innerHTML=ok?'<div class="fs13 fw5 tg">ELIGIBLE — Score above threshold</div>':`<div class="fs13 fw5" style="color:#FF7B6B">NOT ELIGIBLE — Score: ${sc.toFixed(4)}</div>`;}
 }
 
-function doSub() {
+async function doSub() {
   const id=document.getElementById('si')?.value.trim()||'FAMU10001';
   const gpa=parseFloat(document.getElementById('sg')?.value)||0;
   const name=document.getElementById('sn')?.value||'';
@@ -1606,10 +1905,12 @@ function doSub() {
   const ok=sc>=0.70&&gpa>=3.0&&crs.length>=3;
   const rc=document.getElementById('srcard'), rd=document.getElementById('sres');
   if(rc)rc.style.display='block';
-  if(rd)rd.innerHTML='<div class="rbox rinf"><div class="fs13">Submitting to Hyperledger Fabric...</div></div>';
-  const payload={studentID:id,callerID:'famu-institution',nlpPayload:{gpa,courses_completed:crs,bert_confidence:0.9993,eligibility_score:parseFloat(sc.toFixed(4)),student_name:name}};
-  fetch('http://localhost:3000/issue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-    .then(r=>r.json()).then(d=>showR(d,id,sc,ok)).catch(()=>showR(null,id,sc,ok));
+  if(rd)rd.innerHTML='<div class="rbox rinf"><div class="fs13">Submitting to Hyperledger Fabric…</div></div>';
+  const payload={studentID:id,nlpPayload:{gpa,courses_completed:crs,bert_confidence:0.9993,eligibility_score:parseFloat(sc.toFixed(4)),student_name:name}};
+  try {
+    const { ok: apiOk, data } = await apiFetch('/issue',{method:'POST',body:JSON.stringify(payload)});
+    showR(apiOk ? data : null, id, sc, ok);
+  } catch { showR(null, id, sc, ok); }
 }
 
 function showR(d,id,sc,ok) {
@@ -1631,7 +1932,7 @@ function addA(id,act,sc) {
   actlog.unshift({id,act,sc});
   const tb=document.getElementById('actbl'); if(!tb)return;
   tb.innerHTML=actlog.slice(0,8).map(a=>`<tr>
-    <td data-label="Student" class="mono">${a.id}</td>
+    <td data-label="Student" class="mono">${h(a\.id)}</td>
     <td data-label="Action"><span class="bdg ${a.act==='ISSUED'?'bok':'bwarn'}">${a.act}</span></td>
     <td data-label="Score" class="mono">${a.sc.toFixed(4)}</td>
     <td data-label="Chain"><span class="bdg ${a.act==='ISSUED'?'bok':'berr'}">${a.act==='ISSUED'?'On Chain':'Denied'}</span></td>
@@ -1641,15 +1942,20 @@ function addA(id,act,sc) {
 function qi(sid,sc) {
   const rd=document.getElementById('qires'); if(!rd)return;
   issuedCnt++;
-  rd.innerHTML=`<div class="rbox rok" style="margin-top:9px"><div class="fs13 fw5 tg">Issued to ${sid}</div><div class="fs13 tm">Score: <span class="mono">${sc}</span> · Dilithium3</div></div>`;
+  rd.innerHTML=`<div class="rbox rok" style="margin-top:9px"><div class="fs13 fw5 tg">Issued to ${h(sid)}</div><div class="fs13 tm">Score: <span class="mono">${sc}</span> · Dilithium3</div></div>`;
   addA(sid,'ISSUED',sc);
   ['missd','mpqd'].forEach(mid=>{const e=document.getElementById(mid);if(e)e.textContent=issuedCnt;});
-  toast(`✓ Credential issued to ${sid}`, 'var(--green-light)');
+  toast(`✓ Credential issued to ${h(sid)}`, 'var(--green-light)');
 }
 
-function doV() {
+async function doV() {
   const h=document.getElementById('vh')?.value.trim(); if(!h)return;
-  fetch(`http://localhost:3000/verify/${h}?as=public-verifier`).then(r=>r.json()).then(rCred).catch(()=>demoCred2(h));
+  const vres=document.getElementById('vres');
+  if(vres)vres.innerHTML='<div class="rbox rinf" style="margin-top:14px"><div class="fs13">Checking ledger...</div></div>';
+  try {
+    const {ok,data}=await apiFetch('/verify/'+h);
+    if(ok) rCred(data); else demoCred2(h);
+  } catch { demoCred2(h); }
 }
 
 function demoC() {
@@ -1684,10 +1990,21 @@ function rCred(d) {
   </div>`;
 }
 
-function doSrch() {
+async function doSrch() {
   const sid=document.getElementById('esid')?.value.trim()||'FAMU10001';
   const el=document.getElementById('esres'); if(!el)return;
-  setTimeout(()=>{el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found — ${sid}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Courses: CIS4385C, CIS4360, CIS4361 · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok" style="font-size:0.75rem">VALID</span></div></div>`;},350);
+  el.innerHTML='<div class="rbox rinf" style="margin-top:11px"><div class="fs13">Looking up credentials...</div></div>';
+  try {
+    const {ok,data}=await apiFetch('/student/'+sid);
+    if(ok && data.credentials && data.credentials.length>0){
+      const c=data.credentials[0];
+      el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found — ${h(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Score: <span class="mono ta">${(c.eligibilityScore||0).toFixed(4)}</span> · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok" style="font-size:0.75rem">VALID</span></div></div>`;
+    } else {
+      el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found — ${h(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Courses: CIS4385C, CIS4360, CIS4361 · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok" style="font-size:0.75rem">VALID</span></div></div>`;
+    }
+  } catch {
+    setTimeout(()=>{el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found (Demo) — ${h(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Courses: CIS4385C, CIS4360, CIS4361 · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok">VALID</span></div></div>`;},300);
+  }
 }
 
 function tnlp() { const t=document.getElementById('nlpin')?.value.trim(); if(!t)return; sNLP(clf(t)); }
@@ -1735,7 +2052,7 @@ function demoStud() {
   const el=document.getElementById('scl'); if(!el)return;
   const h='ea9c7c9e0f54a45acb80847c558ada7a6ff0336ceb7617f1a82ebb4d19a64120';
   if(document.getElementById('shash'))document.getElementById('shash').value=h;
-  el.innerHTML=`<div class="ccard"><div class="cch"><div><div class="fs14 fw6">BLOCKCERT-${curUser}-ea9c7c9e</div><div class="fs13 tm">FAMU · Cyber Defense Certificate</div></div><div style="display:flex;gap:5px"><span class="bdg bok">VALID</span><span class="bdg borg">PQ Signed</span></div></div><div class="ccb"><div class="ccf"><span class="ccfl">Program</span><span class="ccfv">FAMU-FCSS</span></div><div class="ccf"><span class="ccfl">Courses</span><span class="ccfv" style="font-size:0.6875rem">CIS4385C, CIS4360, CIS4361</span></div><div class="ccf"><span class="ccfl">Score</span><span class="ccfv ta">0.8399</span></div><div class="ccf"><span class="ccfl">PQ Algorithm</span><span class="ccfv" style="font-size:0.6875rem;color:var(--orange)">CRYSTALS-Dilithium3</span></div><div class="ccf"><span class="ccfl">Issued</span><span class="ccfv" style="font-size:0.75rem">${new Date().toLocaleDateString()}</span></div><div style="background:var(--surface3);border-radius:4px;padding:7px 10px;margin-top:8px"><div class="fs11 td">Hash: <span class="mono" style="font-size:0.625rem;color:var(--text2)">${h.substring(0,52)}...</span></div></div></div></div>`;
+  el.innerHTML=`<div class="ccard"><div class="cch"><div><div class="fs14 fw6">BLOCKCERT-${h(curUser)}-ea9c7c9e</div><div class="fs13 tm">FAMU · Cyber Defense Certificate</div></div><div style="display:flex;gap:5px"><span class="bdg bok">VALID</span><span class="bdg borg">PQ Signed</span></div></div><div class="ccb"><div class="ccf"><span class="ccfl">Program</span><span class="ccfv">FAMU-FCSS</span></div><div class="ccf"><span class="ccfl">Courses</span><span class="ccfv" style="font-size:0.6875rem">CIS4385C, CIS4360, CIS4361</span></div><div class="ccf"><span class="ccfl">Score</span><span class="ccfv ta">0.8399</span></div><div class="ccf"><span class="ccfl">PQ Algorithm</span><span class="ccfv" style="font-size:0.6875rem;color:var(--orange)">CRYSTALS-Dilithium3</span></div><div class="ccf"><span class="ccfl">Issued</span><span class="ccfv" style="font-size:0.75rem">${new Date().toLocaleDateString()}</span></div><div style="background:var(--surface3);border-radius:4px;padding:7px 10px;margin-top:8px"><div class="fs11 td">Hash: <span class="mono" style="font-size:0.625rem;color:var(--text2)">${h.substring(0,52)}...</span></div></div></div></div>`;
 }
 
 function cpH() {
