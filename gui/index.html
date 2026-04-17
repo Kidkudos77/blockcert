@@ -842,7 +842,7 @@ select option { background: var(--surface2); color: var(--text1) }
    h(str)     → HTML-encoded string safe for innerHTML static templates
    setText(el, str) → sets textContent (never parses as HTML)
    ─────────────────────────────────────────────────────────────────────────── */
-function h(str) {
+function esc(str) {
   if (str == null) return '';
   return String(str)
     .replace(/&/g, '&amp;')
@@ -1226,7 +1226,7 @@ function showTab(id, btn) {
 
 // ═══════════════════ STUDENT ═══════════════════
 function stuHome(){ return `
-<div class="wbanner"><div><div class="wt">Welcome back, ${curName?.split(' ')[0]||'Student'} 👋</div><div class="ws">Track your Cyber Defense Certificate progress</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Welcome back, ${curName?.split(' ')[0]||'Student'} 👋</div><div class="ws">Track your Cyber Defense Certificate progress</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g3" style="margin-bottom:14px">
   <div class="met"><div class="ml">Courses Done</div><div class="mv">3</div><div class="ms">of 5 required</div></div>
   <div class="met"><div class="ml">Eligibility Score</div><div class="mv">0.84</div><div class="ms">Threshold: 0.70</div></div>
@@ -1251,7 +1251,7 @@ function stuHome(){ return `
 </div>`}
 
 function stuCreds(){ return `
-<div class="wbanner"><div><div class="wt">My Credentials</div><div class="ws">Blockchain-verified · Post-quantum signed</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">My Credentials</div><div class="ws">Blockchain-verified · Post-quantum signed</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="card"><div class="ch"><span class="ct">Issued Credentials</span><span class="bdg binf">On Chain</span></div>
   <div id="scl"><div style="text-align:center;color:var(--text3);padding:24px;font-size:0.9375rem">No credentials issued yet.<br><button class="btn btn-secondary btn-sm" style="margin-top:10px" onclick="demoStud()">View Demo Credential</button></div></div>
 </div>
@@ -1262,7 +1262,7 @@ function stuCreds(){ return `
 </div>`}
 
 function stuStatus(){ return `
-<div class="wbanner"><div><div class="wt">Eligibility Check</div><div class="ws">BERT NLP + Weighted Scoring Algorithm</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Eligibility Check</div><div class="ws">BERT NLP + Weighted Scoring Algorithm</div></div><div class="wr"><div class="wrl">Student</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Your Score</span></div>
     <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span class="fs13 tm">Eligibility Score</span><span class="mono ta fw6">0.8399</span></div>
@@ -1286,7 +1286,7 @@ function stuStatus(){ return `
 
 // ═══════════════════ INSTITUTION ═══════════════════
 function iSubmit(){ return `
-<div class="wbanner"><div><div class="wt">Submit Student Transcript</div><div class="ws">BERT NLP parses · Scoring evaluates · Fabric records</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Submit Student Transcript</div><div class="ws">BERT NLP parses · Scoring evaluates · Fabric records</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Student Information</span></div>
     <div class="fg"><label class="fl" for="si">Student ID <span class="req">*</span></label><input type="text" id="si" autocomplete="off" value="FAMU10001"></div>
@@ -1331,7 +1331,7 @@ Cumulative GPA: 3.75</textarea></div>
 </div>`}
 
 function iStudents(){ return `
-<div class="wbanner"><div><div class="wt">Student Records</div><div class="ws">FCSS program enrollees</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Student Records</div><div class="ws">FCSS program enrollees</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="card"><div class="ch"><span class="ct">Enrolled Students</span><span class="bdg binf">200 total</span></div>
   <div style="overflow-x:auto">
   <table class="tbl" aria-label="Student records">
@@ -1349,7 +1349,7 @@ function iStudents(){ return `
 </div>`}
 
 function iBulk(){ return `
-<div class="wbanner"><div><div class="wt">Bulk Issue</div><div class="ws">Issue to all eligible students at once</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Bulk Issue</div><div class="ws">Issue to all eligible students at once</div></div><div class="wr"><div class="wrl">${RDATA[curRole]?.label}</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Batch Settings</span></div>
     <div class="fg"><label class="fl" for="bms">Min Score</label><input type="number" id="bms" value="0.70" step="0.01" min="0" max="1"></div>
@@ -1366,7 +1366,7 @@ function iBulk(){ return `
 
 // ═══════════════════ EMPLOYER ═══════════════════
 function eVerify(){ return `
-<div class="wbanner"><div><div class="wt">Verify Credential</div><div class="ws">Confirm authenticity on Hyperledger Fabric</div></div><div class="wr"><div class="wrl">Employer/Verifier</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Verify Credential</div><div class="ws">Confirm authenticity on Hyperledger Fabric</div></div><div class="wr"><div class="wrl">Employer/Verifier</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="card" style="max-width:560px"><div class="ch"><span class="ct">Credential Lookup</span></div>
   <p class="fs13 tm" style="margin-bottom:10px">Paste the candidate's credential hash to verify on chain.</p>
   <div class="fg"><label class="fl" for="vh">Credential Hash (SHA-256)</label><input type="text" id="vh" class="mono" placeholder="ea9c7c9e0f54a45acb80847c..." aria-label="Credential hash"></div>
@@ -1378,7 +1378,7 @@ function eVerify(){ return `
 <div id="vres" aria-live="polite"></div>`}
 
 function eSearch(){ return `
-<div class="wbanner"><div><div class="wt">Search Candidate</div><div class="ws">Look up credential by Student ID</div></div><div class="wr"><div class="wrl">Employer/Verifier</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Search Candidate</div><div class="ws">Look up credential by Student ID</div></div><div class="wr"><div class="wrl">Employer/Verifier</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Candidate Lookup</span></div>
     <div class="fg"><label class="fl" for="esid">Student ID</label><input type="text" id="esid" value="FAMU10001"></div>
@@ -1400,7 +1400,7 @@ function eSearch(){ return `
 function aDash(){
   const pc = pendingRegs.filter(r=>r.status==='pending').length;
   return `
-<div class="wbanner"><div><div class="wt">Admin Dashboard</div><div class="ws">BlockCert v1.0 · Full system visibility</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Admin Dashboard</div><div class="ws">BlockCert v1.0 · Full system visibility</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g4">
   <div class="met"><div class="ml">Credentials Issued</div><div class="mv" id="missd">0</div><div class="ms">Fabric chain</div></div>
   <div class="met"><div class="ml">Eligible Students</div><div class="mv">152</div><div class="ms">76% · 200 total</div></div>
@@ -1425,7 +1425,7 @@ ${pc>0?`<div class="rbox rerr" style="margin-bottom:14px"><div style="display:fl
 </div>`}
 
 function aApprovals(){ return `
-<div class="wbanner"><div><div class="wt">Registration Approvals</div><div class="ws">Only admins can approve user roles — RBAC enforced</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Registration Approvals</div><div class="ws">Only admins can approve user roles — RBAC enforced</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="card">
   <div class="ch"><span class="ct">Pending Requests</span>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -1463,14 +1463,14 @@ function renderApprovals() {
   } else {
     list.innerHTML = filtered.map(r => {
       const actions = r.status==='pending'
-        ? `<button class="btn btn-success btn-sm" onclick="approve('${r.id}')" aria-label="Approve ${h(r.name)}">Approve</button><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')" aria-label="Reject ${h(r.name)}">Reject</button>`
+        ? `<button class="btn btn-success btn-sm" onclick="approve('${r.id}')" aria-label="Approve ${esc(r.name)}">Approve</button><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')" aria-label="Reject ${esc(r.name)}">Reject</button>`
         : r.status==='approved'
           ? `<span class="bdg bok">Approved</span><button class="btn btn-danger btn-sm" onclick="reject('${r.id}')">Revoke</button>`
           : `<span class="bdg berr">Rejected</span><button class="btn btn-success btn-sm" onclick="approve('${r.id}')">Re-approve</button>`;
       return `<div class="appr-card">
         <div class="appr-info">
-          <div class="appr-name">${h(r.name)} <span class="bdg ${rCls[r.role]||'bwarn'}" style="font-size:0.6875rem;margin-left:4px">${r.role}</span></div>
-          <div class="appr-meta">${h(r.uid)} · ${h(r.email)}</div>
+          <div class="appr-name">${esc(r.name)} <span class="bdg ${rCls[r.role]||'bwarn'}" style="font-size:0.6875rem;margin-left:4px">${r.role}</span></div>
+          <div class="appr-meta">${esc(r.uid)} · ${esc(r.email)}</div>
           <div class="appr-req">${r.reason||'No reason provided'}</div>
           <div class="fs11 td" style="margin-top:4px">Submitted: ${r.submitted}</div>
         </div>
@@ -1486,10 +1486,10 @@ function renderApprovals() {
       const canRevoke = uid!=='admin';
       return `<tr>
         <td data-label="ID" class="mono">${uid}</td>
-        <td data-label="Name">${h(u.name)}</td>
+        <td data-label="Name">${esc(u.name)}</td>
         <td data-label="Role"><span class="bdg ${rc}">${u.role}</span></td>
         <td data-label="Status"><span class="bdg bok">Active</span></td>
-        <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${uid}')" aria-label="Revoke ${h(u.name)}">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
+        <td data-label="Action">${canRevoke?`<button class="btn btn-danger btn-sm" onclick="revokeUser('${uid}')" aria-label="Revoke ${esc(u.name)}">Revoke</button>`:'<span class="fs12 td">Protected</span>'}</td>
       </tr>`;
     }).join('');
   }
@@ -1502,11 +1502,11 @@ async function approve(id) {
     if (!ok) { toast('Approval failed: '+(data.error||'unknown'), '#FF7B6B'); return; }
     r.status='approved';
     refreshBadge(); renderApprovals();
-    toast(`✓ ${h(r.name)} approved as ${r.role}`, '#4ADE80');
+    toast(`✓ ${esc(r.name)} approved as ${r.role}`, '#4ADE80');
   } catch {
     // Offline fallback
     r.status='approved'; refreshBadge(); renderApprovals();
-    toast(`✓ ${h(r.name)} approved (offline demo)`, '#F47B20');
+    toast(`✓ ${esc(r.name)} approved (offline demo)`, '#F47B20');
   }
 }
 
@@ -1516,10 +1516,10 @@ async function reject(id) {
     const { ok, data } = await apiFetch('/admin/reject/'+r.uid, { method:'POST', body:'{}' });
     if (!ok) { toast('Reject failed: '+(data.error||'unknown'), '#FF7B6B'); return; }
     r.status='rejected'; refreshBadge(); renderApprovals();
-    toast(`✗ ${h(r.name)} rejected`, '#FF7B6B');
+    toast(`✗ ${esc(r.name)} rejected`, '#FF7B6B');
   } catch {
     r.status='rejected'; refreshBadge(); renderApprovals();
-    toast(`✗ ${h(r.name)} rejected (offline demo)`, '#F47B20');
+    toast(`✗ ${esc(r.name)} rejected (offline demo)`, '#F47B20');
   }
 }
 
@@ -1543,7 +1543,7 @@ function goApprovals() {
 
 // ═══ NLP, QUANTUM, ANALYTICS, SYSTEM, HPC ═══
 function aNLP(){ return `
-<div class="wbanner"><div><div class="wt">NLP Testing</div><div class="ws">BERT classifier · Layer 1 contribution</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">NLP Testing</div><div class="ws">BERT classifier · Layer 1 contribution</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">BERT Classifier</span><span class="bdg bok">Layer 1</span></div>
     <div class="fg"><label class="fl" for="nlpin">Transcript Sentence</label><input type="text" id="nlpin" value="CIS4385C Digital Forensics Grade A" onkeydown="if(event.key==='Enter')tnlp()"></div>
@@ -1572,7 +1572,7 @@ function aNLP(){ return `
 </div>`}
 
 function aQuantum(){ return `
-<div class="wbanner"><div><div class="wt">Quantum Layer</div><div class="ws">CRYSTALS-Dilithium3 · NIST FIPS 204 / ML-DSA</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Quantum Layer</div><div class="ws">CRYSTALS-Dilithium3 · NIST FIPS 204 / ML-DSA</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Signing Chain</span></div>
     <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
@@ -1598,7 +1598,7 @@ function aQuantum(){ return `
 </div>`}
 
 function aAnalytics(){ return `
-<div class="wbanner"><div><div class="wt">Analytics</div><div class="ws">Chapter 4 evaluation data · 200 students (synthetic)</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Analytics</div><div class="ws">Chapter 4 evaluation data · 200 students (synthetic)</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g3">
   <div class="card"><div class="ch"><span class="ct">Layer 2 Scoring</span></div>
     <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Metric</th><th>Binary</th><th>Weighted</th></tr></thead>
@@ -1623,7 +1623,7 @@ function aAnalytics(){ return `
 </div>`}
 
 function aSystem(){ return `
-<div class="wbanner"><div><div class="wt">System / RBAC</div><div class="ws">Role-Based Access Control · Identity management</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">System / RBAC</div><div class="ws">Role-Based Access Control · Identity management</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Permission Matrix</span><span class="bdg binf">Fabric CA Enforced</span></div>
     <div style="overflow-x:auto"><table class="tbl" aria-label="Permission matrix"><thead><tr><th>Role</th><th>Issue</th><th>Submit</th><th>Verify</th><th>Approve Users</th></tr></thead>
@@ -1647,7 +1647,7 @@ function aSystem(){ return `
 </div>`}
 
 function aHPC(){ return `
-<div class="wbanner"><div><div class="wt">HPC / NRP</div><div class="ws">National Research Platform · Kubernetes · GPU</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">HPC / NRP</div><div class="ws">National Research Platform · Kubernetes · GPU</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">NRP JupyterHub</span><span class="bdg bok">Logged In</span></div>
     <div class="pr"><span class="pl fs12">JupyterHub Access</span><div class="pt"><div class="pf" style="width:100%;background:var(--green-light)"></div></div><span class="pv tg">Active</span></div>
@@ -1673,7 +1673,7 @@ python3 nlp/bert_classifier.py --train --data dataset/output/sentence_labels.jso
 </div>`}
 
 function aSettings(){ return `
-<div class="wbanner"><div><div class="wt">Settings</div><div class="ws">API connection · Account management</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Settings</div><div class="ws">API connection · Account management</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">API Connection</span><span class="bdg binf" id="api-status-bdg">Checking...</span></div>
     <p class="fs13 tm" style="margin-bottom:12px">Point the GUI to your live API — localhost (VM), ngrok tunnel, or NRP deployment URL.</p>
@@ -1712,7 +1712,7 @@ function aSettings(){ return `
     <button class="btn btn-primary btn-sm" onclick="changePassword()">Update Password</button>
     <div id="cp-result" aria-live="polite"></div>
     <div class="div"></div>
-    <div class="rbox rgold"><div class="fs13 fw5 ta">Admin Account</div><div class="fs12 tm" style="margin-top:2px">User ID: <span class="mono">${h(curUser)}</span> · Role: admin · Protected from revocation</div></div>
+    <div class="rbox rgold"><div class="fs13 fw5 ta">Admin Account</div><div class="fs12 tm" style="margin-top:2px">User ID: <span class="mono">${esc(curUser)}</span> · Role: admin · Protected from revocation</div></div>
   </div>
 </div>`}
 
@@ -1777,7 +1777,7 @@ function showCpErr(msg) {
 }
 
 function accountPage(){ return `
-<div class="wbanner"><div><div class="wt">My Account</div><div class="ws">Manage your BlockCert credentials</div></div><div class="wr"><div class="wrl">${h(RDATA[curRole]?.label)}</div><div class="wri">${h(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">My Account</div><div class="ws">Manage your BlockCert credentials</div></div><div class="wr"><div class="wrl">${esc(RDATA[curRole]?.label)}</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g2">
   <div class="card"><div class="ch"><span class="ct">Change Password</span></div>
     <p class="fs13 tm" style="margin-bottom:14px">Your password must be at least 8 characters. After changing, you will be signed out and asked to sign in again with your new password.</p>
@@ -1792,15 +1792,15 @@ function accountPage(){ return `
     <div style="display:flex;flex-direction:column;gap:10px">
       <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
         <div class="fs12 td" style="margin-bottom:3px">User ID</div>
-        <div class="mono fs13">${h(curUser)}</div>
+        <div class="mono fs13">${esc(curUser)}</div>
       </div>
       <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
         <div class="fs12 td" style="margin-bottom:3px">Name</div>
-        <div class="fs13">${h(curName)}</div>
+        <div class="fs13">${esc(curName)}</div>
       </div>
       <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)">
         <div class="fs12 td" style="margin-bottom:3px">Role</div>
-        <div class="fs13"><span class="bdg ${curRole==='admin'?'borg':curRole==='institution'?'bok':curRole==='employer'?'bpur':'binf'}">${h(RDATA[curRole]?.label)}</span></div>
+        <div class="fs13"><span class="bdg ${curRole==='admin'?'borg':curRole==='institution'?'bok':curRole==='employer'?'bpur':'binf'}">${esc(RDATA[curRole]?.label)}</span></div>
       </div>
     </div>
     <div class="div"></div>
@@ -1941,10 +1941,10 @@ function addA(id,act,sc) {
 function qi(sid,sc) {
   const rd=document.getElementById('qires'); if(!rd)return;
   issuedCnt++;
-  rd.innerHTML=`<div class="rbox rok" style="margin-top:9px"><div class="fs13 fw5 tg">Issued to ${h(sid)}</div><div class="fs13 tm">Score: <span class="mono">${sc}</span> · Dilithium3</div></div>`;
+  rd.innerHTML=`<div class="rbox rok" style="margin-top:9px"><div class="fs13 fw5 tg">Issued to ${esc(sid)}</div><div class="fs13 tm">Score: <span class="mono">${sc}</span> · Dilithium3</div></div>`;
   addA(sid,'ISSUED',sc);
   ['missd','mpqd'].forEach(mid=>{const e=document.getElementById(mid);if(e)e.textContent=issuedCnt;});
-  toast(`✓ Credential issued to ${h(sid)}`, 'var(--green-light)');
+  toast(`✓ Credential issued to ${esc(sid)}`, 'var(--green-light)');
 }
 
 async function doV() {
@@ -1997,12 +1997,12 @@ async function doSrch() {
     const {ok,data}=await apiFetch('/student/'+sid);
     if(ok && data.credentials && data.credentials.length>0){
       const c=data.credentials[0];
-      el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found — ${h(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Score: <span class="mono ta">${(c.eligibilityScore||0).toFixed(4)}</span> · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok" style="font-size:0.75rem">VALID</span></div></div>`;
+      el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found — ${esc(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Score: <span class="mono ta">${(c.eligibilityScore||0).toFixed(4)}</span> · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok" style="font-size:0.75rem">VALID</span></div></div>`;
     } else {
-      el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found — ${h(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Courses: CIS4385C, CIS4360, CIS4361 · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok" style="font-size:0.75rem">VALID</span></div></div>`;
+      el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found — ${esc(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Courses: CIS4385C, CIS4360, CIS4361 · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok" style="font-size:0.75rem">VALID</span></div></div>`;
     }
   } catch {
-    setTimeout(()=>{el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found (Demo) — ${h(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Courses: CIS4385C, CIS4360, CIS4361 · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok">VALID</span></div></div>`;},300);
+    setTimeout(()=>{el.innerHTML=`<div class="rbox rok" style="margin-top:11px"><div class="fs14 fw6 tg">Credential Found (Demo) — ${esc(sid)}</div><div class="fs13 tm" style="margin-top:4px">Program: FAMU Cyber Defense Certificate · Courses: CIS4385C, CIS4360, CIS4361 · PQ: <span class="mono ta">Dilithium3</span> · <span class="bdg bok">VALID</span></div></div>`;},300);
   }
 }
 
@@ -2051,8 +2051,8 @@ function demoStud() {
   const el=document.getElementById('scl'); if(!el)return;
   const hashVal='ea9c7c9e0f54a45acb80847c558ada7a6ff0336ceb7617f1a82ebb4d19a64120';
   if(document.getElementById('shash'))document.getElementById('shash').value=hashVal;
-  const html='<div class="ccard">'
-    +'<div class="cch"><div><div class="fs14 fw6">BLOCKCERT-'+h(curUser)+'-ea9c7c9e</div>'
+  el.innerHTML='<div class="ccard"><div class="cch">'
+    +'<div><div class="fs14 fw6">BLOCKCERT-'+esc(curUser)+'-ea9c7c9e</div>'
     +'<div class="fs13 tm">FAMU · Cyber Defense Certificate</div></div>'
     +'<div style="display:flex;gap:5px"><span class="bdg bok">VALID</span>'
     +'<span class="bdg borg">PQ Signed</span></div></div>'
@@ -2060,12 +2060,14 @@ function demoStud() {
     +'<div class="ccf"><span class="ccfl">Program</span><span class="ccfv">FAMU-FCSS</span></div>'
     +'<div class="ccf"><span class="ccfl">Courses</span><span class="ccfv">CIS4385C, CIS4360, CIS4361</span></div>'
     +'<div class="ccf"><span class="ccfl">Score</span><span class="ccfv ta">0.8399</span></div>'
-    +'<div class="ccf"><span class="ccfl">PQ Algorithm</span><span class="ccfv" style="color:var(--orange)">CRYSTALS-Dilithium3</span></div>'
-    +'<div class="ccf"><span class="ccfl">Issued</span><span class="ccfv">'+new Date().toLocaleDateString()+'</span></div>'
+    +'<div class="ccf"><span class="ccfl">PQ Algorithm</span>'
+    +'<span class="ccfv" style="color:var(--orange)">CRYSTALS-Dilithium3</span></div>'
+    +'<div class="ccf"><span class="ccfl">Issued</span>'
+    +'<span class="ccfv">'+new Date().toLocaleDateString()+'</span></div>'
     +'<div style="background:var(--surface3);border-radius:4px;padding:7px 10px;margin-top:8px">'
-    +'<div class="fs11 td">Hash: <span class="mono" style="font-size:0.625rem;color:var(--text2)">'+hashVal.substring(0,52)+'...</span></div>'
+    +'<div class="fs11 td">Hash: <span class="mono" style="color:var(--text2)">'
+    +hashVal.substring(0,52)+'...</span></div>'
     +'</div></div></div>';
-  el.innerHTML=html;
 }
 
 function cpH() {
