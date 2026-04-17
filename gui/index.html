@@ -1807,7 +1807,7 @@ function showCpErr(msg) {
 
 // ─── SHARED LOGIC ─────────────────────────────────────────────────────────────
 function checkHealth() {
-  fetch(getAPIBase() + '/health')
+  fetch(getAPIBase() + '/health', {headers:{'ngrok-skip-browser-warning':'true'}})
     .then(r=>r.json())
     .then(d=>{
       sb('fbar','fst','Online','var(--green-light)');
