@@ -1,11 +1,11 @@
 'use strict';
 /**
- * CertChain — REST API v3 (Hardened)
+ * BlockCert — REST API v3 (Hardened)
  *
  * Security improvements over v2:
  *  - helmet middleware (H2 fix): X-Frame-Options, HSTS, X-Content-Type-Options,
  *    Referrer-Policy, X-DNS-Prefetch-Control
- *  - Content Security Policy tailored to CertChain (H2 fix)
+ *  - Content Security Policy tailored to BlockCert (H2 fix)
  *  - express-rate-limit on auth endpoints (H1 fix)
  *  - Strict CORS — no wildcard ngrok matching (H3 fix)
  *  - nlpPayload schema validation (H4 fix)
@@ -41,7 +41,7 @@ app.use((req, _res, next) => {
 // H2 fix: Sets X-Frame-Options, X-Content-Type-Options, HSTS,
 //         Referrer-Policy, X-DNS-Prefetch-Control, Permissions-Policy
 app.use(helmet({
-    // Content Security Policy tailored to CertChain
+    // Content Security Policy tailored to BlockCert
     contentSecurityPolicy: {
         directives: {
             defaultSrc:     ["'self'"],
@@ -201,7 +201,7 @@ function safeError(e, fallback = 'An internal error occurred.') {
 // ════════════════════════════════════════════════════════════════════════════
 app.get('/health', (_req, res) => res.json({
     status:         'ok',
-    system:         'CertChain',
+    system:         'BlockCert',
     program:        'FAMU-FCSS',
     pqCryptography: 'CRYSTALS-Dilithium3',
     timestamp:      new Date().toISOString(),
@@ -404,6 +404,35 @@ app.get('/analytics', auth.requireAuth(['institution', 'admin']), async (req, re
     }
 });
 
+
+// GET /admin/verify-alerts — hash mismatch alerts (Item 3)
+app.get('/admin/verify-alerts', auth.requireAuth(['admin']), async (req, res) => {
+    try {
+        const { contract, gateway } = await getContract(req.session.fabricID);
+        const result = await contract.evaluateTransaction('getMismatchAlerts');
+        await gateway.disconnect();
+        return res.json(JSON.parse(result.toString()));
+    } catch(e) {
+        // If chaincode not yet upgraded, return empty alerts
+        console.error({ id: req.id, route: '/admin/verify-alerts', error: e.message });
+        return res.json({ alertCount: 0, alerts: [], note: 'Chaincode upgrade pending' });
+    }
+});
+
+// GET /admin/verify-log — full verification log (Item 3)
+app.get('/admin/verify-log', auth.requireAuth(['admin', 'institution']), async (req, res) => {
+    const limit = Math.min(parseInt(req.query.limit||'50'), 200);
+    try {
+        const { contract, gateway } = await getContract(req.session.fabricID);
+        const result = await contract.evaluateTransaction('getVerificationLog', String(limit));
+        await gateway.disconnect();
+        return res.json(JSON.parse(result.toString()));
+    } catch(e) {
+        console.error({ id: req.id, route: '/admin/verify-log', error: e.message });
+        return res.json({ count: 0, entries: [], alerts: 0, note: 'Chaincode upgrade pending' });
+    }
+});
+
 // ── 404 ───────────────────────────────────────────────────────────────────────
 app.use((_req, res) => res.status(404).json({ error: 'Route not found.' }));
 
@@ -421,7 +450,7 @@ app.use((err, req, res, _next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`\n  CertChain API v3 (Hardened)  →  http://localhost:${PORT}`);
+    console.log(`\n  BlockCert API v3 (Hardened)  →  http://localhost:${PORT}`);
     console.log('  Helmet: ✓  Rate-limiting: ✓  bcrypt: ✓  Atomic writes: ✓\n');
 });
 
