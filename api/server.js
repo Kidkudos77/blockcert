@@ -1,11 +1,11 @@
 'use strict';
 /**
- * BlockCert — REST API v3 (Hardened)
+ * CertChain — REST API v3 (Hardened)
  *
  * Security improvements over v2:
  *  - helmet middleware (H2 fix): X-Frame-Options, HSTS, X-Content-Type-Options,
  *    Referrer-Policy, X-DNS-Prefetch-Control
- *  - Content Security Policy tailored to BlockCert (H2 fix)
+ *  - Content Security Policy tailored to CertChain (H2 fix)
  *  - express-rate-limit on auth endpoints (H1 fix)
  *  - Strict CORS — no wildcard ngrok matching (H3 fix)
  *  - nlpPayload schema validation (H4 fix)
@@ -41,7 +41,7 @@ app.use((req, _res, next) => {
 // H2 fix: Sets X-Frame-Options, X-Content-Type-Options, HSTS,
 //         Referrer-Policy, X-DNS-Prefetch-Control, Permissions-Policy
 app.use(helmet({
-    // Content Security Policy tailored to BlockCert
+    // Content Security Policy tailored to CertChain
     contentSecurityPolicy: {
         directives: {
             defaultSrc:     ["'self'"],
@@ -201,7 +201,7 @@ function safeError(e, fallback = 'An internal error occurred.') {
 // ════════════════════════════════════════════════════════════════════════════
 app.get('/health', (_req, res) => res.json({
     status:         'ok',
-    system:         'BlockCert',
+    system:         'CertChain',
     program:        'FAMU-FCSS',
     pqCryptography: 'CRYSTALS-Dilithium3',
     timestamp:      new Date().toISOString(),
@@ -421,7 +421,7 @@ app.use((err, req, res, _next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`\n  BlockCert API v3 (Hardened)  →  http://localhost:${PORT}`);
+    console.log(`\n  CertChain API v3 (Hardened)  →  http://localhost:${PORT}`);
     console.log('  Helmet: ✓  Rate-limiting: ✓  bcrypt: ✓  Atomic writes: ✓\n');
 });
 

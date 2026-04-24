@@ -1,6 +1,6 @@
 'use strict';
 /**
- * BlockCert — Authentication Module (Hardened v3)
+ * CertChain — Authentication Module (Hardened v3)
  *
  * Security improvements over v2:
  *  - bcrypt replaces SHA-256+static-salt (C1 fix)
@@ -76,7 +76,7 @@ function loadUsers() {
 function saveUsers(store) {
     const serialized = JSON.stringify(store, null, 2);
     // Write to a sibling temp file then atomically rename
-    const tmp = path.join(os.tmpdir(), `blockcert-users-${process.pid}-${Date.now()}.tmp`);
+    const tmp = path.join(os.tmpdir(), `certchain-users-${process.pid}-${Date.now()}.tmp`);
     fs.writeFileSync(tmp, serialized, { encoding: 'utf8', mode: 0o600 });
     fs.renameSync(tmp, USERS_FILE);  // atomic on POSIX (C2 fix)
 }

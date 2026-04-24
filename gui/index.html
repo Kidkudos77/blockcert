@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://kidkudos77.github.io https://*.ngrok-free.dev https://*.ngrok-free.app https://localhost:*; img-src 'self' data:; frame-src 'none'; object-src 'none';">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BlockCert — FAMU Cyber Defense Certificate</title>
+<title>CertChain — FAMU Cyber Defense Certificate</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
@@ -868,7 +868,7 @@ function setText(el, str) {
   <div class="auth-box">
     <div class="auth-logo">
       <div class="auth-logo-mark" aria-hidden="true">BC</div>
-      <div class="auth-logo-name">BlockCert</div>
+      <div class="auth-logo-name">CertChain</div>
       <div class="auth-logo-sub">Florida A&amp;M University · Cyber Defense Certificate</div>
     </div>
 
@@ -893,7 +893,7 @@ function setText(el, str) {
         <input type="password" id="lpw" name="password" autocomplete="current-password" placeholder="Enter your password" aria-required="true">
         <span class="field-err" id="login-err" role="alert"></span>
       </div>
-      <button class="btn btn-primary btn-full" onclick="doLogin()" aria-label="Sign in to BlockCert">Sign In</button>
+      <button class="btn btn-primary btn-full" onclick="doLogin()" aria-label="Sign in to CertChain">Sign In</button>
       <div class="div"></div>
       <p class="fs12 td" style="text-align:center">
         For demo — use password: <span class="mono" style="color:var(--text2)">student123</span>
@@ -970,12 +970,12 @@ function setText(el, str) {
 </div>
 
 <!-- ═══════════════════════ APP ═══════════════════════ -->
-<div id="app" aria-label="BlockCert Application">
+<div id="app" aria-label="CertChain Application">
   <header class="hdr">
     <div class="hlogo">
       <div class="hlogo-mark" aria-hidden="true">BC</div>
       <div class="hlogo-text">
-        <div class="hln">BlockCert</div>
+        <div class="hln">CertChain</div>
         <div class="hls">FAMU · Cyber Defense Certificate</div>
       </div>
     </div>
@@ -1004,17 +1004,17 @@ function setText(el, str) {
 const DEFAULT_API = 'http://localhost:3000';
 
 function getAPIBase() {
-  return localStorage.getItem('blockcert_api_url') || DEFAULT_API;
+  return localStorage.getItem('certchain_api_url') || DEFAULT_API;
 }
 
 function setAPIBase(url) {
-  localStorage.setItem('blockcert_api_url', url.replace(/\/$/, ''));
+  localStorage.setItem('certchain_api_url', url.replace(/\/$/, ''));
   toast('API URL updated: ' + url, '#4ADE80');
 }
 
 // Authenticated fetch helper — auto-attaches Bearer token
 async function apiFetch(path, opts = {}) {
-  const token = sessionStorage.getItem('blockcert_token');
+  const token = sessionStorage.getItem('certchain_token');
   const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
   if (token) headers['Authorization'] = 'Bearer ' + token;
   const res = await fetch(getAPIBase() + path, { ...opts, headers });
@@ -1081,7 +1081,7 @@ async function doLogin() {
     }
 
     // Store token and session
-    sessionStorage.setItem('blockcert_token', data.token);
+    sessionStorage.setItem('certchain_token', data.token);
     curRole = data.role;
     curUser = data.userID;
     curName = data.name;
@@ -1182,11 +1182,11 @@ function launchApp() {
 }
 
 async function logout() {
-  const token = sessionStorage.getItem('blockcert_token');
+  const token = sessionStorage.getItem('certchain_token');
   if (token) {
     try { await apiFetch('/auth/logout', { method:'POST' }); } catch {}
   }
-  sessionStorage.removeItem('blockcert_token');
+  sessionStorage.removeItem('certchain_token');
   curRole=null; curUser=null; curName=null;
   document.getElementById('auth').style.display = 'flex';
   document.getElementById('app').style.display = 'none';
@@ -1400,7 +1400,7 @@ function eSearch(){ return `
 function aDash(){
   const pc = pendingRegs.filter(r=>r.status==='pending').length;
   return `
-<div class="wbanner"><div><div class="wt">Admin Dashboard</div><div class="ws">BlockCert v1.0 · Full system visibility</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
+<div class="wbanner"><div><div class="wt">Admin Dashboard</div><div class="ws">CertChain v1.0 · Full system visibility</div></div><div class="wr"><div class="wrl">Admin</div><div class="wri">${esc(curUser)}</div></div></div>
 <div class="g4">
   <div class="met"><div class="ml">Credentials Issued</div><div class="mv" id="missd">0</div><div class="ms">Fabric chain</div></div>
   <div class="met"><div class="ml">Eligible Students</div><div class="mv">152</div><div class="ms">76% · 200 total</div></div>
@@ -1578,7 +1578,7 @@ function aQuantum(){ return `
     </div>
     <div class="rbox rgold" style="margin-top:12px"><div class="fs13 fw5 ta">Transparent Signing [Qin &amp; Duan, 2026]</div><div class="fs12 tm" style="margin-top:2px">Full JSON shown to institution before signature applied — prevents blind signing. 0 of 35 reviewed papers address this.</div></div>
     <div class="div"></div>
-    <div class="fg"><label class="fl" for="pqin">Credential JSON to Sign</label><textarea id="pqin" style="min-height:65px">{"credentialID":"BLOCKCERT-FAMU10001","score":0.84}</textarea></div>
+    <div class="fg"><label class="fl" for="pqin">Credential JSON to Sign</label><textarea id="pqin" style="min-height:65px">{"credentialID":"CERTCHAIN-FAMU10001","score":0.84}</textarea></div>
     <button class="btn btn-primary btn-sm" onclick="sPQ()">Sign with Dilithium3</button>
     <div id="pqout" class="rbox rinf" style="margin-top:10px" aria-live="polite"><div class="fs13 td">Click to simulate</div></div>
   </div>
@@ -1653,8 +1653,8 @@ function aHPC(){ return `
     <div class="pr"><span class="pl fs12">Fabric Deployment</span><div class="pt"><div class="pf" style="width:10%;background:#FF7B6B"></div></div><span class="pv" style="color:#FF7B6B">Pending</span></div>
     <div class="div"></div>
     <div class="fg" style="margin-bottom:0"><label class="fl">JupyterHub Setup Commands</label>
-      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:10px;font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--text2);overflow-x:auto;white-space:pre">git clone https://github.com/Kidkudos77/blockcert.git
-cd blockcert
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:10px;font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--text2);overflow-x:auto;white-space:pre">git clone https://github.com/Kidkudos77/certchain.git
+cd certchain
 pip install transformers datasets scikit-learn pqcrypto
 python3 nlp/bert_classifier.py --train --data dataset/output/sentence_labels.json --model nlp/model</div>
     </div>
@@ -1696,7 +1696,7 @@ function aSettings(){ return `
       </div>
       <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:9px;border:1px solid var(--green-bd)">
         <div class="fs12 fw5 tg">NRP Kubernetes (permanent)</div>
-        <div class="mono fs11 td">https://blockcert.nrp-nautilus.io</div>
+        <div class="mono fs11 td">https://certchain.nrp-nautilus.io</div>
         <div class="fs11 td" style="margin-top:3px">Available once namespace is provisioned</div>
       </div>
     </div>
@@ -1732,7 +1732,7 @@ async function saveApiUrl() {
 }
 
 function resetApiUrl() {
-  localStorage.removeItem('blockcert_api_url');
+  localStorage.removeItem('certchain_api_url');
   const inp = document.getElementById('api-url-input');
   if (inp) inp.value = DEFAULT_API;
   toast('Reset to localhost:3000', '#F47B20');
@@ -1776,7 +1776,7 @@ function showCpErr(msg) {
 function accountPage(){
   var rl=RDATA[curRole]?.label||'';
   var rc=curRole==='admin'?'borg':curRole==='institution'?'bok':curRole==='employer'?'bpur':'binf';
-  return '<div class="wbanner"><div><div class="wt">My Account</div><div class="ws">Manage your BlockCert credentials</div></div><div class="wr"><div class="wrl">'+esc(rl)+'</div><div class="wri">'+esc(curUser)+'</div></div></div>'
+  return '<div class="wbanner"><div><div class="wt">My Account</div><div class="ws">Manage your CertChain credentials</div></div><div class="wr"><div class="wrl">'+esc(rl)+'</div><div class="wri">'+esc(curUser)+'</div></div></div>'
     +'<div class="g2">'
     +'<div class="card"><div class="ch"><span class="ct">Change Password</span></div>'
     +'<p class="fs13 tm" style="margin-bottom:14px">Your password must be at least 8 characters. After changing, you will be signed out and asked to sign in again.</p>'
@@ -1793,7 +1793,7 @@ function accountPage(){
     +'<div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border:1px solid var(--border)"><div class="fs12 td" style="margin-bottom:3px">Role</div><div class="fs13"><span class="bdg '+rc+'">'+esc(rl)+'</span></div></div>'
     +'</div><div class="div"></div>'
     +'<div class="rbox rinf"><div class="fs13 fw5" style="color:#74BFFF">Need help with your account?</div>'
-    +'<div class="fs12 tm" style="margin-top:4px">Contact the BlockCert administrator:</div>'
+    +'<div class="fs12 tm" style="margin-top:4px">Contact the CertChain administrator:</div>'
     +'<div class="fs12" style="margin-top:6px"><span class="fw5">Javonte Carter</span><br>'
     +'<a href="mailto:javonte1.carter@famu.edu" style="color:var(--orange);text-decoration:none">javonte1.carter@famu.edu</a></div>'
     +'<div class="fs11 td" style="margin-top:6px">For account lockouts, role changes, or access issues.</div>'
@@ -1868,7 +1868,7 @@ function showR(d,id,sc,ok) {
     issuedCnt++;
     ['missd','mpqd'].forEach(mid=>{const e=document.getElementById(mid);if(e)e.textContent=issuedCnt;});
     const h=(d&&d.credHash)||Array.from({length:16},()=>Math.floor(Math.random()*16).toString(16)).join('');
-    rd.innerHTML=`<div class="rbox rok"><div class="fs14 fw6 tg">Credential Issued</div><div class="fs13 tm" style="margin-top:5px">ID: <span class="mono">BLOCKCERT-${id}-${h.substring(0,8)}</span></div><div class="fs13 tm">Score: <span class="mono ta">${sc.toFixed(4)}</span> · PQ: <span class="mono ta">Dilithium3</span></div>${!d?'<div class="fs11 td" style="margin-top:3px">Demo mode — API offline</div>':''}</div>`;
+    rd.innerHTML=`<div class="rbox rok"><div class="fs14 fw6 tg">Credential Issued</div><div class="fs13 tm" style="margin-top:5px">ID: <span class="mono">CERTCHAIN-${id}-${h.substring(0,8)}</span></div><div class="fs13 tm">Score: <span class="mono ta">${sc.toFixed(4)}</span> · PQ: <span class="mono ta">Dilithium3</span></div>${!d?'<div class="fs11 td" style="margin-top:3px">Demo mode — API offline</div>':''}</div>`;
     addA(id,'ISSUED',sc);
     toast(`✓ Credential issued to ${id}`, 'var(--green-light)');
   } else {
@@ -1913,7 +1913,7 @@ function demoC() {
 }
 
 function demoCred2(h) {
-  rCred({isValid:true,identifier:'BLOCKCERT-FAMU10001-ea9c7c9e',credentialHash:h,educationalProgram:'FAMU-FCSS',recognizedBy:'famu.edu',competencyRequired:['CIS4385C','CIS4360','CIS4361'],eligibilityScore:0.8399,dateCreated:new Date().toISOString(),postQuantumSigned:true,pqAlgorithm:'CRYSTALS-Dilithium3'});
+  rCred({isValid:true,identifier:'CERTCHAIN-FAMU10001-ea9c7c9e',credentialHash:h,educationalProgram:'FAMU-FCSS',recognizedBy:'famu.edu',competencyRequired:['CIS4385C','CIS4360','CIS4361'],eligibilityScore:0.8399,dateCreated:new Date().toISOString(),postQuantumSigned:true,pqAlgorithm:'CRYSTALS-Dilithium3'});
 }
 
 function rCred(d) {
@@ -1921,7 +1921,7 @@ function rCred(d) {
   const ok=d.isValid!==false;
   el.innerHTML=`<div class="ccard" style="margin-top:14px">
     <div class="cch">
-      <div><div class="fs14 fw6">${d.identifier||'BlockCert Credential'}</div><div class="fs13 tm">FAMU · Cyber Defense Certificate</div></div>
+      <div><div class="fs14 fw6">${d.identifier||'CertChain Credential'}</div><div class="fs13 tm">FAMU · Cyber Defense Certificate</div></div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
         <span class="bdg ${ok?'bok':'berr'}" aria-label="Credential status ${ok?'valid':'invalid'}">${ok?'VALID':'INVALID'}</span>
         ${d.postQuantumSigned?'<span class="bdg borg">PQ Signed</span>':''}
@@ -2002,7 +2002,7 @@ function demoStud() {
   const hashVal='ea9c7c9e0f54a45acb80847c558ada7a6ff0336ceb7617f1a82ebb4d19a64120';
   if(document.getElementById('shash'))document.getElementById('shash').value=hashVal;
   el.innerHTML='<div class="ccard"><div class="cch">'
-    +'<div><div class="fs14 fw6">BLOCKCERT-'+esc(curUser)+'-ea9c7c9e</div>'
+    +'<div><div class="fs14 fw6">CERTCHAIN-'+esc(curUser)+'-ea9c7c9e</div>'
     +'<div class="fs13 tm">FAMU · Cyber Defense Certificate</div></div>'
     +'<div style="display:flex;gap:5px"><span class="bdg bok">VALID</span>'
     +'<span class="bdg borg">PQ Signed</span></div></div>'

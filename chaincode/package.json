@@ -1,7 +1,7 @@
 {
-  "name": "blockcert",
+  "name": "certchain",
   "version": "1.0.0",
-  "main": "blockcert.js",
+  "main": "certchain.js",
   "scripts": {
     "start": "fabric-chaincode-node start"
   },

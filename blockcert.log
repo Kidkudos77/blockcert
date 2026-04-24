@@ -1,0 +1,316 @@
+BlockCert API → http://localhost:3000
+Routes: /health | POST /issue | GET /verify/:hash | GET /student/:id | POST /revoke | GET /analytics
+nohup: ignoring input
+BlockCert API → http://localhost:3000
+Routes: /health | POST /issue | GET /verify/:hash | GET /student/:id | POST /revoke | GET /analytics
+nohup: ignoring input
+BlockCert API → http://localhost:3000
+Routes: /health | POST /issue | GET /verify/:hash | GET /student/:id | POST /revoke | GET /analytics
+nohup: ignoring input
+
+  BlockCert API v2  →  http://localhost:3000
+  POST /auth/login  |  POST /auth/register
+  GET  /health      |  POST /issue
+
+[2026-04-16T23:20:10.224Z] POST /auth/login
+[2026-04-17T00:05:23.037Z] POST /auth/login
+[2026-04-17T00:10:23.546Z] POST /auth/logout
+[2026-04-17T00:13:54.289Z] POST /auth/login
+[2026-04-17T00:15:35.352Z] POST /auth/logout
+nohup: ignoring input
+
+  BlockCert API v2  →  http://localhost:3000
+  POST /auth/login  |  POST /auth/register
+  GET  /health      |  POST /issue
+
+[2026-04-17T00:18:14.508Z] GET /health
+[2026-04-17T00:18:27.774Z] POST /auth/logout
+[2026-04-17T00:18:51.727Z] POST /auth/login
+[2026-04-17T00:20:06.544Z] GET /health
+[2026-04-17T00:20:22.656Z] GET /
+[2026-04-17T00:21:11.774Z] GET /health
+[2026-04-17T00:22:12.946Z] GET /
+[2026-04-17T00:22:15.264Z] GET /health
+[2026-04-17T00:24:23.887Z] GET /admin/users
+[2026-04-17T00:39:17.557Z] POST /auth/login
+[2026-04-17T00:39:26.814Z] GET /admin/users
+[2026-04-17T00:39:49.336Z] GET /admin/users
+[2026-04-17T01:19:10.278Z] POST /auth/login
+[2026-04-17T01:19:10.429Z] GET /health
+[2026-04-17T01:19:19.172Z] GET /admin/users
+[0;34mUsing docker and docker compose[0m
+[0;34mCreating channel 'blockcertchannel'.[0m
+[0;34mIf network is not up, starting nodes with CLI timeout of '5' tries and CLI delay of '3' seconds and using database 'leveldb [0m
+[0;34mBringing up network[0m
+[0;34mLOCAL_VERSION=v2.5.0[0m
+[0;34mDOCKER_IMAGE_VERSION=v2.5.0[0m
+[0;34mCA_LOCAL_VERSION=v1.5.7[0m
+[0;34mCA_DOCKER_IMAGE_VERSION=v1.5.18[0m
+[1;33mLocal fabric-ca binaries and docker images are out of sync. This may cause problems.[0m
+time="2026-04-17T21:09:02Z" level=warning msg="Found orphan containers ([ca_org2 ca_org1 ca_orderer]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container peer0.org1.example.com Recreate 
+ Container peer0.org2.example.com Recreate 
+ Container peer0.org1.example.com Recreated 
+ Container peer0.org2.example.com Recreated 
+ Container orderer.example.com Starting 
+ Container peer0.org1.example.com Starting 
+ Container peer0.org2.example.com Starting 
+ Container peer0.org1.example.com Started 
+ Container peer0.org2.example.com Started 
+ Container orderer.example.com Started 
+CONTAINER ID   IMAGE                                                                                                                                                                        COMMAND                  CREATED        STATUS                      PORTS                                                                                                                                   NAMES
+4b44c89bd7a9   hyperledger/fabric-peer:latest                                                                                                                                               "peer node start"        1 second ago   Up Less than a second       0.0.0.0:7051->7051/tcp, [::]:7051->7051/tcp, 0.0.0.0:9444->9444/tcp, [::]:9444->9444/tcp                                                peer0.org1.example.com
+79fc3c4a4c6b   hyperledger/fabric-peer:latest                                                                                                                                               "peer node start"        1 second ago   Up Less than a second       0.0.0.0:9051->9051/tcp, [::]:9051->9051/tcp, 7051/tcp, 0.0.0.0:9445->9445/tcp, [::]:9445->9445/tcp                                      peer0.org2.example.com
+a3b00c37cfbb   dev-peer0.org1.example.com-blockcert_1.0-9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c-2c27f4e29b194c88b82b767bd12c42834cf2931d12bb1254f6010f83bb0d9aab   "docker-entrypoint.s…"   22 hours ago   Exited (0) 18 hours ago                                                                                                                                             dev-peer0.org1.example.com-blockcert_1.0-9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c
+3d7490fc55f0   dev-peer0.org2.example.com-blockcert_1.0-9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c-e384912d9f1d1a0c07cc38ba722464a3f1257c388c403404f923cac154ceabed   "docker-entrypoint.s…"   22 hours ago   Exited (0) 18 hours ago                                                                                                                                             dev-peer0.org2.example.com-blockcert_1.0-9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c
+987b45791e45   dae182c7e4c7                                                                                                                                                                 "docker-entrypoint.s…"   22 hours ago   Created                                                                                                                                                             flamboyant_hawking
+85a2488794b6   285327f60fbf                                                                                                                                                                 "docker-entrypoint.s…"   22 hours ago   Created                                                                                                                                                             dazzling_edison
+f340c41db1c5   56f15de20d08                                                                                                                                                                 "docker-entrypoint.s…"   22 hours ago   Created                                                                                                                                                             priceless_matsumoto
+f71aa6e05cd9   af6278ad1c92                                                                                                                                                                 "docker-entrypoint.s…"   22 hours ago   Created                                                                                                                                                             intelligent_pike
+4168126bcb78   hyperledger/fabric-orderer:latest                                                                                                                                            "orderer"                23 hours ago   Up Less than a second       0.0.0.0:7050->7050/tcp, [::]:7050->7050/tcp, 0.0.0.0:7053->7053/tcp, [::]:7053->7053/tcp, 0.0.0.0:9443->9443/tcp, [::]:9443->9443/tcp   orderer.example.com
+1b7db9469208   hyperledger/fabric-ca:latest                                                                                                                                                 "sh -c 'fabric-ca-se…"   23 hours ago   Exited (137) 18 hours ago                                                                                                                                           ca_org2
+309f26efaa79   hyperledger/fabric-ca:latest                                                                                                                                                 "sh -c 'fabric-ca-se…"   23 hours ago   Exited (137) 18 hours ago                                                                                                                                           ca_org1
+638fd1cfb3cd   hyperledger/fabric-ca:latest                                                                                                                                                 "sh -c 'fabric-ca-se…"   23 hours ago   Exited (137) 18 hours ago                                                                                                                                           ca_orderer
+[0;34mUsing docker and docker compose[0m
+[0;34mGenerating channel genesis block 'blockcertchannel.block'[0m
+[0;34mUsing organization 1[0m
+/home/vboxuser/fabric-samples/test-network/../bin/configtxgen
++ '[' 0 -eq 1 ']'
++ configtxgen -profile ChannelUsingRaft -outputBlock ./channel-artifacts/blockcertchannel.block -channelID blockcertchannel
+[34m2026-04-17 21:09:03.419 UTC 0001 INFO[0m [common.tools.configtxgen] [34;1mmain[0m -> Loading configuration
+[34m2026-04-17 21:09:03.429 UTC 0002 INFO[0m [common.tools.configtxgen.localconfig] [34;1mcompleteInitialization[0m -> orderer type: etcdraft
+[34m2026-04-17 21:09:03.429 UTC 0003 INFO[0m [common.tools.configtxgen.localconfig] [34;1mcompleteInitialization[0m -> Orderer.EtcdRaft.Options unset, setting to tick_interval:"500ms" election_tick:10 heartbeat_tick:1 max_inflight_blocks:5 snapshot_interval_size:16777216 
+[34m2026-04-17 21:09:03.429 UTC 0004 INFO[0m [common.tools.configtxgen.localconfig] [34;1mLoad[0m -> Loaded configuration: /home/vboxuser/fabric-samples/test-network/configtx/configtx.yaml
+[34m2026-04-17 21:09:03.442 UTC 0005 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Generating genesis block
+[34m2026-04-17 21:09:03.442 UTC 0006 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Creating application channel genesis block
+[34m2026-04-17 21:09:03.443 UTC 0007 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Writing genesis block
++ res=0
+[0;34mCreating channel blockcertchannel[0m
+[0;34mAdding orderers[0m
++ . scripts/orderer.sh blockcertchannel
++ '[' 0 -eq 1 ']'
++ res=0
+Committed chaincode definition for chaincode 'blockcert' on channel 'blockcertchannel':
+Version: 1.0, Sequence: 3, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [Org1MSP: true, Org2MSP: true]
+Status: 405
+{
+	"error": "cannot join: channel already exists"
+}
+
+[0;32mChannel 'blockcertchannel' created[0m
+[0;34mJoining org1 peer to the channel...[0m
+[0;34mUsing organization 1[0m
++ peer channel join -b ./channel-artifacts/blockcertchannel.block
++ res=1
++ peer channel join -b ./channel-artifacts/blockcertchannel.block
++ res=1
++ peer channel join -b ./channel-artifacts/blockcertchannel.block
++ res=1
++ peer channel join -b ./channel-artifacts/blockcertchannel.block
++ res=1
+[34m2026-04-17 21:09:18.850 UTC 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+Error: proposal failed (err: bad proposal response 500: cannot create ledger from genesis block: ledger [blockcertchannel] already exists with state [ACTIVE])
+[0;31mAfter 5 attempts, peer0.org1 has failed to join channel 'blockcertchannel' [0m
+[0;34mUsing docker and docker compose[0m
+[0;34mdeploying chaincode on channel 'blockcertchannel'[0m
+executing with the following
+- CHANNEL_NAME: [0;32mblockcertchannel[0m
+- CC_NAME: [0;32mblockcert[0m
+- CC_SRC_PATH: [0;32m/home/vboxuser/blockcert/chaincode/[0m
+- CC_SRC_LANGUAGE: [0;32mjavascript[0m
+- CC_VERSION: [0;32m1.0[0m
+- CC_SEQUENCE: [0;32mauto[0m
+- CC_END_POLICY: [0;32mNA[0m
+- CC_COLL_CONFIG: [0;32mNA[0m
+- CC_INIT_FCN: [0;32mNA[0m
+- DELAY: [0;32m3[0m
+- MAX_RETRY: [0;32m5[0m
+- VERBOSE: [0;32mfalse[0m
+executing with the following
+- CC_NAME: [0;32mblockcert[0m
+- CC_SRC_PATH: [0;32m/home/vboxuser/blockcert/chaincode/[0m
+- CC_SRC_LANGUAGE: [0;32mjavascript[0m
+- CC_VERSION: [0;32m1.0[0m
++ '[' false = true ']'
++ peer lifecycle chaincode package blockcert.tar.gz --path /home/vboxuser/blockcert/chaincode/ --lang node --label blockcert_1.0
++ res=0
+[0;32mChaincode is packaged[0m
+[0;34mInstalling chaincode on peer0.org1...[0m
+[0;34mUsing organization 1[0m
++ peer lifecycle chaincode queryinstalled --output json
++ jq -r 'try (.installed_chaincodes[].package_id)'
++ grep '^blockcert_1.0:9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c$'
++ test 0 -ne 0
+blockcert_1.0:9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c
+scripts/envVar.sh: line 86: [: too many arguments
+[0;32mChaincode is installed on peer0.org1[0m
+[0;34mInstall chaincode on peer0.org2...[0m
+[0;34mUsing organization 2[0m
++ peer lifecycle chaincode queryinstalled --output json
++ jq -r 'try (.installed_chaincodes[].package_id)'
++ grep '^blockcert_1.0:9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c$'
++ test 0 -ne 0
+blockcert_1.0:9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c
+scripts/envVar.sh: line 86: [: too many arguments
+[0;32mChaincode is installed on peer0.org2[0m
+++ peer lifecycle chaincode querycommitted --channelID blockcertchannel --name blockcert
+++ sed -n '/Version:/{s/.*Sequence: //; s/, Endorsement Plugin:.*$//; p;}'
++ COMMITTED_CC_SEQUENCE=3
++ res=0
+++ peer lifecycle chaincode queryapproved --channelID blockcertchannel --name blockcert
+++ sed -n '/sequence:/{s/^sequence: //; s/, version:.*$//; p;}'
++ APPROVED_CC_SEQUENCE=3
++ res=0
+[0;34mUsing organization 1[0m
++ peer lifecycle chaincode queryinstalled --output json
++ jq -r 'try (.installed_chaincodes[].package_id)'
++ grep '^blockcert_1.0:9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c$'
++ res=0
+blockcert_1.0:9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c
+[0;32mQuery installed successful on peer0.org1 on channel[0m
+[0;34mUsing organization 1[0m
++ peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile /home/vboxuser/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem --channelID blockcertchannel --name blockcert --version 1.0 --package-id blockcert_1.0:9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c --sequence 4
++ res=0
+[34m2026-04-17 21:09:21.909 UTC 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [7e430ae3e744126490f30bea9456e66346a66c0e4fbf415f1e5096622a7d8c17] committed with status (VALID) at localhost:7051
+[0;32mChaincode definition approved on peer0.org1 on channel 'blockcertchannel'[0m
+[0;34mUsing organization 1[0m
+[0;34mChecking the commit readiness of the chaincode definition on peer0.org1 on channel 'blockcertchannel'...[0m
+[0;34mAttempting to check the commit readiness of the chaincode definition on peer0.org1, Retry after 3 seconds.[0m
++ peer lifecycle chaincode checkcommitreadiness --channelID blockcertchannel --name blockcert --version 1.0 --sequence 4 --output json
++ res=0
+{
+	"approvals": {
+		"Org1MSP": true,
+		"Org2MSP": false
+	}
+}
+[0;34mChecking the commit readiness of the chaincode definition successful on peer0.org1 on channel 'blockcertchannel'[0m
+[0;34mUsing organization 2[0m
+[0;34mChecking the commit readiness of the chaincode definition on peer0.org2 on channel 'blockcertchannel'...[0m
+[0;34mAttempting to check the commit readiness of the chaincode definition on peer0.org2, Retry after 3 seconds.[0m
++ peer lifecycle chaincode checkcommitreadiness --channelID blockcertchannel --name blockcert --version 1.0 --sequence 4 --output json
++ res=0
+{
+	"approvals": {
+		"Org1MSP": true,
+		"Org2MSP": false
+	}
+}
+[0;34mChecking the commit readiness of the chaincode definition successful on peer0.org2 on channel 'blockcertchannel'[0m
+[0;34mUsing organization 2[0m
++ peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile /home/vboxuser/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem --channelID blockcertchannel --name blockcert --version 1.0 --package-id blockcert_1.0:9306afdc3c238082493ee6d3e97f0f016c363fdc1830f98898ad2dc99d70e52c --sequence 4
++ res=0
+[34m2026-04-17 21:09:30.169 UTC 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [5b8096a1d4be5d4acb2df527430eb3c72b414293d6856c11ceda3c15baba709a] committed with status (VALID) at localhost:9051
+[0;32mChaincode definition approved on peer0.org2 on channel 'blockcertchannel'[0m
+[0;34mUsing organization 1[0m
+[0;34mChecking the commit readiness of the chaincode definition on peer0.org1 on channel 'blockcertchannel'...[0m
+[0;34mAttempting to check the commit readiness of the chaincode definition on peer0.org1, Retry after 3 seconds.[0m
++ peer lifecycle chaincode checkcommitreadiness --channelID blockcertchannel --name blockcert --version 1.0 --sequence 4 --output json
++ res=0
+{
+	"approvals": {
+		"Org1MSP": true,
+		"Org2MSP": true
+	}
+}
+[0;34mChecking the commit readiness of the chaincode definition successful on peer0.org1 on channel 'blockcertchannel'[0m
+[0;34mUsing organization 2[0m
+[0;34mChecking the commit readiness of the chaincode definition on peer0.org2 on channel 'blockcertchannel'...[0m
+[0;34mAttempting to check the commit readiness of the chaincode definition on peer0.org2, Retry after 3 seconds.[0m
++ peer lifecycle chaincode checkcommitreadiness --channelID blockcertchannel --name blockcert --version 1.0 --sequence 4 --output json
++ res=0
+{
+	"approvals": {
+		"Org1MSP": true,
+		"Org2MSP": true
+	}
+}
+[0;34mChecking the commit readiness of the chaincode definition successful on peer0.org2 on channel 'blockcertchannel'[0m
+[0;34mUsing organization 1[0m
+[0;34mUsing organization 2[0m
++ peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile /home/vboxuser/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem --channelID blockcertchannel --name blockcert --peerAddresses localhost:7051 --tlsRootCertFiles /home/vboxuser/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem --peerAddresses localhost:9051 --tlsRootCertFiles /home/vboxuser/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem --version 1.0 --sequence 4
++ res=0
+[34m2026-04-17 21:09:38.428 UTC 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [34ba24cebc3af04c281680fe697a818e5555ce5b8b03037161ada6b0b4db0a8d] committed with status (VALID) at localhost:9051
+[34m2026-04-17 21:09:38.430 UTC 0002 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [34ba24cebc3af04c281680fe697a818e5555ce5b8b03037161ada6b0b4db0a8d] committed with status (VALID) at localhost:7051
+[0;32mChaincode definition committed on channel 'blockcertchannel'[0m
+[0;34mUsing organization 1[0m
+[0;34mQuerying chaincode definition on peer0.org1 on channel 'blockcertchannel'...[0m
+[0;34mAttempting to Query committed status on peer0.org1, Retry after 3 seconds.[0m
++ peer lifecycle chaincode querycommitted --channelID blockcertchannel --name blockcert
++ res=0
+Committed chaincode definition for chaincode 'blockcert' on channel 'blockcertchannel':
+Version: 1.0, Sequence: 4, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [Org1MSP: true, Org2MSP: true]
+[0;32mQuery chaincode definition successful on peer0.org1 on channel 'blockcertchannel'[0m
+[0;34mUsing organization 2[0m
+[0;34mQuerying chaincode definition on peer0.org2 on channel 'blockcertchannel'...[0m
+[0;34mAttempting to Query committed status on peer0.org2, Retry after 3 seconds.[0m
++ peer lifecycle chaincode querycommitted --channelID blockcertchannel --name blockcert
++ res=0
+Committed chaincode definition for chaincode 'blockcert' on channel 'blockcertchannel':
+Version: 1.0, Sequence: 4, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [Org1MSP: true, Org2MSP: true]
+[0;32mQuery chaincode definition successful on peer0.org2 on channel 'blockcertchannel'[0m
+[0;34mChaincode initialization is not required[0m
+
+  BlockCert API v2  →  http://localhost:3000
+  POST /auth/login  |  POST /auth/register
+  GET  /health      |  POST /issue
+
+[2026-04-17T21:09:48.596Z] GET /health
+nohup: ignoring input
+
+  BlockCert API v3 (Hardened)  →  http://localhost:3000
+  Helmet: ✓  Rate-limiting: ✓  bcrypt: ✓  Atomic writes: ✓
+
+{"t":"2026-04-17T21:50:12.660Z","id":"9e73485dd35da345","method":"GET","path":"/health","ip":"::1"}
+{"t":"2026-04-17T21:50:22.182Z","id":"409e7568a626ba55","method":"POST","path":"/auth/login","ip":"::1"}
+{"t":"2026-04-17T22:34:19.532Z","id":"edc2b1b9a7275598","method":"GET","path":"/health","ip":"::1"}
+{"t":"2026-04-17T22:35:34.578Z","id":"2df05e314410eb91","method":"POST","path":"/auth/login","ip":"168.223.90.176"}
+nohup: ignoring input
+
+  BlockCert API v3 (Hardened)  →  http://localhost:3000
+  Helmet: ✓  Rate-limiting: ✓  bcrypt: ✓  Atomic writes: ✓
+
+{"t":"2026-04-17T22:36:39.314Z","id":"222d329d45ea069b","method":"GET","path":"/health","ip":"::1"}
+{"t":"2026-04-17T22:37:26.703Z","id":"cda8c89d2c77b71b","method":"GET","path":"/health","ip":"::1"}
+ValidationError: The 'X-Forwarded-For' header is set but the Express 'trust proxy' setting is false (default). This could indicate a misconfiguration which would prevent express-rate-limit from accurately identifying users. See https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/ for more information.
+    at Object.xForwardedForHeader (/home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:371:13)
+    at wrappedValidations.<computed> [as xForwardedForHeader] (/home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:685:22)
+    at Object.keyGenerator (/home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:788:20)
+    at /home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:852:32
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:830:5 {
+  code: 'ERR_ERL_UNEXPECTED_X_FORWARDED_FOR',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/'
+}
+{"t":"2026-04-17T22:38:09.341Z","id":"ed73f97c1e19ef3c","method":"POST","path":"/auth/login","ip":"168.223.90.176"}
+{"t":"2026-04-17T22:38:09.761Z","id":"04fd268a2aa8c207","method":"GET","path":"/health","ip":"168.223.90.176"}
+{"t":"2026-04-17T22:59:14.029Z","id":"3cdb30b91fab4da0","method":"POST","path":"/auth/login","ip":"168.223.90.176"}
+{"t":"2026-04-17T22:59:14.440Z","id":"31918bd1b02cc75c","method":"GET","path":"/health","ip":"168.223.90.176"}
+
+  BlockCert API v3 (Hardened)  →  http://localhost:3000
+  Helmet: ✓  Rate-limiting: ✓  bcrypt: ✓  Atomic writes: ✓
+
+{"t":"2026-04-24T20:51:09.754Z","id":"87e1e90006f32459","method":"GET","path":"/health","ip":"::1"}
+
+  BlockCert API v3 (Hardened)  →  http://localhost:3000
+  Helmet: ✓  Rate-limiting: ✓  bcrypt: ✓  Atomic writes: ✓
+
+{"t":"2026-04-24T20:51:23.747Z","id":"b823af3c4dfd40e4","method":"GET","path":"/health","ip":"::1"}
+
+  BlockCert API v3 (Hardened)  →  http://localhost:3000
+  Helmet: ✓  Rate-limiting: ✓  bcrypt: ✓  Atomic writes: ✓
+
+{"t":"2026-04-24T21:05:39.364Z","id":"61c99b59582a01d0","method":"GET","path":"/health","ip":"::1"}
+{"t":"2026-04-24T22:17:13.288Z","id":"325f001f932d299d","method":"GET","path":"/health","ip":"168.223.90.176"}
+ValidationError: The 'X-Forwarded-For' header is set but the Express 'trust proxy' setting is false (default). This could indicate a misconfiguration which would prevent express-rate-limit from accurately identifying users. See https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/ for more information.
+    at Object.xForwardedForHeader (/home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:371:13)
+    at wrappedValidations.<computed> [as xForwardedForHeader] (/home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:685:22)
+    at Object.keyGenerator (/home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:788:20)
+    at /home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:852:32
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /home/vboxuser/blockcert/node_modules/express-rate-limit/dist/index.cjs:830:5 {
+  code: 'ERR_ERL_UNEXPECTED_X_FORWARDED_FOR',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/'
+}
+{"t":"2026-04-24T22:18:50.140Z","id":"f8012c29ab68a798","method":"POST","path":"/auth/login","ip":"168.223.90.176"}
+{"t":"2026-04-24T22:18:50.536Z","id":"76654765e6766481","method":"GET","path":"/health","ip":"168.223.90.176"}

@@ -1,6 +1,6 @@
 'use strict';
 /**
- * BlockCert — Wallet & Identity Manager
+ * CertChain — Wallet & Identity Manager
  * Role embedded in X.509 certificate → read by chaincode _assertRole()
  * Roles: admin | institution | student | verifier
  */
@@ -11,8 +11,8 @@ const path                 = require('path');
 
 const WALLET_DIR   = path.join(__dirname, '..', 'wallet', 'store');
 const CONN_PROFILE = path.join(__dirname, '..', 'config', 'connection.json');
-const CHANNEL      = 'blockcertchannel';
-const CHAINCODE    = 'blockcert';
+const CHANNEL      = 'certchainchannel';
+const CHAINCODE    = 'certchain';
 const MSP_ID       = 'Org1MSP';
 const CA_HOST      = 'ca.org1.example.com';
 

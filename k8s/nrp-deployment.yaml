@@ -1,14 +1,14 @@
-# BlockCert — Kubernetes Manifests for NRP (Nautilus HyperCluster)
-# Apply with: kubectl apply -f k8s/ -n blockcert
-# Create namespace first: kubectl create namespace blockcert
+# CertChain — Kubernetes Manifests for NRP (Nautilus HyperCluster)
+# Apply with: kubectl apply -f k8s/ -n certchain
+# Create namespace first: kubectl create namespace certchain
 ---
 # ── Namespace ─────────────────────────────────────────────────────────────────
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: blockcert
+  name: certchain
   labels:
-    app: blockcert
+    app: certchain
     institution: famu
     program: fcss
 ---
@@ -16,36 +16,36 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: blockcert-config
-  namespace: blockcert
+  name: certchain-config
+  namespace: certchain
 data:
-  BLOCKCERT_API:    "http://blockcert-api-service:3000"
-  BLOCKCERT_CALLER: "famu-institution"
+  CERTCHAIN_API:    "http://certchain-api-service:3000"
+  CERTCHAIN_CALLER: "famu-institution"
   BERT_MODEL_DIR:   "/app/nlp/model"
-  FABRIC_CHANNEL:   "blockcertchannel"
-  FABRIC_CHAINCODE: "blockcert"
+  FABRIC_CHANNEL:   "certchainchannel"
+  FABRIC_CHAINCODE: "certchain"
   PORT:             "3000"
 ---
-# ── BlockCert API Deployment ──────────────────────────────────────────────────
+# ── CertChain API Deployment ──────────────────────────────────────────────────
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blockcert-api
-  namespace: blockcert
+  name: certchain-api
+  namespace: certchain
   labels:
-    app: blockcert-api
+    app: certchain-api
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: blockcert-api
+      app: certchain-api
   template:
     metadata:
       labels:
-        app: blockcert-api
+        app: certchain-api
     spec:
       containers:
-        - name: blockcert-api
+        - name: certchain-api
           image: node:18-alpine
           workingDir: /app
           command: ["node", "api/server.js"]
@@ -53,7 +53,7 @@ spec:
             - containerPort: 3000
           envFrom:
             - configMapRef:
-                name: blockcert-config
+                name: certchain-config
           volumeMounts:
             - name: app-code
               mountPath: /app
@@ -75,20 +75,20 @@ spec:
       volumes:
         - name: app-code
           configMap:
-            name: blockcert-config
+            name: certchain-config
         - name: wallet-store
           persistentVolumeClaim:
             claimName: wallet-pvc
 ---
-# ── BlockCert API Service ─────────────────────────────────────────────────────
+# ── CertChain API Service ─────────────────────────────────────────────────────
 apiVersion: v1
 kind: Service
 metadata:
-  name: blockcert-api-service
-  namespace: blockcert
+  name: certchain-api-service
+  namespace: certchain
 spec:
   selector:
-    app: blockcert-api
+    app: certchain-api
   ports:
     - protocol: TCP
       port: 3000
@@ -99,17 +99,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blockcert-ipfs
-  namespace: blockcert
+  name: certchain-ipfs
+  namespace: certchain
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: blockcert-ipfs
+      app: certchain-ipfs
   template:
     metadata:
       labels:
-        app: blockcert-ipfs
+        app: certchain-ipfs
     spec:
       containers:
         - name: ipfs
@@ -137,11 +137,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: blockcert-ipfs-service
-  namespace: blockcert
+  name: certchain-ipfs-service
+  namespace: certchain
 spec:
   selector:
-    app: blockcert-ipfs
+    app: certchain-ipfs
   ports:
     - name: api
       port: 5001
@@ -154,7 +154,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: bert-training-job
-  namespace: blockcert
+  namespace: certchain
 spec:
   template:
     spec:
@@ -194,7 +194,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: wallet-pvc
-  namespace: blockcert
+  namespace: certchain
 spec:
   accessModes: [ "ReadWriteOnce" ]
   resources:
@@ -205,7 +205,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ipfs-pvc
-  namespace: blockcert
+  namespace: certchain
 spec:
   accessModes: [ "ReadWriteOnce" ]
   resources:
@@ -216,7 +216,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: model-pvc
-  namespace: blockcert
+  namespace: certchain
 spec:
   accessModes: [ "ReadWriteOnce" ]
   resources:

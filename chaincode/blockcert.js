@@ -1,6 +1,6 @@
 'use strict';
 /**
- * BlockCert Chaincode — Hyperledger Fabric Smart Contract
+ * CertChain Chaincode — Hyperledger Fabric Smart Contract
  * =========================================================
  * FAMU FCSS Micro-Credentialing System — Final Version
  *
@@ -28,7 +28,7 @@ const W1=0.40, W2=0.40, W3=0.20;
 const THRESHOLD    = 0.70;
 const ROLES        = {ADMIN:'admin',INSTITUTION:'institution',STUDENT:'student',VERIFIER:'verifier'};
 
-class BlockCert extends Contract {
+class CertChain extends Contract {
 
     // ── Init ──────────────────────────────────────────────────────────────────
     async initLedger(ctx) {
@@ -87,7 +87,7 @@ class BlockCert extends Contract {
             return JSON.stringify({ success:false, reason:`Score ${scoring.score} below threshold ${THRESHOLD}.`, scoring });
         }
 
-        const credentialID = `BLOCKCERT-${studentID}-${ctx.stub.getTxID().substring(0,8)}`;
+        const credentialID = `CERTCHAIN-${studentID}-${ctx.stub.getTxID().substring(0,8)}`;
         const issuedAt     = new Date().toISOString();
 
         const credential = {
@@ -272,4 +272,4 @@ class BlockCert extends Contract {
     }
 }
 
-module.exports = BlockCert;
+module.exports = CertChain;

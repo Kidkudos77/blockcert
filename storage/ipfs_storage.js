@@ -1,5 +1,5 @@
 'use strict';
-/** BlockCert — IPFS Off-Chain Storage
+/** CertChain — IPFS Off-Chain Storage
  *  Full document → IPFS. Only SHA-256 hash → ledger.
  *  Integrity verified by re-hashing on retrieval.
  */
