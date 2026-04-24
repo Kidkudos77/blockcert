@@ -450,7 +450,7 @@ app.use((err, req, res, _next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`\n  BlockCert API v3 (Hardened)  →  http://localhost:${PORT}`);
+    console.log(`\n  CertChain API v3 (Hardened)  →  http://localhost:${PORT}`);
     console.log('  Helmet: ✓  Rate-limiting: ✓  bcrypt: ✓  Atomic writes: ✓\n');
 });
 
