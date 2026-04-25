@@ -33,7 +33,7 @@ async function enrollAdmin() {
     const ca     = new FabricCA(caInfo.url, { trustedRoots:caInfo.tlsCACerts.pem, verify:false }, caInfo.caName);
     const enroll = await ca.enroll({ enrollmentID:'admin', enrollmentSecret:'adminpw' });
     await wallet.put('admin', {
-        credentials: { certificate:enroll.certificate, privateKey:enroll.key.toBytes() },
+        credentials: { certificate:enroll.certificate, privateKey:enroll.key.toBytes() }, attrs: [{name:'role', value:'admin', ecert:true}],
         mspId:MSP_ID, type:'X.509'
     });
     console.log('Admin enrolled.');
@@ -62,7 +62,7 @@ async function registerUser({ userID, role, affiliation='org1.department1' }) {
         attr_reqs:[{ name:'role', optional:false }],
     });
     await wallet.put(userID, {
-        credentials: { certificate:enroll.certificate, privateKey:enroll.key.toBytes() },
+        credentials: { certificate:enroll.certificate, privateKey:enroll.key.toBytes() }, attrs: [{name:'role', value:'admin', ecert:true}],
         mspId:MSP_ID, type:'X.509'
     });
     console.log(`Enrolled ${userID} (role: ${role})`);

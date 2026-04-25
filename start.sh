@@ -3,11 +3,11 @@ export DOCKER_BUILDKIT=0
 export PATH="$HOME/fabric-samples/bin:$PATH"
 export FABRIC_CFG_PATH="$HOME/fabric-samples/test-network/../config/"
 
-BLOCKCERT_DIR="$HOME/blockcert"
+BLOCKCERT_DIR="$HOME/certchain"
 FABRIC_DIR="$HOME/fabric-samples/test-network"
-CHANNEL="blockcertchannel"
+CHANNEL="certchainchannel"
 
-echo "=== BlockCert Startup ==="
+echo "=== CertChain Startup ==="
 
 # Step 1 - Check/start Fabric
 cd "$FABRIC_DIR"
@@ -17,9 +17,9 @@ if [ -z "$RUNNING" ]; then
   echo "[1/5] Starting Fabric network..."
   docker pull hyperledger/fabric-peer:2.5.0 --quiet 2>/dev/null
   docker tag hyperledger/fabric-peer:2.5.0 hyperledger/fabric-peer:latest 2>/dev/null
-  ./network.sh up createChannel -c $CHANNEL -ca >> "$BLOCKCERT_DIR/blockcert.log" 2>&1
+  ./network.sh up createChannel -c $CHANNEL -ca >> "$BLOCKCERT_DIR/certchain.log" 2>&1
   echo "[2/5] Deploying chaincode..."
-  ./network.sh deployCC -ccn blockcert -ccp "$BLOCKCERT_DIR/chaincode/" -ccl javascript -c $CHANNEL >> "$BLOCKCERT_DIR/blockcert.log" 2>&1
+  ./network.sh deployCC -ccn certchain -ccp "$BLOCKCERT_DIR/chaincode/" -ccl javascript -c $CHANNEL >> "$BLOCKCERT_DIR/certchain.log" 2>&1
   echo "[3/5] Copying connection profile..."
   cp organizations/peerOrganizations/org1.example.com/connection-org1.json "$BLOCKCERT_DIR/config/connection.json"
   echo "[4/5] Enrolling identities..."
@@ -35,14 +35,14 @@ fi
 echo "[5/5] Starting API server..."
 cd "$BLOCKCERT_DIR"
 pkill -f "node api/server.js" 2>/dev/null; sleep 1
-nohup node api/server.js >> blockcert.log 2>&1 &
+nohup node api/server.js >> certchain.log 2>&1 &
 sleep 2
 
 STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/health)
 if [ "$STATUS" = "200" ]; then
   echo "[✓] API running on port 3000"
 else
-  echo "[!] API may not be running — check blockcert.log"
+  echo "[!] API may not be running — check certchain.log"
 fi
 
 # Optional ngrok
