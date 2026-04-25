@@ -201,7 +201,7 @@ function safeError(e, fallback = 'An internal error occurred.') {
 // ════════════════════════════════════════════════════════════════════════════
 app.get('/health', (_req, res) => res.json({
     status:         'ok',
-    system:         'BlockCert',
+    system:         'CertChain',
     program:        'FAMU-FCSS',
     pqCryptography: 'CRYSTALS-Dilithium3',
     timestamp:      new Date().toISOString(),
