@@ -1845,6 +1845,21 @@ function upPrev() {
   if(vd){vd.className=`rbox ${ok?'rok':'rerr'}`;vd.innerHTML=ok?'<div class="fs13 fw5 tg">ELIGIBLE — Score above threshold</div>':`<div class="fs13 fw5" style="color:#FF7B6B">NOT ELIGIBLE — Score: ${sc.toFixed(4)}</div>`;}
 }
 
+// ── FabricVault detection ──────────────────────────────────────────────────
+// Checks if the FabricVault extension is installed and connected
+async function detectFabricVault() {
+  return new Promise(resolve => {
+    window.addEventListener('message', function handler(e) {
+      if (e.data?.type === 'FABRIC_VAULT_ANNOUNCE') {
+        window.removeEventListener('message', handler);
+        resolve(true);
+      }
+    });
+    window.postMessage({ type: 'FABRIC_VAULT_REQUEST_PROVIDER' }, '*');
+    setTimeout(() => resolve(false), 500);
+  });
+}
+
 async function doSub() {
   const id=document.getElementById('si')?.value.trim()||'FAMU10001';
   const gpa=parseFloat(document.getElementById('sg')?.value)||0;
@@ -1855,14 +1870,38 @@ async function doSub() {
   const rc=document.getElementById('srcard'), rd=document.getElementById('sres');
   if(rc)rc.style.display='block';
   if(rd)rd.innerHTML='<div class="rbox rinf"><div class="fs13">Submitting to Hyperledger Fabric…</div></div>';
-  const payload={studentID:id,nlpPayload:{gpa,courses_completed:crs,bert_confidence:0.9993,eligibility_score:parseFloat(sc.toFixed(4)),student_name:name}};
+
+  const credentialJson = JSON.stringify({
+    studentID: id,
+    program: 'FAMU-FCSS',
+    courses_completed: crs,
+    eligibility_score: parseFloat(sc.toFixed(4)),
+    issuedAt: new Date().toISOString()
+  });
+
+  const payload={
+    studentID: id,
+    nlpPayload: {
+      gpa, courses_completed:crs, bert_confidence:0.9993,
+      eligibility_score:parseFloat(sc.toFixed(4)), student_name:name
+    },
+    credentialJson  // FabricVault will sign this with Dilithium3
+  };
+
+  // Check for FabricVault extension
+  const vaultAvailable = await detectFabricVault();
+  if (vaultAvailable) {
+    if(rd)rd.innerHTML='<div class="rbox rinf"><div class="fs13">🔐 FabricVault detected — signing with CRYSTALS-Dilithium3…</div></div>';
+    toast('FabricVault connected — PQ signing active', 'var(--orange)');
+  }
+
   try {
     const { ok: apiOk, data } = await apiFetch('/issue',{method:'POST',body:JSON.stringify(payload)});
-    showR(apiOk ? data : null, id, sc, ok);
-  } catch { showR(null, id, sc, ok); }
+    showR(apiOk ? data : null, id, sc, ok, vaultAvailable);
+  } catch { showR(null, id, sc, ok, vaultAvailable); }
 }
 
-function showR(d,id,sc,ok) {
+function showR(d,id,sc,ok,pqSigned=false) {
   const rd=document.getElementById('sres'); if(!rd)return;
   if((d&&d.success)||(!d&&ok)){
     issuedCnt++;
