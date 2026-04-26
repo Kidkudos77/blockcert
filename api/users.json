@@ -4,7 +4,7 @@
       "userID": "admin",
       "name": "Javonte Carter",
       "email": "javonte1.carter@famu.edu",
-      "passwordHash": "$2b$12$jluJL1zfzPOTDxj7X1FnTOB8QVZMSAHUiIPyR.eWedfSxis5YrE.O",
+      "passwordHash": "$2b$12$lOGxNk8cEN.uMo8gmA9TJuqzVbR9UN.aMnKXM1dH0wLouHb75r8JO",
       "role": "admin",
       "status": "active",
       "createdAt": "2026-04-16T00:00:00.000Z"
@@ -13,7 +13,7 @@
       "userID": "FAMU10001",
       "name": "Marcus Johnson",
       "email": "m.johnson@famu.edu",
-      "passwordHash": "$2b$12$El3JewqrVL2x68vhJfgYS.79oX1bWFaoB3FWB80k6MEvxTaZjbxDW",
+      "passwordHash": "$2b$12$hSdiv8rvXvnq3suEj6GRsOGojufaPSOdzSTAt1iaU1jzgoPP7dWyS",
       "role": "student",
       "status": "active",
       "createdAt": "2026-04-16T00:00:00.000Z"
@@ -22,7 +22,7 @@
       "userID": "famu-institution",
       "name": "FAMU Registrar",
       "email": "registrar@famu.edu",
-      "passwordHash": "$2b$12$q6llVRevri7nSaJ.QStm2e4kAPc0yrgvP.goign6.s6k4NdymYEAq",
+      "passwordHash": "$2b$12$hz1mrY5xkIWSx4lB.poh0.LQj6.U8wXvjwZ3Vd8qw5fK/bM4uX49y",
       "role": "institution",
       "status": "active",
       "createdAt": "2026-04-16T00:00:00.000Z"
@@ -31,7 +31,7 @@
       "userID": "public-verifier",
       "name": "HR Verifier",
       "email": "hr@techcorp.com",
-      "passwordHash": "$2b$12$jynwupueMX2Z5UuApqKh4.uw8z4wzcaK7snHh4eqHDAxHF02AYqwq",
+      "passwordHash": "$2b$12$GBO20jDTbtnxEJM8Dx2/Au5pLHzfYhOd2Tyt9TQmeiPMBNv8FrGTe",
       "role": "employer",
       "status": "active",
       "createdAt": "2026-04-16T00:00:00.000Z"
