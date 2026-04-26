@@ -1848,15 +1848,14 @@ function upPrev() {
 // ── FabricVault detection ──────────────────────────────────────────────────
 // Checks if the FabricVault extension is installed and connected
 async function detectFabricVault() {
+  // FabricVault injects window.fabric when active
   return new Promise(resolve => {
-    window.addEventListener('message', function handler(e) {
-      if (e.data?.type === 'FABRIC_VAULT_ANNOUNCE') {
-        window.removeEventListener('message', handler);
-        resolve(true);
-      }
-    });
-    window.postMessage({ type: 'FABRIC_VAULT_REQUEST_PROVIDER' }, '*');
-    setTimeout(() => resolve(false), 500);
+    // Check immediately
+    if (typeof window.fabric !== 'undefined') { resolve(true); return; }
+    // Wait a moment for injection
+    setTimeout(() => {
+      resolve(typeof window.fabric !== 'undefined');
+    }, 300);
   });
 }
 
